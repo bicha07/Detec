@@ -9,7 +9,7 @@ import { Technique } from './interfaces/interface.technique';
   providedIn: 'root'
 })
 export class ServiceService {
-  private apiUrl = 'http://localhost:8000/api/techniques'; // Remplacez par l'URL de votre backend
+  private apiUrl = 'http://localhost:8000/api'; // Remplacez par l'URL de votre backend
 
   constructor(private http: HttpClient) { }
 
