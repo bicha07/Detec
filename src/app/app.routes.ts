@@ -6,6 +6,7 @@ import { LinkPortfolioComponent } from './Portfolio/link-portfolio/link-portfoli
 
 import { LinkServiceComponent } from './Service/link-service/link-service.component';
 import { SingleSComponent } from './Service/single-s/single-s.component';
+import { SingleSCComponent } from './Service/single-sc/single-sc.component';
 
 export const routes: Routes = [
     {path:"", component:LinkHomeComponent },
@@ -15,6 +16,8 @@ export const routes: Routes = [
     {path:"sg/:id", component:SingleSComponent },
     {path:"services", component:LinkServiceComponent },
     {path:"portfolio", component:LinkPortfolioComponent },
+    {path:"sgc/:id", component:SingleSCComponent },
+
 
 
 

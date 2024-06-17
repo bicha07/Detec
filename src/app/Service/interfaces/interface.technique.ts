@@ -33,10 +33,10 @@ export class Technique {
   }
 }
 
-export class CertAdvantages {
+export class Advantages {
   advantages: Advantage[];
 
-  constructor(certadvantages: Advantage[]) {
-    this.advantages = certadvantages;
+  constructor(advantages: Advantage[]) {
+    this.advantages = advantages;
   }
 }

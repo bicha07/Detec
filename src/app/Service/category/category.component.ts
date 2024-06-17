@@ -19,7 +19,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.serviceService.getTechniques().subscribe(data => {
       this.techniques = data;
-      console.log("kkkk")
     });
   }
 

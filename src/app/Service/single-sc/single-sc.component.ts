@@ -12,25 +12,19 @@ declare var windowLoadInit: any; // Global declaration for existing init functio
 declare var initializeToggleMenu: any; // Global declaration for toggle menu function
 
 @Component({
-    selector: 'app-single-s',
+    selector: 'app-single-sc',
     standalone: true,
-    templateUrl: './single-s.component.html',
-    styleUrls: ['./single-s.component.css'],
+    templateUrl: './single-sc.component.html',
+    styleUrls: ['./single-sc.component.css'],
     imports: [FooterComponent, NavbarComponent,CommonModule]
 })
-export class SingleSComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SingleSCComponent implements OnInit, AfterViewInit, OnDestroy {
     private routerSubscription: Subscription;
     technique: Technique | null = null;
     certif: Certif | null = null;
 
 
     constructor(private router: Router, private route: ActivatedRoute, private serviceService: ServiceService) {
-        this.routerSubscription = this.route.params.subscribe(params => {
-            const techniqueId: BigInteger = params['id']; // Assurez-vous que l'ID est récupéré correctement
-            this.serviceService.getTechniqueById(techniqueId).subscribe(data => {
-                this.technique = data;
-            });
-        });
         this.routerSubscription = this.route.params.subscribe(params => {
             const certifId: BigInteger = params['id']; // Assurez-vous que l'ID est récupéré correctement
             this.serviceService.getCertifById(certifId).subscribe(data => {

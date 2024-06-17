@@ -25,5 +25,9 @@ export class ServiceService {
     const url = `${this.apiUrl}/techniques/${id}`; // Endpoint spécifique pour récupérer une technique par ID
     return this.http.get<Technique>(url);
   }
+  getCertifById(id: BigInteger): Observable<Certif> {
+    const url = `${this.apiUrl}/certifs/${id}`; // Endpoint spécifique pour récupérer une technique par ID
+    return this.http.get<Certif>(url);
+  }
 
 }

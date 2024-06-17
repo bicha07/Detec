@@ -18,7 +18,7 @@
 		  <div class="ls icon-box text-center service-box service-dark grow">
 			<img [src]="certif.photo" alt="">
 			<h5>
-			  <a routerLink="/sg" routerLinkActive="active" ariaCurrentWhenActive="page">{{ certif.title }}</a>
+			  <a [routerLink]="['/sgc', certif.id]" routerLinkActive="active" ariaCurrentWhenActive="page">{{ certif.title }}</a>
 			</h5>
 			<p>{{ certif.recap }}</p>
 		  </div>

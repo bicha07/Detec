@@ -4,27 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="d-none d-lg-block divider-70"></div>
-            <div class="col-lg-6 animate" data-animation="fadeInLeft">
-                <img [src]="technique?.desc_photo" alt="">
-            </div>
-            <div class="col-lg-6 animate" data-animation="fadeInRight">
-                <div class="item-content">
-                    <h3>{{ technique?.title }}</h3>
-                    <p>{{ technique?.description1 }}</p>
-                    <ul class="list-styled ticket">
-                        <li *ngFor="let advantage of technique?.advantages" class="ticket">
-                            <strong class="ticket">{{ advantage.title }} :</strong> {{ advantage.description }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 animate" data-animation="fadeInUp">
-                <p class="after-content">{{ technique?.description2 }}</p>
-                <p class="after-content">{{ technique?.conclusion }}</p>
-            </div>
-            <div class="d-none d-lg-block divider-70"></div>
 
                         <!-- certif -->
 
