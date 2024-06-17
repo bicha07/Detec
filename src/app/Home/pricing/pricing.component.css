@@ -1,0 +1,61 @@
+.ls .div a{
+    color:black;
+}
+.ds h3{
+    color: rgb(255, 254, 254);
+}
+.ls h3{
+    color:black;
+}
+.ds .shadow-left{
+    border:  solid #ffffff24; box-shadow: 38px -3px 80px 10px  rgba(143, 142, 142, 0.1);
+}
+.ls .shadow-left{
+    box-shadow: -40px -3px 80px 10px  rgba(0, 0, 0, 0.1);
+}
+.ds a {
+    width: 100%;color: rgb(255, 255, 255);height: 100%;
+}
+.ds .shadow-mid{
+    box-shadow: 2px 10px 91px 0px rgba(143, 142, 142, 0.1);border:  solid #ffffff24;
+} 
+.ds .shadow-mid-top{
+    background-color: #222c35;border:  solid #ffffff24; box-shadow: 2px 29px 40px 15px  rgba(143, 142, 142, 0.1);border:  solid #ffffff24;
+}
+.ls .shadow-mid-top{
+    box-shadow: 2px 29px 40px 15px  rgba(144, 138, 138, 0.169);border:  solid #ffffff24;
+}
+.ls .shadow-mid{
+    box-shadow: 2px 29px 40px 15px  rgba(0, 0, 0, 0.1);border:  solid #ffffff24;
+}
+.ds .shadow-right{
+    border:  solid #ffffff24; box-shadow: -40px -3px 80px 10px   rgba(143, 142, 142, 0.1);
+}
+.ls .shadow-right{
+    box-shadow: 40px -3px 80px 10px   rgba(0, 0, 0, 0.1);
+}
+#mid{
+    z-index:9;
+}
+.ls #mid{
+    color: white;
+}
+.ls #mida{
+    color: #fe0303!important;
+}
+.ls #mida:hover{
+    color: black!important;
+}
+.plan-button a{
+    width: 100%;
+}
+.ls.ms [class*='btn-outline-']:not(:hover){
+    color:black;
+}
+.btn-price{
+    padding-right: 20px;
+    padding-left: 20px;
+
+}
+
+

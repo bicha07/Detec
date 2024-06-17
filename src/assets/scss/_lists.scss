@@ -1,0 +1,57 @@
+ul, ol {
+  padding-left: 1.15rem;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin: 0 1.5em 1.5em;
+}
+
+.list-bordered {
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  li {
+    padding-top: 14px;
+    padding-bottom: 15px;
+    border-top: 1px solid $borderColor;
+    border-bottom: 1px solid $borderColor;
+  }
+  li + li {
+    border-top: none;
+  }
+  &.no-top-border > li:first-child {
+    border-top: none;
+  }
+  &.no-bottom-border > li:last-child {
+    border-bottom: none;
+  }
+}
+
+.list-styled ul,
+ul.list-styled {
+  padding: 10px 0;
+  list-style: none;
+  color: #fff;
+  font-weight: 300;
+  li {
+    position: relative;
+    margin-bottom: 16px;
+    &:before {
+      font-family: 'FontAwesome';
+      content: "\f00c";
+      font-size: 14px;
+      color: $colorMain;
+      position: relative;
+      padding-right: 13px;
+    }
+  }
+}
+
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 3px;
+}

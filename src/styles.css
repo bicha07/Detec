@@ -1,0 +1,38 @@
+@media only screen and (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+    html {
+        overflow-x: hidden;
+      }
+}  
+.ls{
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+.ds{
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+}
+p{
+  font-family: "Rubik", sans-serif;
+}
+a{
+  font-family: "Rubik", sans-serif;
+
+  font-weight: 200!important;
+}
+.grow:hover{
+  transform: scale(1.06);
+}
+.grow{
+  transition: all .2s ease-in-out;
+}
+.toggle_menu{
+  background-color: #bf3939!important;
+}
+@media (max-width: 991px) {
+
+  .page_slider .flex-control-nav{
+      bottom: 3%;
+  }
+}

@@ -1,0 +1,24 @@
+.ls h2{
+    color:white;
+}
+.ls h3{
+    color:white;
+}
+.cs{
+    color:#fe0303;
+}
+.header_absolute .page_header.affix-top {
+    background-color: rgb(255 255 255 / 40%);
+}
+    @media (max-width: 991px) {
+
+        .ls h2{
+            color:black;
+        }
+        .ls h3{
+            color:black;
+        } 
+        .page_slider .flex-control-nav{
+            bottom: 3%  !important;
+        }
+    }

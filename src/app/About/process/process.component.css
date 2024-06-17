@@ -1,0 +1,26 @@
+.ds .h6.process-title{
+    color:white;
+}
+.ls .h6.process-title{
+    color:black;
+}
+.process-list{
+    text-align: justify;text-align-last: center
+}
+.product-item-sm .thumbnail{
+    margin-right:10px;
+    -webkit-box-flex:0;
+    flex: 0 0 120px;
+    position:relative;
+} 
+#pr1{
+    transition: 0.5s ease-in-out, color 0.5s ease-in-out;
+
+}
+#pr2{
+    transition: 0.5s ease-in-out, color 0.5s ease-in-out;
+
+}#pr3{
+    transition: 0.5s ease-in-out, color 0.5s ease-in-out;
+
+}

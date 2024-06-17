@@ -1,0 +1,29 @@
+#services {
+    position: relative;
+    margin-top: -60px; /* Ajustez cette valeur pour chevaucher les boîtes de service sur la bande rouge */
+    z-index: 999;
+}
+.bg-line{
+    height: 370px;z-index: 0;position: absolute;width: 100%; background-color: #b82020e0;background-size: cover;background-position: center;background-repeat: no-repeat;
+}
+.service-box {
+    padding: 20px;
+    box-shadow: 20px 20px 20px  rgba(143, 142, 142, 0.1);
+    margin-bottom: 30px;
+    border-radius: 8px;
+    position: relative;
+}
+.ds .service-dark{
+    border: solid #ffffff24;background-color: #222c35;
+}
+.ls[_ngcontent-ng-c2174591586] .service-dark[_ngcontent-ng-c2174591586] {    border: solid #ece0e038;
+}
+.ds .service-dark a p{
+    color:white;
+}
+.ds .ds p{
+    color:#ffffffba;
+}
+.ls .service-dark{
+    border: solid #ece0e038;background-color: #ffffff;
+}

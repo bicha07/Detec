@@ -1,0 +1,46 @@
+/*
+** 404
+*/
+
+.error-404 {
+  .page-header {
+    h3 {
+      margin-top: 15px;
+      font-size: 100px;
+      line-height: 1;
+      margin: 0;
+      font-weight: 700;
+      color: $colorMain;
+      @media (min-width: 992px) {
+        font-size: 210px;
+      }
+    }
+    p {
+      margin-top: 3px;
+      font-size: 24px;
+      color: #fff;
+      @media (min-width: 768px) {
+        letter-spacing: 0;
+        font-size: 30px;
+      }
+      &:last-child {
+        color: #999;
+        font-size: 16px;
+         margin: 33px 0 0;
+      }
+    }
+  }
+  a.btn {
+    padding: 17px 30px;
+  }
+  h6 {
+    color: #999;
+    margin-bottom: 13px;
+  }
+  .widget_search {
+    margin: 14px 0;
+  }
+  .form-control {
+    color: #999;
+  }
+}

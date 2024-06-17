@@ -1,0 +1,24 @@
+.ls .btn.btn-link{
+    color:black;
+}
+.hero-bg {
+    transition: 0.5s ease-in-out, color 0.5s ease-in-out;
+
+}
+.ds .shadow-mid{
+    box-shadow: 0px 2px 6px   rgba(255, 255, 255, 0.1);border:  solid #ffffff24;
+}
+.ds .shadow-mid:hover{
+    box-shadow: 0px 5px 35px 0px  rgba(255, 255, 255, 0.1);border:  solid #fe030390;
+}
+
+.ls .shadow-mid{
+    box-shadow: 0px 2px 6px  rgba(0, 0, 0, 0.1);border:  solid #ffffff24;
+}
+.ls .shadow-mid:hover{
+    box-shadow: 0px 5px 35px 0px   rgba(0, 0, 0, 0.1);border:  solid #fe030390;
+}
+.team-carousel .link {
+    border-top: 1px solid #fe030390;
+    padding: 27px 0;
+}

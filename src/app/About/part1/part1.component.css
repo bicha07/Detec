@@ -1,0 +1,9 @@
+.ds .part1-list-item{
+    color:white;
+}
+.ls .part1-list-item{
+    color:black;
+}
+.ls h5{
+    color: #fe0303!important;
+}

@@ -1,0 +1,35 @@
+.ds .lorem{
+    color: #fe0303;
+}
+
+.ls .lorem{
+    color: #fe0303;
+}
+
+.ds .lolo {
+    color: #ffffff;
+}
+
+.ds .lolo:hover {
+    color: #fe0303;
+}
+
+.ds .lolo.active {
+    color: #fe0303;
+}
+
+.ls .lolo {
+    color: #000000;
+}
+
+.ls .lolo:hover {
+    color: #fe0303;
+}
+
+.ls .lolo.active {
+    color: #fe0303;
+}
+
+.filters .lolo:first-child {
+    display: inline-block; 
+}

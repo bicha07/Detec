@@ -1,0 +1,17 @@
+<mgl-map
+  [style]="'https://api.maptiler.com/maps/streets/style.json?key=99uIlSfkESdjdECvHmBf'"
+  [zoom]="[4]"
+  [center]="[-106.3468, 56.1304]"  
+>
+  <mgl-marker [lngLat]="[-106.3468, 56.1304]"></mgl-marker>  <!-- Exemple de marqueur au centre du Canada -->
+    <!-- Marqueur à Ottawa -->
+    <mgl-marker [lngLat]="[-75.6972, 45.4215]"></mgl-marker>
+  
+    <!-- Marqueur à Québec -->
+    <mgl-marker [lngLat]="[-71.2082, 46.8139]"></mgl-marker>
+    <mgl-marker [lngLat]="[-84.2082, 50.8139]"></mgl-marker>
+
+    <mgl-marker [lngLat]="[-68.2082, 55.8139]"></mgl-marker>
+
+  <mgl-control mglNavigation position="top-left"></mgl-control>
+</mgl-map>

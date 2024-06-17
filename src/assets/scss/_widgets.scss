@@ -1,0 +1,286 @@
+/*
+** Widgets
+*/
+aside h2 {
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+aside > * + * {
+  margin-top: 56px;
+  @media(max-width: 767px) {
+    margin-top: 30px;
+  }
+}
+
+.widget {
+  position: relative;
+  & > h3,
+  .widget-title {
+    @include widget-title();
+  }
+
+  //for shortcodes demo
+  & > h2:last-child {
+    line-height: 1;
+  }
+
+  //our custom widgets with bootstrap .media element
+  li.media {
+    margin-bottom: 20px;
+
+    img {
+      max-width: 85px;
+    }
+    h3, h4 {
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.5em;
+      text-transform: none;
+      font-size: 16px;
+      @media(max-width: 767px) {
+        margin-top: 0;
+      }
+    }
+    p {
+      line-height: 1.4;
+      margin-bottom: 0.5em;
+      color: $colorMain;
+      font-size: 14px; 
+    }
+  }
+
+  .page_footer & {
+    margin-bottom: 33px;
+    @media(max-width: 767px) {
+      margin-bottom: 58px;
+      &.widget_text {
+        margin-bottom: 20px;       
+      }
+    }
+    & > h3,
+    .widget-title {
+      font-size: 30px;
+      font-weight: 200;
+      margin-bottom: 29px;
+    }
+    @media(min-width: 768px) and (max-width: 1199px) {
+      input[type="email"].form-control {
+      font-size: 12px;
+    }
+  }
+}
+
+  .signup {
+    margin-top: 30px;
+  }
+  * + .media-body {
+    @media(max-width: 767px) {
+      margin-top: 0;
+    }
+  }
+}
+
+.widget-logo {
+   img {
+    position: absolute;
+    left: 0;
+    top: -41%;
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    @media(max-width: 991px) {
+      position: static;
+      left: 0;
+      left: 0%;
+      transform: translateX(0);
+      margin-bottom: 10px;
+    }
+  }
+  a.logo.flex-column {
+    padding-top: 3px;
+    margin-bottom: 23px;
+    @media (max-width: 767px) {
+      margin-top: 13px;
+      margin-bottom: 10px;
+    }
+  }
+  @media (max-width: 767px) {
+    a.logo img {
+      max-height: 80px;
+    }
+  }
+}
+
+@media(max-width: 991px) {
+  aside {
+    margin: 60px auto;
+    max-width: 370px;
+  }
+}
+
+/* affix-aside */
+.affix-aside {
+  position: relative;
+  &.affix {
+    position: fixed;
+    //oriented header height
+    top: 100px;
+  }
+  &.affix-bottom {
+    position: absolute !important;
+  }
+  &.affix-top {
+    width: inherit !important;
+    left: auto !important;
+  }
+
+  @media(max-width: 991px) {
+    &,
+    &.affix-top,
+    &.affix,
+    &.affix-bottom {
+      position: static !important;
+      width: 100% !important;
+    }
+  }
+}
+
+//p.stars removed
+.stars {
+  & > span {
+    display: flex;
+  }
+
+  a {
+    position: relative;
+    width: 1em;
+    color: transparent;
+    text-indent: -999em;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-indent: 0;
+      font-family: 'FontAwesome';
+    }
+    &:before,
+    &:hover ~ a:before {
+      color: $fontColor;
+      content: "\f006"
+    }
+  }
+  &.selected a.active:before,
+  &:hover a:before {
+    content: "\f005";
+    color: $colorMain;
+    opacity: 1;
+  }
+  &.selected {
+    a.active ~ a:before {
+      content: "\f005";
+      color: $fontColor;
+      opacity: .75
+    }
+    a:not(.active):before {
+      content: "\f005";
+      color: $colorMain;
+      opacity: 1
+    }
+  }
+}
+
+.star-rating {
+  overflow: hidden;
+  position: relative;
+  height: 1em;
+  line-height: 1;
+  font-size: 1em;
+  width: 5em;
+  letter-spacing: 0.1em;
+  font-family: 'FontAwesome';
+  color: $colorMain;
+
+  &:before {
+    content: '\f006\f006\f006\f006\f006';
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute
+  }
+
+  span {
+    overflow: hidden;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding-top: 1.5em;
+
+    &:before {
+      content: '\f005\f005\f005\f005\f005';
+      top: 0;
+      position: absolute;
+      left: 0
+    }
+  }
+}
+
+.widget_mailchimp {
+  p {
+    margin-top: 15px;
+    margin-bottom: -5px;
+  }
+}
+
+.widget_latest_news {
+  i {
+    margin-right: 4px;
+  }
+  span {
+    margin-right: 13px;
+  }
+  h6 {
+    margin-bottom: 9px;
+    a {
+      font-weight: 400;
+      color: #999;
+    }
+  } 
+  .odd {
+    margin-top: 31px;
+  }
+}
+
+.widget_recent_posts {
+  * + .media-body {
+    margin-top: 4px;
+  }
+  li.media h4 {
+    margin-bottom: 5px;
+  }
+}
+
+  .widget_search button:before {
+    color: $colorMain;
+    font-size: 14px;
+    content: "\f002";
+    font-family: 'FontAwesome';
+  }
+
+@import 'widgets/search_mailchimp';
+@import 'widgets/nav_cat_arch_meta_pages';
+@import 'widgets/calendar';
+@import 'widgets/rss';
+@import 'widgets/tag_cloud';
+@import 'widgets/flickr';
+@import 'widgets/instagram';
+@import 'widgets/access_press';
+@import 'widgets/twitter';
+@import 'widgets/post_slider';
+@import 'widgets/post_tabs';
+@import 'widgets/post_2cols';

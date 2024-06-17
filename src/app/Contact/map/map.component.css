@@ -1,0 +1,34 @@
+
+mgl-map {
+    height: 50vh;
+    width: 50%;
+  }
+  .marker {
+    background-color: #007bff;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  
+  .mgl-popup {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  /* You can add global styles to this file, and also import other style files */
+@import '~maplibre-gl/dist/maplibre-gl.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

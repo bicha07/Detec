@@ -1,0 +1,11 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #a52021; /* Mettez la couleur souhaitée ici */
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.light-mode .carousel-control-prev-icon,
+.light-mode .carousel-control-next-icon {
+  background-color: #757575; /* Mettez la couleur souhaitée ici pour le mode clair */
+}
