@@ -15,5 +15,6 @@ import { SingleSComponent } from '../single-s/single-s.component';
     imports: [SingleSComponent,NavbarComponent, BannerComponent, FooterComponent, CategoryComponent, ServiceComponent, SpecialityComponent, ProgressComponent]
 })
 export class LinkServiceComponent {
-
+ 
+    title: string = 'Title';
 }

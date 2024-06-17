@@ -2,7 +2,6 @@
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900");
 
-@import url("https://fonts.googleapis.com/css?family=Yesteryear");
 /**
 *** Table Of Contents
 **/
@@ -658,18 +657,18 @@ select option,
 
 .form-control::-moz-placeholder {
 	color: #808080;
-	font-style: italic;
+	font-style: normal;
 	opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
 	color: #808080;
-	font-style: italic;
+	font-style: normal;
 }
 
 .form-control::-webkit-input-placeholder {
 	color: #808080;
-	font-style: italic;
+	font-style: normal;
 }
 
 .form-control:focus:-moz-placeholder {
@@ -14268,7 +14267,7 @@ a.logo img {
 }
 
 a.logo .logo-text {
-	font-family: "Yesteryear", sans-serif;
+	font-family: " calibri", sans-serif;
 	font-size: 42px;
 	padding: 0 10px;
 }
@@ -14286,7 +14285,7 @@ a.logo .logo-subtext {
 }
 
 a.logo .logo-text-bottom {
-	font-family: "Yesteryear", sans-serif;
+	font-family: " calibri", sans-serif;
 	font-size: 42px;
 }
 
@@ -14402,7 +14401,7 @@ a.logo.flex-column.text-center {
 	border: none;
 	color: #323232;
 	font-size: 28px;
-	font-style: italic;
+	font-style: normal;
 	height: 60px;
 	max-width: none;
 	width: 100%;
@@ -14737,7 +14736,7 @@ body.active-side-header.slide-right .page_header_side {
 }
 
 .page_slider h3 {
-	font-family: "Yesteryear", sans-serif;
+	font-family: " calibri", sans-serif;
 	font-size: 21px;
 	line-height: 1;
 	margin-top: 20px;
@@ -15028,7 +15027,7 @@ body.active-side-header.slide-right .page_header_side {
 
 @media (min-width: 1600px) {
 	.page_slider .intro_before_featured_word {
-		font-family: "Yesteryear", sans-serif;
+		font-family: " calibri", sans-serif;
 		font-size: 24px;
 		margin-bottom: 30px;
 	}

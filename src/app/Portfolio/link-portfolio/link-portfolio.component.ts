@@ -3,7 +3,6 @@ import { PortfolioComponent } from "../portfolio/portfolio.component";
 import { BannerComponent } from "../../Home/banner/banner.component";
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from "../../Home/footer/footer.component";
-import { NumbersComponent } from '../numbers/numbers.component';
 import { QuoteComponent } from "../quote/quote.component";
 
 @Component({
@@ -11,7 +10,7 @@ import { QuoteComponent } from "../quote/quote.component";
     standalone: true,
     templateUrl: './link-portfolio.component.html',
     styleUrl: './link-portfolio.component.css',
-    imports: [PortfolioComponent, BannerComponent, NavbarComponent, FooterComponent, NumbersComponent, QuoteComponent]
+    imports: [PortfolioComponent, BannerComponent, NavbarComponent, FooterComponent, QuoteComponent]
 })
 export class LinkPortfolioComponent {
 

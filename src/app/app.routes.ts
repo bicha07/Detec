@@ -14,7 +14,7 @@ export const routes: Routes = [
     {path:"contact", component:LinkContactComponent },
     {path:"sg", component:SingleSComponent },
     {path:"services", component:LinkServiceComponent },
-    // {path:"portfolio", component:LinkPortfolioComponent },
+    {path:"portfolio", component:LinkPortfolioComponent },
 
 
 

@@ -1,90 +1,29 @@
-
 <section class="ls s-pt-75 s-pb-20 s-pt-lg-100 s-pb-lg-30 c-gutter-60 c-mb-50 c-mb-md-60 service-icon" id="services">
-
 	<div class="container">
-		<div class="row">
-            <div class="d-none d-lg-block divider-30"></div>
-            <div class="col-lg-8 offset-lg-2">
-                <div class="main-content text-center">
-                    <h2>
-						<mark>Excellence</mark> Certifiée
-                    </h2>
-                    <p>
-						Chez DETEC, la précision n'est pas seulement un objectif, c'est une garantie. Nos certifications industrielles attestent de notre engagement envers la qualité et l'innovation dans toutes nos spécialisations en soudage.
-                    </div>
-            </div>
-        </div>
-		<div class="row">
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow" >
-                    <img src="./assets/images/icon-01.png" alt="">
-                    <h5>
-                        <a href="service-single.html" >Tests Radiographiques</a>
-                    </h5>
-                    <p >
-						Compétence avérée dans les tests radiographiques et ultrasoniques pour assurer la conformité et la qualité des soudures.                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow">
-                    <img src="./assets/images/icon-02.png" alt="">
-                    <h5>
-                        <a href="service-single.html"> Soudage Haute Pression
-						</a>
-                    </h5>
-                    <p>
-						Qualifications diverses pour le soudage dans toutes positions: à plat (1G/1F), horizontale (2G/2F), verticale montante (3G/3F), verticale descendante (4G/4F), répondant a vos besoins.                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow">
-                    <img src="./assets/images/icon-03.png" alt="">
-                    <h5>
-                        <a href="service-single.html">Certifications CWB
-
-						</a>
-                    </h5>
-                    <p>
-						Nos soudeurs détiennent des certifications CWB, affirmant leur expertise et conformité avec les standards élevés.                </div>
-            </div>
-
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-04.png" alt="">
-								<h5>
-									<a href="service-single.html">Qualifications WPQR
-									</a>
-								</h5>
-								<p>
-									Fourniture de WPQR pour garantir la conformité des techniques de soudage avec les normes industrielles.								</p>
-							</div>
-						</div>
-						<!-- .col-* -->
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-06.png" alt="">
-								<h5>
-									<a href="service-single.html">Positions de Soudage</a>
-								</h5>
-								<p>
-									Qualifications diverses pour le soudage dans toutes positions: à plat (1G/1F), horizontale (2G/2F), verticale montante (3G/3F), verticale descendante (4G/4F),  repondant a vos besoins.								</p>
-							</div>
-						</div>
-						
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-05.png" alt="">
-								<h5>
-									<a href="service-single.html">Soudure pour Tuyauteries
-									</a>
-								</h5>
-								<p>
-									Expertise en soudage de tuyauteries à haute pression, assurant intégrité structurelle et sécurité dans les applications critiques.							</div>
-						</div>
-						<!-- .col-* -->
-
-						<!-- .col-* -->
-						<div class="d-none d-lg-block divider-25"></div>
-						
-					</div>
-				</div>
-			</section>
+	  <div class="row">
+		<div class="d-none d-lg-block divider-30"></div>
+		<div class="col-lg-8 offset-lg-2">
+		  <div class="main-content text-center">
+			<h2>
+			  <mark>Excellence</mark> Certifiée
+			</h2>
+			<p>
+			  Chez DETEC, la précision n'est pas seulement un objectif, c'est une garantie. Nos certifications industrielles attestent de notre engagement envers la qualité et l'innovation dans toutes nos spécialisations en soudage.
+			</p>
+		  </div>
+		</div>
+	  </div>
+	  <div class="row">
+		<div *ngFor="let technique of techniques" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
+		  <div class="ls icon-box text-center service-box service-dark grow">
+			<img [src]="technique.photo" alt="">
+			<h5>
+			  <a routerLink="/sg" routerLinkActive="active" ariaCurrentWhenActive="page">{{ technique.title }}</a>
+			</h5>
+			<p>{{ technique.recap }}</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  
