@@ -23,3 +23,7 @@
 .ls .kss{
     color:black;
 }
+
+.non-maj{
+    text-transform: none!important;
+}
