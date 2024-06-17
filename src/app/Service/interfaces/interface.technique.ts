@@ -1,5 +1,4 @@
 import { Advantage } from "./interface.advantages";
-
 export class Technique {
   id: BigInteger;
   photo: string;
@@ -34,10 +33,10 @@ export class Technique {
   }
 }
 
-export class AdvantagesList {
+export class CertAdvantages {
   advantages: Advantage[];
 
-  constructor(advantages: Advantage[]) {
-    this.advantages = advantages;
+  constructor(certadvantages: Advantage[]) {
+    this.advantages = certadvantages;
   }
 }

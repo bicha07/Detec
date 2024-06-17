@@ -14,13 +14,13 @@
 		</div>
 	  </div>
 	  <div class="row">
-		<div *ngFor="let technique of techniques" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
+		<div *ngFor="let certif of certifs" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
 		  <div class="ls icon-box text-center service-box service-dark grow">
-			<img [src]="technique.photo" alt="">
+			<img [src]="certif.photo" alt="">
 			<h5>
-			  <a routerLink="/sg" routerLinkActive="active" ariaCurrentWhenActive="page">{{ technique.title }}</a>
+			  <a routerLink="/sg" routerLinkActive="active" ariaCurrentWhenActive="page">{{ certif.title }}</a>
 			</h5>
-			<p>{{ technique.recap }}</p>
+			<p>{{ certif.recap }}</p>
 		  </div>
 		</div>
 	  </div>

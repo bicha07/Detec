@@ -3,44 +3,31 @@
 <section class="ls s-py-50 c-gutter-60 single-service">
     <div class="container">
         <div class="row">
-
             <div class="d-none d-lg-block divider-70"></div>
-
-
             <div class="col-lg-6 animate" data-animation="fadeInLeft">
-                <img src="./assets/images/service/single-01.jpg" alt="">
+                <img [src]="technique?.desc_photo" alt="">
             </div>
-            <!-- .col-* -->
             <div class="col-lg-6 animate" data-animation="fadeInRight">
                 <div class="item-content">
-                    <h3>Soudage GMAW (MIG)</h3>
-                    <p>
-                        Le soudage GMAW (Gas Metal Arc Welding), également connu sous le nom de soudage MIG (Metal Inert Gas), est une technique de soudage très prisée pour sa rapidité et son efficacité. Cette méthode utilise un gaz de protection inerte pour protéger la soudure des contaminations atmosphériques, garantissant des soudures propres et de haute qualité.
-                    </p>
+                    <h3>{{ technique?.title }}</h3>
+                    <p>{{ technique?.description1 }}</p>
                     <ul class="list-styled ticket">
-                        <li class="ticket">
-                            <strong class="ticket">Haute productivité :</strong> Permet des soudures rapides, augmentant ainsi la productivité des projets.
+                        <li *ngFor="let advantage of technique?.advantages" class="ticket">
+                            <strong class="ticket">{{ advantage.title }} :</strong> {{ advantage.description }}
                         </li>
-                        <li>
-                            <strong class="ticket">Propreté :</strong> Moins de projections et de résidus, réduisant ainsi le besoin de nettoyage après le soudage.
-                        </li>
-                    
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-12 animate" data-animation="fadeInUp">
+                <p class="after-content">{{ technique?.description2 }}</p>
+                <p class="after-content">{{ technique?.conclusion }}</p>
             </div>
-            <div class="row">
-                <div class="col-12 animate" data-animation="fadeInUp">
-                    <p class="after-content">
-                        Nos soudeurs qualifiés et certifiés maîtrisent parfaitement la technique de soudage GMAW (MIG). Que ce soit pour des projets dans l'industrie automobile, la construction métallique, l'industrie maritime ou la fabrication d'électroménagers, nous assurons des soudures fiables et durables. Nous utilisons des équipements de pointe et des matériaux de haute qualité pour garantir des résultats optimaux et conformes aux normes les plus strictes.
-                    </p>
-                    <p class="after-content">
-                        Le soudage GMAW (MIG) est particulièrement efficace pour les applications nécessitant une haute précision et une finition soignée. Notre expertise couvre l'ensemble du processus, de la préparation des surfaces à la réalisation des soudures en passant par le contrôle de qualité rigoureux.
-                    </p>
-                </div>
-                <div class="d-none d-lg-block divider-70"></div>
-            </div>
-            </div>
-            </section>
+            <div class="d-none d-lg-block divider-70"></div>
+        </div>
+    </div>
+</section>
+
 
 <app-footer></app-footer>
