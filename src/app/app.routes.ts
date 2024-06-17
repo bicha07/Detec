@@ -12,7 +12,7 @@ export const routes: Routes = [
     {path:"home", component:LinkHomeComponent },
     {path:"about", component:LinkAboutComponent },
     {path:"contact", component:LinkContactComponent },
-    {path:"sg", component:SingleSComponent },
+    {path:"sg/:id", component:SingleSComponent },
     {path:"services", component:LinkServiceComponent },
     {path:"portfolio", component:LinkPortfolioComponent },
 

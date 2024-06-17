@@ -24,8 +24,10 @@
 				</div>
 				<div class="item-content hero-bg">
 				  <h5>
-					<a  routerLink="/sg" routerLinkActive="active" ariaCurrentWhenActive="page">{{ technique.title }}</a>
-				  </h5>
+						<a [routerLink]="['/sg', technique.id]" routerLinkActive="active" ariaCurrentWhenActive="page">
+							{{ technique.title }}
+						</a>
+					</h5>
 				  <p>{{ technique.recap }}</p>
 				</div>
 			  </div>
