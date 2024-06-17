@@ -46,23 +46,26 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LinkServiceComponent } from '../link-service/link-service.component';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../service.service'; // Assurez-vous que le chemin est correct
-import { technique } from '../interface.service'; // Importez l'interface Category
+import { Technique } from '../interface.technique'; // Importez l'interface Category
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-service',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, LinkServiceComponent, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, LinkServiceComponent, CommonModule,HttpClientModule],
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.css']
 })
 export class ServiceComponent implements OnInit {
-  techniques: technique[] = []; // Utilisez l'interface Category pour typer le tableau
+  techniques: Technique[] = []; // Utilisez l'interface Category pour typer le tableau
 
   constructor(private serviceService: ServiceService) { }
 
   ngOnInit(): void {
     this.serviceService.getTechniques().subscribe(data => {
       this.techniques = data;
+      console.log("hhhhh");
     });
   }
 

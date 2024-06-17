@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Technique } from './interface.technique';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
-  private apiUrl = 'https://localhost:8000/api/technique'; // Remplacez par l'URL de votre backend
+  private apiUrl = 'http://localhost:8000/api/techniques'; // Remplacez par l'URL de votre backend
 
   constructor(private http: HttpClient) { }
 
-  getTechniques(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getTechniques(): Observable<Technique[]> {
+    return this.http.get<Technique[]>(this.apiUrl);
   }
 }
