@@ -1430,7 +1430,7 @@ h6 small {
 }
 
 .owl-carousel .owl-dots .owl-dot {
-	*display: inline;
+	display: inline;
 	display: inline-block;
 	zoom: 1;
 }
@@ -1920,7 +1920,7 @@ html[xmlns] .slides {
 
 /* Direction Nav */
 .flex-direction-nav {
-	*height: 0;
+	height: 0;
 }
 
 .flex-direction-nav a {
@@ -2026,7 +2026,7 @@ html[xmlns] .slides {
 }
 
 .flex-control-nav li {
-	*display: inline;
+	display: inline;
 	display: inline-block;
 	padding: 0 12px;
 	text-align: center;
@@ -13307,7 +13307,7 @@ a img.aligncenter {
 	}
 
 	.sf-menu li {
-		*white-space: normal;
+		white-space: normal;
 		white-space: nowrap;
 	}
 
@@ -13426,7 +13426,7 @@ a img.aligncenter {
 	.sf-menu > li .mega-menu,
 	.sf-menu li > ul {
 		/* allow long menu items to determine submenu width */
-		*width: 10em;
+		width: 10em;
 		background-color: #fff;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 		list-style: none;
@@ -16277,7 +16277,7 @@ mark {
 }
 
 .page_footer.s-parallax {
-	background-image: url("../images/parallax/video_section_background.jpg");
+	background-image: none;/*old:url("../images/parallax/video_section_background.jpg")*/
 }
 
 @media (min-width: 576px) {
@@ -16342,7 +16342,7 @@ mark {
 
 .page_copyright.cover-background,
 .page_copyright.s-parallax {
-	background-image: url("../images/parallax/video_section_background.jpg");
+	background-image:none; /**old: url("../images/parallax/video_section_background.jpg")*/
 }
 
 .page_copyright.ds.ms,

@@ -34,8 +34,6 @@ export class NavbarComponent {
     const banner1 = document.getElementById('banner1') as HTMLImageElement;
     const banner2 = document.getElementById('banner2') as HTMLImageElement;
     const banner3 = document.getElementById('banner3') as HTMLImageElement;
-    const speciality = document.getElementById('speciality') as HTMLImageElement;
-    const welcome = document.getElementById('welcome') as HTMLImageElement;
     const logof = document.getElementById('logof') as HTMLImageElement;
     const lang = document.getElementById('lang') as HTMLImageElement;
 
@@ -48,10 +46,10 @@ export class NavbarComponent {
         icon.src = './assets/images/moon.png';
         logo.src='./assets/images/LOGOR.svg'
         logof.src='./assets/images/LOGOR.svg'
+        lang.src='./assets/images/langb.png'
         banner1.src='./assets/images/16.jpg'
         banner2.src='./assets/images/6.jpg'
         banner3.src='./assets/images/17.jpg'
-        lang.src='./assets/images/langb.png'
 
 
 
@@ -59,10 +57,10 @@ export class NavbarComponent {
         icon.src = './assets/images/sun.png';
         logo.src='./assets/images/LOGOW.svg'
         logof.src='./assets/images/LOGOW.svg'
+        lang.src='./assets/images/langw.png'
         banner1.src='./assets/images/9.jpg'
         banner2.src='./assets/images/8.jpg'
         banner3.src='./assets/images/14.jpg'
-        lang.src='./assets/images/langw.png'
 
 
       }

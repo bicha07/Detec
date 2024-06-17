@@ -1,5 +1,5 @@
 import { FooterComponent } from "../../Home/footer/footer.component";
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarComponent } from "../navbar/navbar.component";
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
@@ -31,12 +31,7 @@ export class SingleSComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.technique = data;
             });
         });
-        this.routerSubscription = this.route.params.subscribe(params => {
-            const certifId: BigInteger = params['id']; // Assurez-vous que l'ID est récupéré correctement
-            this.serviceService.getCertifById(certifId).subscribe(data => {
-                this.certif = data;
-            });
-        });
+
     }
 
     ngOnInit(): void {}
