@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LinkServiceComponent } from '../link-service/link-service.component';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../service.service'; // Assurez-vous que le chemin est correct
-import { Certif } from '../interfaces/interface.certif'; // Importez l'interface Category
+import { Certif } from '../../interfaces/interface.certif'; // Importez l'interface Category
 import { HttpClientModule } from '@angular/common/http';
 
 

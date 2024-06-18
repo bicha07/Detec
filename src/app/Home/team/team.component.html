@@ -4,24 +4,24 @@
             <div class="d-none d-lg-block divider-5"></div>
             <div class="col-sm-12 text-center">
                 <h2 class="header-section">Fondateurs</h2>
-                <div class="owl-carousel" data-responsive-lg="3" data-responsive-md="2" data-responsive-sm="2" data-responsive-xs="1" data-nav="true" data-loop="true">
-                    <div class="vertical-item hero-bg content-padding text-center shadow-mid ">
+                <div *ngFor="let personne of personnes" class="owl-carousel" data-responsive-lg="3" data-responsive-md="2" data-responsive-sm="2" data-responsive-xs="1" data-nav="true" data-loop="true">
+                    <div  class="vertical-item hero-bg content-padding text-center shadow-mid ">
                         <div class="item-media">
-                            <img src="https://scontent.ftun1-2.fna.fbcdn.net/v/t39.30808-6/355699255_10210017359787766_3411309885477491066_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=IdWEONZxAnwQ7kNvgHWrl7F&_nc_ht=scontent.ftun1-2.fna&oh=00_AYBXaFLubJUFBwCNcnSIKTR_ofXte_0vCp_DcDd6D49vxg&oe=666EA9BB" alt="">
+                            <img [src]="personne.photo" alt="">
                             <div class="media-links">
                                 <a  ></a>
                             </div>
                         </div>
                         <div class="item-content">
                             <h5>
-                                <a  >Bilel Makni</a>
+                                <a  >{{ personne.name }}</a>
                             </h5>
 
                             <p class="small-text color-main">
-                                Vise President
+                                {{ personne.post }}
                             </p>
                             <p>
-                                Lorem ipsum dolret consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
+                                {{ personne.discription }}
                             </p>
 
                         </div>

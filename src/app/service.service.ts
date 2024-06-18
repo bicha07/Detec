@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Certif } from './Service/interfaces/interface.certif';
-import { Technique } from './Service/interfaces/interface.technique';
-import { Expertise } from './Service/interfaces/interface.expertise';
+import { Certif } from './interfaces/interface.certif';
+import { Technique } from './interfaces/interface.technique';
+import { Expertise } from './interfaces/interface.expertise';
+import { Personne } from './interfaces/interface.personne';
+import { Partner } from './interfaces/interface.partner';
 
 
 
@@ -34,5 +36,13 @@ export class ServiceService {
   getExpertises(): Observable<Certif[]> {
     const url = `${this.apiUrl}/expertises`; // Endpoint spécifique
     return this.http.get<Certif[]>(url);
+  }
+  getPersonnes(): Observable<Personne[]> {
+    const url = `${this.apiUrl}/personnes`; // Endpoint spécifique
+    return this.http.get<Personne[]>(url);
+  }
+  getPartners(): Observable<Partner[]> {
+    const url = `${this.apiUrl}/partners`; // Endpoint spécifique
+    return this.http.get<Partner[]>(url);
   }
 }

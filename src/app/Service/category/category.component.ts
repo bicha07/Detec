@@ -2,7 +2,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../service.service';
-import { Technique } from '../interfaces/interface.technique';
+import { Technique } from '../../interfaces/interface.technique';
 
 @Component({
   selector: 'app-category',

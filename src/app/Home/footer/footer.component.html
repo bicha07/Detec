@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="d-none d-lg-block divider-10"></div>
                 <div class="col-sm-12 text-center">
-                    <div class="owl-carousel partners-carousel" data-center="true" data-loop="true" data-responsive-lg="4 " data-responsive-md="4" data-responsive-sm="3" data-responsive-xs="2">
+                    <div *ngFor="let partner of partners" class="owl-carousel partners-carousel" data-center="true" data-loop="true" data-responsive-lg="4 " data-responsive-md="4" data-responsive-sm="3" data-responsive-xs="2">
                         <a  >
-                            <img src="./assets/images/partners/01.png" alt="">
+                            <img [src]="partner.photo" alt="">
                         </a>
-                        <a  >
+                        <!-- <a  >
                             <img src="./assets/images/partners/02.png" alt="">
                         </a>
                         <a  >
@@ -25,7 +25,7 @@
                         </a>
                         <a  >
                             <img src="./assets/images/partners/07.png" alt="">
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>

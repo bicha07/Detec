@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../service.service'; // Assurez-vous que le chemin est correct
-import { Expertise } from '../../Service/interfaces/interface.expertise'; // Importez l'interface Category
+import { Expertise } from '../../interfaces/interface.expertise'; // Importez l'interface Category
 import { HttpClientModule } from '@angular/common/http';
 
 
