@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Certif } from './interfaces/interface.certif';
-import { Technique } from './interfaces/interface.technique';
+import { Certif } from './Service/interfaces/interface.certif';
+import { Technique } from './Service/interfaces/interface.technique';
+import { Expertise } from './Service/interfaces/interface.expertise';
+
 
 
 @Injectable({
@@ -29,5 +31,8 @@ export class ServiceService {
     const url = `${this.apiUrl}/certifs/${id}`; // Endpoint spécifique pour récupérer une technique par ID
     return this.http.get<Certif>(url);
   }
-
+  getExpertises(): Observable<Certif[]> {
+    const url = `${this.apiUrl}/expertises`; // Endpoint spécifique
+    return this.http.get<Certif[]>(url);
+  }
 }

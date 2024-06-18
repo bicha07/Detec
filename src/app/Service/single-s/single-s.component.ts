@@ -3,7 +3,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { ServiceService } from "../service.service"; // Assurez-vous que le chemin est correct
+import { ServiceService } from "../../service.service";// Assurez-vous que le chemin est correct
 import { Technique } from '../interfaces/interface.technique'; // Assurez-vous que le chemin est correct
 import { CommonModule } from "@angular/common";
 import { Certif } from "../interfaces/interface.certif";

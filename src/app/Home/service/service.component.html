@@ -18,74 +18,17 @@
 			<p style="text-align: center;"><span style="color: white;"> Offrant des services de soudage de métal de haute qualité avec précision, fiabilité et innovation pour répondre à vos besoins industriels.</span></p>
 		</div>
 		<div class="row">
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow" >
-                    <img src="./assets/images/icon-01.png" alt="">
-                    <h5>
-                        <a   >Créativité</a>
-                    </h5>
-                    <p >
-                        Innovation et esthétique dans chaque projet
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow">
-                    <img src="./assets/images/icon-02.png" alt="">
-                    <h5>
-                        <a  >Fiabilité</a>
-                    </h5>
-                    <p>
-                        Des résultats fiables, même sous pression.
-                    </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-                <div class="ls icon-box text-center service-box service-dark grow">
-                    <img src="./assets/images/icon-03.png" alt="">
-                    <h5>
-                        <a  >Qualité</a>
-                    </h5>
-                    <p>
-                        Un accompagnement dédié du début à la fin.
-                    </p>
-                </div>
-            </div>
-
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-04.png" alt="">
-								<h5>
-									<a  >Précision</a>
-								</h5>
-								<p>
-									Exactitude méticuleuse pour chaque spécification.
-								</p>
-							</div>
-						</div>
-						<!-- .col-* -->
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-05.png" alt="">
-								<h5>
-									<a  >Expérience</a>
-								</h5>
-								<p>
-									Des décennies d'expertise en soudage et métallurgie.								</p>
-							</div>
-						</div>
-						<!-- .col-* -->
-						<div class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999 ;" data-animation="fadeInUp">
-							<div class="ls icon-box text-center service-box service-dark grow">
-								<img src="./assets/images/icon-06.png" alt="">
-								<h5>
-									<a  >Diversité</a>
-								</h5>
-								<p>
-									Expertise étendue en solutions métalliques.
-								</p>
-							</div>
-						</div>
+			<div class="row">
+				<div *ngFor="let expertise of expertises" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
+				  <div class="ls icon-box text-center service-box service-dark grow">
+					<img [src]="expertise.photo" alt="">
+					<h5>
+					  <a [routerLink]="['/sgc', expertise.id]" routerLinkActive="active" ariaCurrentWhenActive="page">{{ expertise.title }}</a>
+					</h5>
+					<p>{{ expertise.recap }}</p>
+				  </div>
+				</div>
+			  </div>
 						<!-- .col-* -->
 						<div class="d-none d-lg-block divider-25"></div>
 					</div>

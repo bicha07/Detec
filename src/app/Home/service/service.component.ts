@@ -1,12 +1,33 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ServiceService } from '../../service.service'; // Assurez-vous que le chemin est correct
+import { Expertise } from '../../Service/interfaces/interface.expertise'; // Importez l'interface Category
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-service',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule,HttpClientModule],
   templateUrl: './service.component.html',
-  styleUrl: './service.component.css'
+  styleUrls: ['./service.component.css']
 })
-export class ServiceComponent {
+export class ServiceComponent implements OnInit {
+  expertises: Expertise[] = []; // Utilisez l'interface Category pour typer le tableau
 
+  constructor(private serviceService: ServiceService) { }
+
+  ngOnInit(): void {
+    this.serviceService.getExpertises().subscribe(data => {
+      this.expertises = data;
+      console.log("hhhhh");
+    });
+  }
+
+  // Method to update the content dynamically
+  updateExpertiseContent(updatedData: any): void {
+    this.expertises = updatedData.expertises;
+  }
 }
