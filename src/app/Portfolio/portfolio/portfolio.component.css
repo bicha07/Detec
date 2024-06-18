@@ -173,3 +173,14 @@ margin-right: auto !important;
 .zindex{
     z-index: 55;
 }
+.ds .ds{
+    background-color: #222c35!important;
+}
+.disappear{
+    display: block;
+}
+@media (max-width: 767px){
+    .disappear{
+        display:none;
+    }
+}
