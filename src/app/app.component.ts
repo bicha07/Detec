@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+
 declare var windowLoadInit: any; // Global declaration for existing init function
 declare var initializeToggleMenu: any; // Global declaration for toggle menu function
 

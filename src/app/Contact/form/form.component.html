@@ -13,8 +13,8 @@
                     <div class="icon-styled color-icon ">
                         <i class="fa fa-phone"></i>
                     </div>
-                    <p>
-                        +1 581-372-3851
+                    <p *ngFor="let contacttel of contactstel">
+                        {{contacttel.tel}}
 
                     </p>
                 </div>
@@ -40,8 +40,8 @@
                     <div class="icon-styled color-icon">
                         <i class="fa fa-envelope-o"></i>
                     </div>
-                    <p href="mailto:info@example.com">
-                        &nbsp;info&#64;detec-industriels.ca                     
+                    <p *ngFor="let contactmail of contactsemail" href="mailto:info@example.com">
+                        {{contactmail.mail}}
 
                     </p>
                 </div>

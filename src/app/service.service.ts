@@ -6,6 +6,9 @@ import { Technique } from './interfaces/interface.technique';
 import { Expertise } from './interfaces/interface.expertise';
 import { Personne } from './interfaces/interface.personne';
 import { Partner } from './interfaces/interface.partner';
+import { Stat } from './interfaces/interface.stat';
+import { ContactTel } from './interfaces/interface.contactTel';
+import { ContactEmail } from './interfaces/interface.contactEmail';
 
 
 
@@ -33,9 +36,9 @@ export class ServiceService {
     const url = `${this.apiUrl}/certifs/${id}`; // Endpoint spécifique pour récupérer une technique par ID
     return this.http.get<Certif>(url);
   }
-  getExpertises(): Observable<Certif[]> {
+  getExpertises(): Observable<Expertise[]> {
     const url = `${this.apiUrl}/expertises`; // Endpoint spécifique
-    return this.http.get<Certif[]>(url);
+    return this.http.get<Expertise[]>(url);
   }
   getPersonnes(): Observable<Personne[]> {
     const url = `${this.apiUrl}/personnes`; // Endpoint spécifique
@@ -45,4 +48,17 @@ export class ServiceService {
     const url = `${this.apiUrl}/partners`; // Endpoint spécifique
     return this.http.get<Partner[]>(url);
   }
+  getStats(): Observable<Stat[]> {
+    const url = `${this.apiUrl}/stats`; // Endpoint spécifique
+    return this.http.get<Stat[]>(url);
+  }
+  getContactsTel(): Observable<ContactTel[]> {
+    const url = `${this.apiUrl}/contactstel`; // Endpoint spécifique
+    return this.http.get<ContactTel[]>(url);
+  }
+  getContactsEmail(): Observable<ContactEmail[]> {
+    const url = `${this.apiUrl}/contactsemail`; // Endpoint spécifique
+    return this.http.get<ContactEmail[]>(url);
+  }
+
 }

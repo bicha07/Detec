@@ -9,59 +9,21 @@
                 <hr>
 
                 <div class="row">
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="icon-box text-center">
-                            <div class="icon-styled color-main fs-28">
-                                <i class="fa fa-thumbs-o-up"></i>
-                            </div>
-                            <p class="small-text fs">Clients heureux</p>
-                            <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
-                                <span class="counter" data-from="0" data-to="94" data-speed="2500">0</span>
-                                <span class="counter-add">%</span>
-                            </h3>
+                    <div class="col-sm-6 col-lg-3" *ngFor="let stat of stats">
+                      <div class="icon-box text-center">
+                        <div class="icon-styled color-main fs-28">
+                          <i [class]="stat.photo"></i>
                         </div>
+                        <p class="small-text fs">{{ stat.title }}</p>
+                        <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
+                          <span class="counter" [attr.data-from]="0" [attr.data-to]="stat.percent" [attr.data-speed]="3000">0</span>
+                          <span class="counter-add">%</span>
+                        </h3>
+                      </div>
                     </div>
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="icon-box text-center">
-                            <div class="icon-styled color-main fs-28">
-                                <i class="fa fa-sign-in"></i>
-                            </div>
-                            <p class="small-text fs">Retours</p>
-                            <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
-                                <span class="counter" data-from="0" data-to="94" data-speed="2500">0</span>
-                                <span class="counter-add">%</span>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="icon-box text-center">
-                            <div class="icon-styled color-main fs-28">
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <p class="small-text fs">Projets réalisés</p>
-                            <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
-                                <span class="counter" data-from="0" data-to="96" data-speed="3000">0</span>
-                                <span class="counter-add">%</span>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="icon-box text-center">
-                            <div class="icon-styled color-main fs-28">
-                                <i class="fa fa-heart-o"></i>
-                            </div>
-                            <p class="small-text fs">Satisfaction</p>
-                            <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
-                                <span class="counter" data-from="0" data-to="99" data-speed="2800">0</span>
-                                <span class="counter-add">%</span>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+                  </div>
+                  
+                  
 
             </div>
 
