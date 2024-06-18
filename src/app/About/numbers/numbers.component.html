@@ -9,14 +9,14 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3" *ngFor="let stat of stats">
+                    <div class="col-sm-6 col-lg-4" *ngFor="let stat of stats">
                       <div class="icon-box text-center">
                         <div class="icon-styled color-main fs-28">
                           <i [class]="stat.photo"></i>
                         </div>
                         <p class="small-text fs">{{ stat.title }}</p>
                         <h3 class="special-heading text-uppercase counter-wrap color-darkgrey">
-                          <span class="counter" [attr.data-from]="0" [attr.data-to]="stat.percent" [attr.data-speed]="3000">0</span>
+                          <span class="counter" data-from="1" [attr.data-to]="stat.percent" data-speed="3000">{{stat.percent}}</span>
                           <span class="counter-add">%</span>
                         </h3>
                       </div>
