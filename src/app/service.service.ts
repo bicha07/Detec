@@ -9,6 +9,7 @@ import { Partner } from './interfaces/interface.partner';
 import { Stat } from './interfaces/interface.stat';
 import { ContactTel } from './interfaces/interface.contactTel';
 import { ContactEmail } from './interfaces/interface.contactEmail';
+import { Portfolio } from './interfaces/interface.portfolio';
 
 
 
@@ -60,5 +61,8 @@ export class ServiceService {
     const url = `${this.apiUrl}/contactsemail`; // Endpoint spécifique
     return this.http.get<ContactEmail[]>(url);
   }
-
+  getPortfolios(): Observable<Portfolio[]> {
+    const url = `${this.apiUrl}/porfolio`; // Endpoint spécifique
+    return this.http.get<Portfolio[]>(url);
+  }
 }
