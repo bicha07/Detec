@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, Renderer2 } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { GalleryService } from './gallery.service';
+import { Portfolio } from '../../interfaces/interface.portfolio';
+import { ServiceService } from '../../service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet,CommonModule],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.css'
 })
@@ -18,7 +21,7 @@ export class PortfolioComponent implements AfterViewInit{
   private lightBoxPrev!: HTMLElement;
   private lightBoxNext!: HTMLElement;
   private index: number = 1;
-  constructor(private galleryService: GalleryService,private renderer: Renderer2) {}
+  constructor(private galleryService: GalleryService,private renderer: Renderer2,private serviceService: ServiceService) {}
   ngAfterViewInit(): void {
     this.galleryService.init('.gallery', '.gallery-track', '.card');
     this.galleryItem = document.getElementsByClassName('gallery-item');
@@ -89,5 +92,18 @@ export class PortfolioComponent implements AfterViewInit{
   }
   closeFromX(){
     this.lightBoxContainer.style.display = 'none';
+  }
+  portfolios: Portfolio[] = []; // Utilisez l'interface Category pour typer le tableau
+
+
+  ngOnInit(): void {
+    this.serviceService.getPortfolios().subscribe(data => {
+      this.portfolios = data;
+    });
+  }
+
+  // Method to update the content dynamically
+  updatePortfolioContent(updatedData: any): void {
+    this.portfolios = updatedData.porfolios;
   }
 }
