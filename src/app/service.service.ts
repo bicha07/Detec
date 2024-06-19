@@ -10,6 +10,7 @@ import { Stat } from './interfaces/interface.stat';
 import { ContactTel } from './interfaces/interface.contactTel';
 import { ContactEmail } from './interfaces/interface.contactEmail';
 import { Portfolio } from './interfaces/interface.portfolio';
+import { Pack } from './interfaces/interface.pack';
 
 
 
@@ -64,5 +65,9 @@ export class ServiceService {
   getPortfolios(): Observable<Portfolio[]> {
     const url = `${this.apiUrl}/porfolio`; // Endpoint spécifique
     return this.http.get<Portfolio[]>(url);
+  }
+  getPacks(): Observable<Pack[]> {
+    const url = `${this.apiUrl}/pack`; // Endpoint spécifique
+    return this.http.get<Pack[]>(url);
   }
 }
