@@ -6,6 +6,9 @@
         overflow-x: hidden;
       }
 }  
+html::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 .ls{
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
