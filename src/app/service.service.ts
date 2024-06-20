@@ -62,7 +62,7 @@ export class ServiceService {
     return this.http.get<ContactEmail[]>(url);
   }
   getPortfolios(): Observable<Portfolio[]> {
-    const url = `${this.apiUrl}/porfolio`; // Endpoint spécifique
+    const url = `${this.apiUrl}/portfolios`; // Endpoint spécifique
     return this.http.get<Portfolio[]>(url);
   }
 }
