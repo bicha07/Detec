@@ -22,7 +22,13 @@ export class PortfolioComponent implements AfterViewInit{
   private lightBoxNext!: HTMLElement;
   private index: number = 1;
   constructor(private galleryService: GalleryService,private renderer: Renderer2,private serviceService: ServiceService) {}
+  ngOnInit(): void {
+
+  }
   ngAfterViewInit(): void {
+    this.serviceService.getPortfolios().subscribe(data => {
+      this.portfolios = data;
+    });
     this.galleryService.init('.gallery', '.gallery-track', '.card');
     this.galleryItem = document.getElementsByClassName('gallery-item');
     this.lightBoxContainer = this.renderer.createElement('div');
@@ -96,11 +102,7 @@ export class PortfolioComponent implements AfterViewInit{
   portfolios: Portfolio[] = []; // Utilisez l'interface Category pour typer le tableau
 
 
-  ngOnInit(): void {
-    this.serviceService.getPortfolios().subscribe(data => {
-      this.portfolios = data;
-    });
-  }
+  
 
   // Method to update the content dynamically
   updatePortfolioContent(updatedData: any): void {
