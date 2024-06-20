@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     body {
       overflow-x: hidden;
     }
@@ -6,9 +6,13 @@
         overflow-x: hidden;
       }
 }  
-html::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
+body::-webkit-scrollbar {
+  display: none;
+} */
+ 
+ body{
+  overflow-y:hidden!important;
+ }
 .ls{
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
