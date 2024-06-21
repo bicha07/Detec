@@ -1,12 +1,12 @@
 export class Expertise {
-  id: BigInteger;
+  id: number;
   photo: string;
   title: string;
   recap: string;
   
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     title: string,
     recap: string,

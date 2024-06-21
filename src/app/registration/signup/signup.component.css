@@ -1,0 +1,137 @@
+.full-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full-height {
+    height: 100%;
+}
+
+@media (min-width: 992px) {
+    .lost_reset_password, form.login {
+        margin: auto;
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px) {
+    .pad{
+        padding-top: 10%;
+    }
+    .woocommerce-form {
+        padding: 20%;
+    }
+
+    .woocommerce-input-text {
+        font-size: 18px; /* Augmente la taille de la police */
+        padding: 12px; /* Augmente le padding pour une meilleure visibilité */
+        width: 100%; /* Assurez-vous que les champs prennent toute la largeur */
+    }
+
+    .woocommerce-Button.button {
+        font-size: 18px; /* Augmente la taille de la police du bouton */
+        padding: 12px 20px; /* Augmente le padding du bouton */
+        width: 100%; /* Assurez-vous que le bouton prenne toute la largeur */
+    }
+
+    p.form-row {
+        margin-bottom: 30px; /* Augmente l'espacement entre les champs */
+        width: 100%; /* Assurez-vous que le bouton prenne toute la largeur */
+
+    }
+    .lost_reset_password, form.login {
+        margin: auto;
+        width: 100%;
+    }
+    .podo{
+            padding-left: 0px;
+    padding-right: 0px;
+    }
+}
+
+.lost_reset_password .button, form.login .button {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+p.form-row {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.pad {
+    padding-top: 15px;
+}
+
+/* Stylisation générale de la liste déroulante */
+.woocommerce-input-text {
+    width: 100%; /* Assurez-vous que les champs prennent toute la largeur */
+    height: 40px;
+    padding: 8px 12px;
+    background-color: #222c35;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* Stylisation spécifique du select */
+select.woocommerce-input-text {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23FF0000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'); /* Flèche rouge */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+/* Amélioration de la visibilité de la liste déroulante sur différents navigateurs */
+select.woocommerce-input-text:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+.padb {
+    padding-bottom: 84px;
+}
+
+/* .todo{
+    max-width: 100%;
+} */
+
+
+/* Stylisation générale de la liste déroulante */
+.woocommerce-input-text {
+    width: 100%;
+    height: 50px;
+    padding: 12px;
+    background-color: #222c35;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/* Stylisation spécifique du select */
+select.woocommerce-input-text {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23FF0000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+/* Amélioration de la visibilité de la liste déroulante sur différents navigateurs */
+select.woocommerce-input-text:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 767px) {
+    .woocommerce-input-text {
+        font-size: 18px;
+        padding: 12px;
+        width: 100%;
+        height: 50px;
+    }
+}

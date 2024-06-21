@@ -1,0 +1,55 @@
+
+
+.full-width {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .lost_reset_password, form.login {
+        margin: auto;
+        width: 50%;
+        
+    }
+}@media (max-width: 992px) {
+    .lost_reset_password, form.login {
+        height: 715px;
+        
+    }
+    .koko{
+        padding-top: 15vh;
+    }
+    
+}
+
+.lost_reset_password .button, form.login .button {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+p.form-row {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.pad {
+    padding-top: 14px;
+}
+
+.pado {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+/* Add some spacing and alignment for mobile devices */
+@media (max-width: 767px) {
+    .woocommerce-form-row {
+        text-align: left;
+    }
+
+    .form.login .woocommerce-Button {
+        width: 100%;
+    }
+}
+
