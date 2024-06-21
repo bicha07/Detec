@@ -3,7 +3,7 @@ export class Personne {
   photo: string;
   name: string;
   post: string;
-  discription: string;
+  description: string;
 
 
   constructor(
@@ -11,14 +11,14 @@ export class Personne {
     photo: string,
     name: string,
     post: string,
-    discription: string,
+    description: string,
     
   ) {
     this.id = id;
     this.photo = photo;
     this.name = name;
     this.post = post;
-    this.discription = discription;
+    this.description = description;
    
   }
 }
