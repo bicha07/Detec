@@ -1,0 +1,83 @@
+<section class="page_title ds s-pt-100 s-pb-50 s-pt-md-75 s-pb-md-25 " >
+    <div class="container pad">
+      <div class="row">
+        <div class="d-none d-lg-block divider-90"></div>
+        <div class="col-md-12 text-center">
+          <h1>Account - Sign-Up</h1>
+          <ol class="breadcrumb">
+            <a class="breadcrumb-item " routerLink="/registration" routerLinkActive="active" ariaCurrentWhenActive="page">
+              Sign In
+            </a>
+            <a class="breadcrumb-item active" routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page">
+              Sign Up
+            </a>
+          </ol>
+        </div>
+        <div class="d-none d-lg-block divider-15"></div>
+      </div>
+    </div>
+  </section>
+  <section class="ds s-py-50" >
+    <div class="container ">
+      <div class="row">
+        <div class="col-lg-12">
+          <article>
+            <div class="entry-content">
+              <div class="woocommerce">
+                <form class="woocommerce-form woocommerce-form-login login podo" [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+                  
+
+  
+                  <div class="row">
+                    <!-- Left side inputs -->
+                    <div class="col-md-6">
+                      <p>
+                        <label for="username">Username<span class="required">*</span></label>
+                        <input type="text" formControlName="username" placeholder="Enter username" class="woocommerce-Input woocommerce-input-text input-text text-center">
+                      </p>
+
+                      <p>
+                        <label for="password">Password<span class="required">*</span></label>
+                        <input type="password" formControlName="password" placeholder="Enter password" class="woocommerce-Input woocommerce-input-text input-text text-center">
+                      </p>
+                    </div>
+  
+                    <!-- Right side inputs -->
+                    <div class="col-md-6">
+                        <p>
+                            <label for="email">Email<span class="required">*</span></label>
+                            <input type="email" formControlName="email" placeholder="Enter email" class="woocommerce-Input woocommerce-input-text input-text text-center">
+                          </p>
+                      <p>
+                        <label for="confirmPassword">Confirm Password<span class="required">*</span></label>
+                        <input type="password" formControlName="confirmPassword" placeholder="Confirm password" class="woocommerce-Input woocommerce-input-text input-text text-center">
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- Role field on top spanning full width -->
+                    <div class="col-12 mb-3">
+                      <label for="role">Role<span class="required">*</span></label>
+                      <select formControlName="role" class="woocommerce-Input woocommerce-input-text input-text text-center" id="role-select">
+                        <option value="" disabled selected>Choose your role</option>
+                        <option value="admin">Admin</option>
+                        <option value="client">Client</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  
+                  
+  
+                  <p class="text-center mt-4">
+                    <button type="submit" class="woocommerce-Button button" routerLink="/registration" routerLinkActive="active" ariaCurrentWhenActive="page">Register</button>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  

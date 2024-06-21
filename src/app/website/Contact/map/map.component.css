@@ -1,0 +1,157 @@
+:root {
+    --pin: url("data:image/svg+xml,%3Csvg id='Calque_2' data-name='Calque 2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 59.86 82.99'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: rgba(198, 66, 66, .99); stroke-width: 0px; %7D %3C/style%3E%3C/defs%3E%3Cg id='Calque_1-2' data-name='Calque 1'%3E%3Cpath class='cls-1' d='m52.51,10.55c-4.11-4.88-9.87-8.49-16.69-9.9C19.81-2.69,4.07,7.28.65,22.91.1,25.45-.09,27.98.04,30.46c-.5,15.51,11.72,29.81,23.05,44.86,2.78,3.44,6.65,7.23,6.84,7.68l6.23-7.35c14.19-18.52,34.91-45.55,16.36-65.1Zm-25.49,34.83l-.36-.08c-7.87-1.71-12.89-9.62-11.21-17.66,1.67-8.04,9.42-13.16,17.28-11.45,7.87,1.71,12.88,9.62,11.21,17.66-1.65,7.89-9.16,13.01-16.92,11.53Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.map-container {
+    position: relative;
+    text-align: -webkit-center;
+}
+.contact-sub{
+    align-content: center!important;
+}
+.map-wrap {
+    width: 100%;
+    position: relative;
+    /* background-image: url(../../../assets/images/map.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100%; */
+}
+.map-item {
+    
+}
+.map-land {
+    fill: #bf3939;
+}
+.map-text-intern {}
+.map-text-extern {
+    fill: #bf3939;
+}
+.dashed-line {}
+.pin {
+    fill: #FFCC30;
+    animation: pin-hover 1s ease-in-out 0s infinite alternate;
+}
+.pin-pin{
+    width : 15%;
+    
+}
+@keyframes pin-hover {
+    0% {
+        transform: translateY(-3px);
+    }
+
+    100% {
+        transform: translateY(3px);
+    }
+}
+.shadow {
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    transform: rotateX(-70deg);
+    animation: shadow-grow 1s ease-in-out 0s infinite alternate;
+}
+@keyframes shadow-grow {
+    0% {
+        transform: rotateX(-70deg) scale(1.2);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: rotateX(-70deg) scale(0.8);
+        opacity: 1;
+    }
+}
+.pincontainer {
+    position: absolute;
+    left: 59%;
+    top: 69%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    transition-delay: 0.5s;
+}
+.popup{
+    display: none;
+    position: absolute;
+    top: -55px;
+    
+    width: 120px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 17px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 100;
+}
+.popup-direction{
+    color: #bf3939;
+}
+.popup::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    /* Position the arrow */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+.popup.show {
+    display: block;
+    /* Show the popup when .show class is added */
+}
+@media (max-width: 1197px) {
+    .pincontainer {
+        left:60%;
+        top: 69%;
+    }
+  }
+  @media (max-width: 1076px) {
+    .pincontainer {
+        left: 61%;
+        top: 70%;
+    }
+  }
+  @media (max-width: 992px) {
+    .pincontainer {
+        left: 65%;
+        top: 72%;
+    }
+  }
+  @media (max-width: 939px) {
+    .pincontainer {
+        left: 64%;
+        top: 73%;
+    }
+  }
+  @media (max-width: 939px) and (min-width: 777px) {
+    .pincontainer {
+        left: 60%;
+        top: 71%;
+    }
+  }
+
+@media (max-width: 767px) {
+.pincontainer {
+    left: 59%;
+    top: 68%;
+}
+.shadow {
+    width: 15px;
+    height: 15px;}
+}
+@media (max-width: 546px) {
+    .pincontainer {
+        left: 57%;
+        top: 66%;
+    }
+  }
+.popup-direction:hover{
+    color: #000000;
+}

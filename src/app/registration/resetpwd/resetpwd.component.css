@@ -1,0 +1,38 @@
+.full-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.full-height {
+    height: 100%;
+}
+
+@media (min-width: 992px) {
+    .lost_reset_password, form.login {
+        margin: auto;
+        width: 50%;
+    }
+}
+
+.lost_reset_password .button, form.login .button {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+p.form-row {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.pad {
+    padding-top: 10px;
+}
+
+.pado {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
