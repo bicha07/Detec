@@ -21,7 +21,7 @@
 			<div class="row">
 				<div *ngFor="let expertise of expertises" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
 				  <div class="ls icon-box text-center service-box service-dark grow">
-					<img [src]="expertise.photo" alt="">
+					<img [src]="'https://detec-industriels-backend.marqenti.tn/storage/uploads/'+ expertise.photo" alt="">
 					<h5>
 					  <a [routerLink]="['/sgc', expertise.id]" routerLinkActive="active" ariaCurrentWhenActive="page">{{ expertise.title }}</a>
 					</h5>
