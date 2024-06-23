@@ -1,6 +1,6 @@
 export class Expertise {
   id: number;
-  photo: string;
+  photo: string|null;
   title: string;
   recap: string;
   

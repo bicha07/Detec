@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Certif } from './interfaces/interface.certif';
-import { Technique } from './interfaces/interface.technique';
-import { Expertise } from './interfaces/interface.expertise';
+import { Certif } from './website/interfaces/interface.certif';
+import { Technique } from './website/interfaces/interface.technique';
+import { Expertise } from './website/interfaces/interface.expertise';
 import { Personne } from './interfaces/interface.personne';
-import { Partner } from './interfaces/interface.partner';
-import { Stat } from './interfaces/interface.stat';
-import { ContactTel } from './interfaces/interface.contactTel';
-import { ContactEmail } from './interfaces/interface.contactEmail';
-import { Portfolio } from './interfaces/interface.portfolio';
-import { Pack } from './interfaces/interface.pack';
+import { Partner } from './website/interfaces/interface.partner';
+import { Stat } from './website/interfaces/interface.stat';
+import { ContactTel } from './website/interfaces/interface.contactTel';
+import { ContactEmail } from './website/interfaces/interface.contactEmail';
+import { Portfolio } from './website/interfaces/interface.portfolio';
+import { Pack } from './website/interfaces/interface.pack';
 
 
 
@@ -25,6 +25,19 @@ export class ServiceService {
   getTechniques(): Observable<Technique[]> {
     const url = `${this.apiUrl}/techniques`; // Endpoint spécifique
     return this.http.get<Technique[]>(url);
+  }
+  // Create a new expertise
+  createExpertise(expertise: FormData): Observable<Expertise> {
+    return this.http.post<Expertise>(`${this.apiUrl}/expertises`, expertise);
+  }
+
+  updateExpertise(id: number, expertise: FormData): Observable<Expertise> {
+    return this.http.put<Expertise>(`${this.apiUrl}/expertises/${id}`, expertise);
+  }
+
+  // Delete an expertise
+  deleteExpertise(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/expertises/${id}`);
   }
   getCertifs(): Observable<Certif[]> {
     const url = `${this.apiUrl}/certifs`; // Endpoint spécifique
