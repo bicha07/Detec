@@ -1,0 +1,48 @@
+.page-container {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    width: 100%; /* Full width of the container */
+  }
+  
+  .sidebar {
+    width: 25%; /* Adjust width as needed */
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  .main-content {
+    width: 75%; /* Adjust width as needed */
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  @media (max-width: 768px) {
+    .page-container {
+        flex-direction: column;
+    }
+  
+    .sidebar, .main-content {
+        width: 100%; /* Full width on small screens */
+    }
+  }
+  
+ 
+  .pado{
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 20px;
+    background-color: #F9F8Fa;
+  } 
+
+  a{
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 27px 0 #1f1f1f2e;
+  }
+  .card-header a.collapsed {
+    background-color: white;
+  }
+  .card-header a.collapsed:hover:after{
+    color:black;
+  }
+
+  .card-header a.collapsed:hover {
+    color:black
+  }

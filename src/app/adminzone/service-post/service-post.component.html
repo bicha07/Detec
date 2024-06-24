@@ -1,23 +1,59 @@
-<h3>Liste des Expertises</h3>
+<div class="page-container">
+
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+
+<!-- eof aside sidebar -->
+ <!-- <div class="d-flex flex-row justify-content-between">
+<h3>NAVBAR HERE</h3>
+</div> -->
+<div class="row padi">
+    <div class=" col-lg-12">
+        <h3>Simple Tabs</h3>
+
+        <!-- tabs start -->
+        <ul class=" nav nav-tabs nav-margi" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link coleu active" id="tab01" data-toggle="tab" href="#tab01_pane" role="tab" aria-controls="tab01_pane" aria-expanded="true">Expansion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link coleu" id="tab02" data-toggle="tab" href="#tab02_pane" role="tab" aria-controls="tab02_pane">Promotion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link coleu" id="tab03" data-toggle="tab" href="#tab03_pane" role="tab" aria-controls="tab03_pane">Consulting</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="card mx-4 mb-4 marg-4">
+    <div class="d-flex flex-row justify-content-between card-header">
+        <div>        <p>Liste des Expertises</p>        </div>
+        <div><button class="btn btn-secondary" (click)="onAdd()">  + Nouvelle Expertises</button></div>
+    </div>
+<div class="card-body px-0 pt-0 pb-0">
+<div class="table-responsive p-0">
 <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Photo</th>
-            <th>Title</th>
-            <th>Recap</th>
-            <th>Action</th>
+    
+    <thead >
+        <tr >
+            <th class="text-center">ID</th>
+            <th class="text-center">Photo</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Recap</th>
+            <th class="left-button-cont">Action</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let expertise of expertises">
-            <td>{{ expertise.id }}</td>
-            <td><img [src]="'http://localhost:8000/storage/uploads/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
-            <td>{{ expertise.title }}</td>
-            <td>{{ expertise.recap }}</td>
-            <td>
-                <button class="btn btn-warning" (click)="onEdit(expertise)">Modifier</button>
-                <button class="btn btn-danger" (click)="onDelete(expertise.id)">Supprimer</button>
+            <td class="text-center">{{ expertise.id }}</td>
+            <td class="text-center"><img [src]="'http://localhost:8000/storage/uploads/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
+            <td class="text-center">{{ expertise.title }}</td>
+            <td class="text-center">{{ expertise.recap }}</td>
+            <td class="left-button-cont">
+                <button class="btn" (click)="onEdit(expertise)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+                <button class="btn" (click)="onDelete(expertise.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
             </td>
         </tr>
     </tbody>
@@ -45,4 +81,8 @@
     </div>
 </div>
 
-<button class="btn btn-primary" (click)="onAdd()">Ajouter une nouvelle expertise</button>
+</div>
+</div>
+</div>
+</div>
+</div>

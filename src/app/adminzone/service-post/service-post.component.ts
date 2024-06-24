@@ -3,14 +3,15 @@ import { ServiceService } from '../../website/service.service';
 import { Expertise } from '../../website/interfaces/interface.expertise';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
-  selector: 'app-service-post',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './service-post.component.html',
-  styleUrls: ['./service-post.component.css'],
-  providers: [ServiceService]
+    selector: 'app-service-post',
+    standalone: true,
+    templateUrl: './service-post.component.html',
+    styleUrls: ['./service-post.component.css'],
+    providers: [ServiceService],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
 })
 export class ServicePostComponent implements OnInit {
   expertises: Expertise[] = [];
