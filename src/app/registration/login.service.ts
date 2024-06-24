@@ -15,7 +15,7 @@ export class LoginService {
   loginUser(loginData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, loginData);
   }
-  forgotPassword(email: string) {
-    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  forgotPassword(identifier: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { identifier });
   }
 }
