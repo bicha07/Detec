@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Certif } from './website/interfaces/interface.certif';
 import { Technique } from './website/interfaces/interface.technique';
 import { Expertise } from './website/interfaces/interface.expertise';
-import { Personne } from './interfaces/interface.personne';
+import { Personne } from './website/interfaces/interface.personne';
 import { Partner } from './website/interfaces/interface.partner';
 import { Stat } from './website/interfaces/interface.stat';
 import { ContactTel } from './website/interfaces/interface.contactTel';

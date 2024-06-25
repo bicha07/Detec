@@ -1,5 +1,5 @@
 export class Stat {
-  id: BigInteger;
+  id: number;
   photo: string;
   title: string;
   percent:string;
@@ -7,7 +7,7 @@ export class Stat {
 
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     title: string,
     percent:string,

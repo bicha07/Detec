@@ -1,12 +1,12 @@
 export class Partner {
-  id: BigInteger;
+  id: number;
   photo: string;
   name: string;
 
 
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     name: string,
 

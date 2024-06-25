@@ -1,0 +1,23 @@
+<div class="page-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+        <div class="row padi">
+            <div class="col-lg-12">
+                <h3>Simple Tabs</h3>
+                <ul class="nav nav-tabs nav-margi" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link coleu" id="tab02" (click)="activeTab = 'partners'" [class.active]="activeTab === 'partners'" data-toggle="tab" role="tab" aria-controls="tab02_pane">Partners</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'stat'" [class.active]="activeTab === 'stat'" role="tab" aria-controls="tab01_pane" aria-expanded="true">Statistique</a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <app-stat-post *ngIf="activeTab === 'stat'"></app-stat-post>
+        <app-partner-post *ngIf="activeTab === 'partners'"></app-partner-post>
+  </div>
+</div>

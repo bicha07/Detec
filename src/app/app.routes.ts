@@ -9,11 +9,14 @@ import { SingleSCComponent } from './website/Service/single-sc/single-sc.compone
 import { RegistrationComponent } from './registration/registration/registration.component';
 import { ResetpwdComponent } from './registration/resetpwd/resetpwd.component';
 import { SignupComponent } from './registration/signup/signup.component';
-import { ServicePostComponent } from './adminzone/service-post/service-post.component';
-import { StructureComponent } from './adminzone/structure/structure.component';
-import { FondateurPostComponent } from './adminzone/fondateur-post/fondateur-post.component';
+import { ServicePostComponent } from './adminzone/HomeAdmin/service-post/service-post.component';
+import { StructureComponent } from './adminzone/HomeAdmin/structure/structure.component';
+import { FondateurPostComponent } from './adminzone/HomeAdmin/fondateur-post/fondateur-post.component';
 import { TeamComponent } from './website/Home/team/team.component';
-import { PackPostComponent } from './adminzone/pack-post/pack-post.component';
+import { PackPostComponent } from './adminzone/HomeAdmin/pack-post/pack-post.component';
+import { StructureAboutComponent } from './adminzone/AboutAdmin/structure-about/structure-about.component';
+import { StructurePortfolioComponent } from './adminzone/portfolioAdmin/structure-portfolio/structure-portfolio.component';
+import { StructureContactComponent } from './adminzone/contactAdmin/structure-contact/structure-contact.component';
 
 export const routes: Routes = [
     { path: '', component: LinkHomeComponent },
@@ -27,10 +30,13 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent },
     { path: 'resetpwd', component: ResetpwdComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'backend', component: StructureComponent },
-    { path: 'fondateur', component: FondateurPostComponent },
-    { path: 'pack', component: PackPostComponent },
-    { path: 'expertise', component: ServicePostComponent },
+    { path: 'homeAdmin', component: StructureComponent },
+    { path: 'aboutAdmin', component: StructureAboutComponent},
+    { path: 'serviceAdmin', component: StructureComponent },
+    { path: 'portfolioAdmin', component: StructurePortfolioComponent },
+    { path: 'contactAdmin', component: StructureContactComponent },
+
+
 
 
 
