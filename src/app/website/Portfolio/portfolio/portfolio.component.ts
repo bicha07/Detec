@@ -1,112 +1,135 @@
-import { AfterViewInit, Component, Renderer2 } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { GalleryService } from './gallery.service';
-import { Portfolio } from '../../interfaces/interface.portfolio';
-import { ServiceService } from '../../service.service';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ServiceService } from '../../service.service';
+import { Portfolio } from '../../interfaces/interface.portfolio';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet,CommonModule],
+  imports: [CommonModule],
   templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.css'
+  styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements AfterViewInit{
-  private galleryItem!: HTMLCollectionOf<Element>;
-  private lightBoxContainer!: HTMLElement;
-  private lightBoxContent!: HTMLElement;
-  private lightBoxImg!: HTMLImageElement;
-  private sliderexit!: HTMLImageElement;
-  private lightBoxPrev!: HTMLElement;
-  private lightBoxNext!: HTMLElement;
-  private index: number = 1;
-  constructor(private galleryService: GalleryService,private renderer: Renderer2,private serviceService: ServiceService) {}
+export class PortfolioComponent implements OnInit, AfterViewInit {
+  portfolios: Portfolio[] = [];
+  showModal: boolean = false;
+  selectedIndex: number = 0;
+  transform: string = 'translateX(0)';
+  isDragging: boolean = false;
+  startX: number = 0;
+  currentX: number = 0;
+  dragOffset: number = 0;
+
+  @ViewChild('sliderTrack') sliderTrack!: ElementRef;
+
+  constructor(private serviceService: ServiceService, private renderer: Renderer2) { }
+
   ngOnInit(): void {
-        this.serviceService.getPortfolios().subscribe(data => {
+    this.serviceService.getPortfolios().subscribe(data => {
       this.portfolios = data;
     });
-
   }
+
   ngAfterViewInit(): void {
-
-    this.galleryService.init('.gallery', '.gallery-track', '.card');
-    this.galleryItem = document.getElementsByClassName('gallery-item');
-    this.lightBoxContainer = this.renderer.createElement('div');
-    this.lightBoxContent = this.renderer.createElement('div');
-    this.sliderexit = this.renderer.createElement('div');
-    this.lightBoxImg = this.renderer.createElement('img');
-    this.lightBoxPrev = this.renderer.createElement('div');
-    this.lightBoxNext = this.renderer.createElement('div');
-
-    this.lightBoxContainer.classList.add('lightbox');
-    this.lightBoxContent.classList.add('lightbox-content');
-    this.sliderexit.classList.add('slider-exit' , 'fa' , 'fa-times');
-    this.lightBoxPrev.classList.add('fa', 'fa-angle-left', 'lightbox-prev');
-    this.lightBoxNext.classList.add('fa', 'fa-angle-right', 'lightbox-next');
-
-    this.renderer.appendChild(this.lightBoxContent, this.sliderexit);
-    this.renderer.appendChild(this.lightBoxContent, this.lightBoxImg);
-    this.renderer.appendChild(this.lightBoxContent, this.lightBoxPrev);
-    this.renderer.appendChild(this.lightBoxContent, this.lightBoxNext);
-    this.renderer.appendChild(this.lightBoxContainer, this.lightBoxContent);
-    this.renderer.appendChild(document.body, this.lightBoxContainer);
-
-    for (let i = 0; i < this.galleryItem.length; i++) {
-      this.galleryItem[i].addEventListener('click', this.currentImage.bind(this));
-    }
-
-    this.lightBoxPrev.addEventListener('click', this.prevImage.bind(this));
-    this.lightBoxNext.addEventListener('click', this.nextImage.bind(this));
-    this.lightBoxContainer.addEventListener('click', this.closeLightBox.bind(this));
-    this.sliderexit.addEventListener('click', this.closeFromX.bind(this));
+    this.addDragListeners();
   }
-  showLightBox(n: number): void {
-    if (n > this.galleryItem.length) {
-      this.index = 1;
-    } else if (n < 1) {
-      this.index = this.galleryItem.length;
-    }
-    const imageLocation = this.galleryItem[this.index - 1].children[0].getAttribute('src');
-    if (imageLocation) {
-      this.lightBoxImg.setAttribute('src', imageLocation);
+
+  addDragListeners(): void {
+    this.renderer.listen(this.sliderTrack.nativeElement, 'mousedown', this.onDragStart.bind(this));
+    this.renderer.listen(this.sliderTrack.nativeElement, 'mousemove', this.onDragMove.bind(this));
+    this.renderer.listen(document, 'mouseup', this.onDragEnd.bind(this));
+    this.renderer.listen(this.sliderTrack.nativeElement, 'mouseleave', this.onDragEnd.bind(this));
+    this.renderer.listen(this.sliderTrack.nativeElement, 'touchstart', this.onDragStart.bind(this));
+    this.renderer.listen(this.sliderTrack.nativeElement, 'touchmove', this.onDragMove.bind(this));
+    this.renderer.listen(this.sliderTrack.nativeElement, 'touchend', this.onDragEnd.bind(this));
+  }
+
+  openModal(index: number): void {
+    this.selectedIndex = index;
+    this.showModal = true;
+    this.updateTransform();
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
+
+  closeModalOnBackground(event: MouseEvent): void {
+    if ((event.target as HTMLElement).classList.contains('modal')) {
+      this.closeModal();
     }
   }
 
-  currentImage(event: Event): void {
-    const target = event.currentTarget as HTMLElement;
-    this.lightBoxContainer.style.display = 'block';
-    const imageIndex = parseInt(target.getAttribute('data-index') || '1', 10);
-    this.showLightBox((this.index = imageIndex));
-  }
-
-  slideImage(n: number): void {
-    this.showLightBox((this.index += n));
-  }
-
-  prevImage(): void {
-    this.slideImage(-1);
-  }
-
-  nextImage(): void {
-    this.slideImage(1);
-  }
-
-  closeLightBox(event: Event): void {
-    if (event.target === this.lightBoxContainer) {
-      this.lightBoxContainer.style.display = 'none';
+  prevSlide(): void {
+    if (this.selectedIndex > 0) {
+      this.selectedIndex--;
+      this.updateTransform();
     }
   }
-  closeFromX(){
-    this.lightBoxContainer.style.display = 'none';
+
+  nextSlide(): void {
+    if (this.selectedIndex < this.portfolios.length - 1) {
+      this.selectedIndex++;
+      this.updateTransform();
+    }
   }
-  portfolios: Portfolio[] = []; // Utilisez l'interface Category pour typer le tableau
 
+  goToSlide(index: number): void {
+    this.selectedIndex = index;
+    this.updateTransform();
+  }
 
-  
+  updateTransform(): void {
+    const width = 100; // Assuming each slide is 100% width
+    this.transform = `translateX(-${this.selectedIndex * width}%)`;
+  }
 
-  // Method to update the content dynamically
+  onDragStart(event: MouseEvent | TouchEvent): void {
+    this.isDragging = true;
+    this.startX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+    this.currentX = this.startX;
+    this.dragOffset = 0;
+    event.preventDefault();
+  }
+
+  onDragMove(event: MouseEvent | TouchEvent): void {
+    if (!this.isDragging) return;
+    this.currentX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+    this.dragOffset = this.currentX - this.startX;
+    const width = this.sliderTrack.nativeElement.clientWidth;
+    const maxDragOffset = this.selectedIndex * width;
+    const minDragOffset = (this.portfolios.length - this.selectedIndex - 1) * width;
+
+    // Prevent dragging beyond the first and last slides
+    if (this.dragOffset > maxDragOffset) {
+      this.dragOffset = maxDragOffset;
+    } else if (-this.dragOffset > minDragOffset) {
+      this.dragOffset = -minDragOffset;
+    }
+
+    this.sliderTrack.nativeElement.style.transform = `translateX(${this.transformOffset()}px)`;
+  }
+
+  onDragEnd(): void {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    if (this.dragOffset > 50 && this.selectedIndex > 0) {
+      this.prevSlide();
+    } else if (this.dragOffset < -50 && this.selectedIndex < this.portfolios.length - 1) {
+      this.nextSlide();
+    } else {
+      this.updateTransform();
+    }
+    this.dragOffset = 0;
+  }
+
+  transformOffset(): number {
+    const width = this.sliderTrack.nativeElement.clientWidth;
+    const percentageOffset = (this.selectedIndex * -width) + this.dragOffset;
+    return percentageOffset;
+  }
+
   updatePortfolioContent(updatedData: any): void {
-    this.portfolios = updatedData.porfolios;
+    this.portfolios = updatedData.portfolios;
   }
 }
