@@ -1,12 +1,12 @@
 export class ContactEmail {
-  id: BigInteger;
+  id: number;
   mail:string;
   name:string;
 
 
 
   constructor(
-    id: BigInteger,
+    id: number,
     mail:string,
     name:string,
 

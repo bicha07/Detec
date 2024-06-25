@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceService } from '../../website/service.service';
-import { Expertise } from '../../website/interfaces/interface.expertise';
+import { ServiceService } from '../../../website/service.service';
+import { Expertise } from '../../../website/interfaces/interface.expertise';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SidebarComponent } from "../sidebar/sidebar.component";
+import { SidebarComponent } from "../../sidebar/sidebar.component";
 
 @Component({
     selector: 'app-service-post',

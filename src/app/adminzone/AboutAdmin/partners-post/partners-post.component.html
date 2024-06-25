@@ -1,0 +1,51 @@
+<div class="card mx-4 mb-4 marg-4">
+    <div class="d-flex flex-row justify-content-between card-header">
+      <div><p>Liste des Partners</p></div>
+      <div><button class="btn btn-secondary" (click)="onAdd()">+ Nouveau Partner</button></div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-0">
+      <div class="table-responsive p-0">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">ID</th>
+              <th class="text-center">Photo</th>
+              <th class="text-center">Nom</th>
+              <th class="left-button-cont">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let partner of partners">
+              <td class="text-center">{{ partner.id }}</td>
+              <td class="text-center "><img class="dark-bg" [src]="'http://localhost:8000/storage/uploads/'+ partner.photo" alt="{{ partner.name }}" width="50"></td>
+              <td class="text-center">{{ partner.name }}</td>
+              <td class="left-button-cont">
+                <button class="btn" (click)="onEdit(partner)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+                <button class="btn" (click)="onDelete(partner.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+<!-- Formulaire pour ajouter/modifier un partner -->
+<div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
+  <div class="modal-content">
+      <span class="close" (click)="closeForm()">&times;</span>
+      <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div class="form-group">
+              <label for="photo">Photo</label>
+              <input type="file" id="photo" (change)="onFileChange($event)" name="photo" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" id="name" [(ngModel)]="currentPartner.name" name="name" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
+      </form>
+  </div>
+</div>
+
+</div>
+</div>
+</div>

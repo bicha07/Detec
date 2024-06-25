@@ -46,3 +46,19 @@
   .card-header a.collapsed:hover {
     color:black
   }
+
+  #collapse01 .card-body {
+    color: black; /* Couleur de texte blanche pour les liens */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+#collapse01 .card-body a {
+    color: black; /* Assure que les liens sont également blancs */
+}
+.displaying{
+  text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%;
+}
