@@ -10,6 +10,10 @@ import { RegistrationComponent } from './registration/registration/registration.
 import { ResetpwdComponent } from './registration/resetpwd/resetpwd.component';
 import { SignupComponent } from './registration/signup/signup.component';
 import { ServicePostComponent } from './adminzone/service-post/service-post.component';
+import { StructureComponent } from './adminzone/structure/structure.component';
+import { FondateurPostComponent } from './adminzone/fondateur-post/fondateur-post.component';
+import { TeamComponent } from './website/Home/team/team.component';
+import { PackPostComponent } from './adminzone/pack-post/pack-post.component';
 
 export const routes: Routes = [
     { path: '', component: LinkHomeComponent },
@@ -23,7 +27,12 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent },
     { path: 'resetpwd', component: ResetpwdComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'backend', component: ServicePostComponent },
+    { path: 'backend', component: StructureComponent },
+    { path: 'fondateur', component: FondateurPostComponent },
+    { path: 'pack', component: PackPostComponent },
+    { path: 'expertise', component: ServicePostComponent },
+
+
 
     { path: '**', redirectTo: 'home' } 
 ];

@@ -68,10 +68,28 @@ export class ServiceService {
     return this.http.delete<void>(`${this.apiUrl}/expertises/${id}`);
   }
 
+//////////////////////
+
+
   getPersonnes(): Observable<Personne[]> {
     const url = `${this.apiUrl}/personnes`; // Endpoint spécifique
     return this.http.get<Personne[]>(url);
   }
+
+  createPersonne(personne: FormData): Observable<Personne> {
+    return this.http.post<Personne>(`${this.apiUrl}/personnes`, personne);
+  }
+
+  updatePersonne(id: number, personne: Partial<Personne>): Observable<Personne> {
+    return this.http.put<Personne>(`${this.apiUrl}/personnes/${id}`, personne);
+  }
+
+  // Delete an expertise
+  deletePersonne(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/personnes/${id}`);
+  }
+
+  ///////////////////////
   getPartners(): Observable<Partner[]> {
     const url = `${this.apiUrl}/partners`; // Endpoint spécifique
     return this.http.get<Partner[]>(url);

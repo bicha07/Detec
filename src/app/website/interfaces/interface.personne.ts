@@ -1,5 +1,5 @@
 export class Personne {
-  id: BigInteger;
+  id: number;
   photo: string;
   name: string;
   post: string;
@@ -7,7 +7,7 @@ export class Personne {
 
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     name: string,
     post: string,
