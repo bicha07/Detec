@@ -47,7 +47,12 @@
 .coli{
     color: black;
 }
-
+.ls .black{
+    color: black ;
+}
+.ls .black:hover{
+    color: #c3001e ;
+}
 
 
 /* .form-group label {
