@@ -67,3 +67,9 @@
     font-weight: bold;
     font-size: 20px;
 }
+.ls .black{
+    color: black ;
+}
+.ls .black:hover{
+    color: #c3001e ;
+}
