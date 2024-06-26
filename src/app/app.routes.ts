@@ -17,6 +17,7 @@ import { PackPostComponent } from './adminzone/HomeAdmin/pack-post/pack-post.com
 import { StructureAboutComponent } from './adminzone/AboutAdmin/structure-about/structure-about.component';
 import { StructurePortfolioComponent } from './adminzone/portfolioAdmin/structure-portfolio/structure-portfolio.component';
 import { StructureContactComponent } from './adminzone/contactAdmin/structure-contact/structure-contact.component';
+import { FormulaireComponent } from './website/Home/formulaire/formulaire.component';
 
 export const routes: Routes = [
     { path: '', component: LinkHomeComponent },
@@ -35,6 +36,7 @@ export const routes: Routes = [
     { path: 'serviceAdmin', component: StructureComponent },
     { path: 'portfolioAdmin', component: StructurePortfolioComponent },
     { path: 'contactAdmin', component: StructureContactComponent },
+    { path: 'formulaire', component: FormulaireComponent },
 
 
 
