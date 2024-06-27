@@ -1,10 +1,11 @@
 import { Nature } from "./interface.natures";
 import { Chantier } from "./interface.chantiers";
 
-export class Technique {
+export class Devis {
   id: number;
   name: string;
   email: string;
+  company:string;
   message: string;
   natures: Nature[];
   chantiers: Chantier[];
@@ -13,6 +14,7 @@ export class Technique {
     id: number,
     name: string,
     email: string,
+    company:string,
     message: string,
     natures: Nature[],
     chantiers: Chantier[],
@@ -21,6 +23,7 @@ export class Technique {
     this.name = name;
     this.email = email;
     this.message = message;
+    this.company = company;
     this.natures = natures;
     this.chantiers = chantiers;
   }

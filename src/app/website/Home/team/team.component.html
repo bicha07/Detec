@@ -9,7 +9,7 @@
                     <div *ngFor="let personne of personnes"
                         class="vertical-item hero-bg content-padding text-center shadow-mid ">
                         <div class="item-media">
-                            <img [src]="personne.photo" alt="">
+                            <img [src]="'http://localhost:8000/storage/uploads/'+personne.photo" alt="">
                             <div class="media-links">
                                 <a></a>
                             </div>
