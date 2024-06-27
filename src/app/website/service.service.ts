@@ -211,7 +211,7 @@ export class ServiceService {
 //////////////////////////////
 
 public sendFormData(formData: any): Observable<any> {
-  return this.http.post(`${this.apiUrl}/send-form`, formData);
+  return this.http.post(`${this.apiUrl}/devis`, formData);
 }
 
 

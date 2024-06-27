@@ -57,7 +57,9 @@
 .ls .black:hover {
     color: white;
 }
-
+.hidden{
+    display:none;
+}
 
 /* .form-group label {
     margin-bottom: 5px;
