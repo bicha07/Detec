@@ -88,28 +88,121 @@ export class ServiceService {
   deletePersonne(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/personnes/${id}`);
   }
+  
 
   ///////////////////////
+
+
+
   getPartners(): Observable<Partner[]> {
     const url = `${this.apiUrl}/partners`; // Endpoint spécifique
     return this.http.get<Partner[]>(url);
   }
+
+  createPartner(partner: FormData): Observable<Partner> {
+    return this.http.post<Partner>(`${this.apiUrl}/partners`, partner);
+  }
+
+  updatePartner(id: number, partners: Partial<Partner>): Observable<Partner> {
+    return this.http.put<Partner>(`${this.apiUrl}/partners/${id}`, partners);
+  }
+
+  // Delete an expertise
+  deletePartner(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/partners/${id}`);
+  }
+
+
+
+  /////////////////
+
+
   getStats(): Observable<Stat[]> {
     const url = `${this.apiUrl}/stats`; // Endpoint spécifique
     return this.http.get<Stat[]>(url);
   }
+
+  createStat(stat: FormData): Observable<Stat> {
+    return this.http.post<Stat>(`${this.apiUrl}/stats`, stat);
+  }
+
+  updateStat(id: number, stats: Partial<Stat>): Observable<Stat> {
+    return this.http.put<Stat>(`${this.apiUrl}/stats/${id}`, stats);
+  }
+
+  // Delete an expertise
+  deleteStat(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/stats/${id}`);
+  }
+
+
+
+  //////////////////////////
   getContactsTel(): Observable<ContactTel[]> {
     const url = `${this.apiUrl}/contactstel`; // Endpoint spécifique
     return this.http.get<ContactTel[]>(url);
   }
+
+  createTel(tel: FormData): Observable<ContactTel> {
+    return this.http.post<ContactTel>(`${this.apiUrl}/tels`, tel);
+  }
+
+  updateTel(id: number, tels: Partial<ContactTel>): Observable<ContactTel> {
+    return this.http.put<ContactTel>(`${this.apiUrl}/tels/${id}`, tels);
+  }
+
+  // Delete an expertise
+  deleteTel(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/tels/${id}`);
+  }
+
+
+  ////////////////////////
+
+  
   getContactsEmail(): Observable<ContactEmail[]> {
     const url = `${this.apiUrl}/contactsemail`; // Endpoint spécifique
     return this.http.get<ContactEmail[]>(url);
   }
+
+  createMail(mail: FormData): Observable<ContactEmail> {
+    return this.http.post<ContactEmail>(`${this.apiUrl}/contactsemail`, mail);
+  }
+
+  updateMail(id: number, mails: Partial<ContactEmail>): Observable<ContactEmail> {
+    return this.http.put<ContactEmail>(`${this.apiUrl}/contactsemail/${id}`, mails);
+  }
+
+  // Delete an expertise
+  deleteMail(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/contactsemail/${id}`);
+  }
+
+
+  ///////////////////
+
+
+
   getPortfolios(): Observable<Portfolio[]> {
     const url = `${this.apiUrl}/portfolios`; // Endpoint spécifique
     return this.http.get<Portfolio[]>(url);
   }
+
+  createPortfolio(portfolio: FormData): Observable<Portfolio> {
+    return this.http.post<Portfolio>(`${this.apiUrl}/portfolios`, portfolio);
+  }
+
+  updatePortfolio(id: number, portfolios: Partial<Portfolio>): Observable<Portfolio> {
+    return this.http.put<Portfolio>(`${this.apiUrl}/portfolios/${id}`, portfolios);
+  }
+
+  // Delete an expertise
+  deletePortfolio(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/portfolios/${id}`);
+  }
+
+
+  /////////////////
   getPacks(): Observable<Pack[]> {
     const url = `${this.apiUrl}/pack`; // Endpoint spécifique
     return this.http.get<Pack[]>(url);

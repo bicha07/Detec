@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
  // Assure-toi d'avoir un service approprié
-import { Personne } from '../../website/interfaces/interface.personne';
+import { Personne } from '../../../website/interfaces/interface.personne';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { ServiceService } from '../../website/service.service';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
+import { ServiceService } from '../../../website/service.service';
 
 @Component({
     selector: 'app-fondateur-post',

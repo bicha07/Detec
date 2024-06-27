@@ -1,9 +1,12 @@
-import { Component, Renderer2, AfterViewInit } from '@angular/core';
+
+import { Component,Renderer2, AfterViewInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive  ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
