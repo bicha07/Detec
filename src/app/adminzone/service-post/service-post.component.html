@@ -19,7 +19,7 @@
     <tbody>
         <tr *ngFor="let expertise of expertises">
             <td class="text-center">{{ expertise.id }}</td>
-            <td class="text-center"><img [src]="'http://localhost:8000/storage/uploads/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
+            <td class="text-center"><img [src]="'../../../assets/images/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
             <td class="text-center">{{ expertise.title }}</td>
             <td class="text-center">{{ expertise.recap }}</td>
             <td class="left-button-cont">
