@@ -22,3 +22,6 @@
     border-top: 1px solid #fe030390;
     padding: 27px 0;
 }
+.item-content{
+    height: 300px!important;
+}

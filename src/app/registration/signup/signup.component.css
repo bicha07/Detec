@@ -21,7 +21,7 @@
         padding-top: 10%;
     }
     .woocommerce-form {
-        padding: 20%;
+        
     }
 
     .woocommerce-input-text {
@@ -106,7 +106,7 @@ select.woocommerce-input-text:-moz-focusring {
     width: 100%;
     height: 50px;
     padding: 12px;
-    background-color: #222c35;
+    background-color: transparent;
     font-size: 16px;
     border-radius: 4px;
 }
@@ -134,4 +134,22 @@ select.woocommerce-input-text:-moz-focusring {
         width: 100%;
         height: 50px;
     }
+}
+.pad-top-11vh{
+    padding-top: 11vh;
+}
+.ls a {
+    color: #757575!important;
+}
+.ls a:hover{
+    color: #fe0303!important;
+}
+.ls button{
+    color: #757575!important;
+}
+.ls button:hover{
+    color: #ffffff!important;
+}
+input{
+    background-color: transparent!important;
 }

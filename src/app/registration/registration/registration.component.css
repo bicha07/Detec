@@ -1,4 +1,6 @@
-
+.pad-top-11vh{
+    padding-top: 11vh;
+}
 
 .full-width {
     width: 100%;
@@ -16,7 +18,7 @@
         
     }
     .koko{
-        padding-top: 15vh;
+        
     }
     
 }
@@ -52,4 +54,18 @@ p.form-row {
         width: 100%;
     }
 }
-
+.ls a {
+    color: #757575!important;
+}
+.ls a:hover{
+    color: #fe0303!important;
+}
+.ls button{
+    color: #757575!important;
+}
+.ls button:hover{
+    color: #ffffff!important;
+}
+input {
+    background-color: transparent!important;
+}

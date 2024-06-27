@@ -37,7 +37,7 @@
                                         <a routerLink="/contact" ariaCurrentWhenActive="page"
                                             id="contact-id">Contact</a>
                                     </li>
-                                    <li routerLinkActive="active">
+                                    <li [ngClass]="{'active': isRegistrationRoute}">
                                         <a routerLink="/registration" ariaCurrentWhenActive="page"
                                             id="registration-id">Registration</a>
                                     </li>
