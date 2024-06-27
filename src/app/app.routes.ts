@@ -20,7 +20,8 @@ import { StructureContactComponent } from './adminzone/contactAdmin/structure-co
 import { FormulaireComponent } from './website/Home/formulaire/formulaire.component';
 
 export const routes: Routes = [
-    { path: '', component: LinkHomeComponent },
+    // { path: '', component: LinkHomeComponent },
+    {path:'' , redirectTo: 'home' , pathMatch: 'full'},
     { path: 'home', component: LinkHomeComponent },
     { path: 'about', component: LinkAboutComponent },
     { path: 'contact', component: LinkContactComponent },
@@ -37,10 +38,5 @@ export const routes: Routes = [
     { path: 'portfolioAdmin', component: StructurePortfolioComponent },
     { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },
-
-
-
-
-
     { path: '**', redirectTo: 'home' } 
 ];

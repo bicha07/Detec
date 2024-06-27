@@ -1,7 +1,7 @@
-<div class="card mx-4 mb-4 marg-4">
+<div class="card mx-4 mb-4 ">
     <div class="d-flex flex-row justify-content-between card-header">
         <div>        <p>Liste des Expertises</p>        </div>
-        <div><button class="btn btn-secondary" (click)="onAdd()">  + Nouvelle Expertises</button></div>
+        <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">  + Nouvelle Expertises</button></div>
     </div>
 <div class="card-body px-0 pt-0 pb-0">
 <div class="table-responsive p-0">
@@ -19,7 +19,7 @@
     <tbody>
         <tr *ngFor="let expertise of expertises">
             <td class="text-center">{{ expertise.id }}</td>
-            <td class="text-center"><img [src]="'http://localhost:8000/storage/uploads/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
+            <td class="text-center"><img [src]="'../../../assets/images/'+ expertise.photo" alt="{{ expertise.title }}" width="50"></td>
             <td class="text-center">{{ expertise.title }}</td>
             <td class="text-center">{{ expertise.recap }}</td>
             <td class="left-button-cont">

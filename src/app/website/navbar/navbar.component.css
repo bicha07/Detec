@@ -60,5 +60,8 @@
 .ls .sf-menu > li.active > a {
   color: #fe0303!important;
   
+}.ds .sf-menu > li.active > a {
+  color: #fe0303!important;
+  
 }
 }

@@ -37,3 +37,19 @@ p.form-row {
     padding-bottom: 0px;
     padding-top: 0px;
 }
+.ls a {
+    color: #757575!important;
+}
+.ls a:hover{
+    color: #fe0303!important;
+}
+.ls button{
+    color: #757575!important;
+}
+.ls button:hover{
+    color: #ffffff!important;
+}
+input{
+    background-color: transparent!important;
+    color: #757575!important;
+}

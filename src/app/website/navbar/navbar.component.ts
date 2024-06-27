@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -5,13 +6,14 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule,RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
   private lastScrollTop = 0;
   night = false;
+  isRegistrationRoute = false;
 
   constructor(private renderer: Renderer2, private router: Router) {
     // Listen for route changes
@@ -20,11 +22,17 @@ export class NavbarComponent implements OnInit {
     ).subscribe(() => {
       this.applyTheme();
       this.closeMenuOnMobile();
+      this.checkIfRegistrationRoute();
     });
   }
 
   ngOnInit() {
     this.rearrangeElements();
+    this.checkIfRegistrationRoute();
+  }
+  checkIfRegistrationRoute() {
+    const registrationRoutes = ['/registration', '/resetpwd', '/signup'];
+    this.isRegistrationRoute = registrationRoutes.includes(this.router.url);
   }
 
   @HostListener('window:scroll', [])

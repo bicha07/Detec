@@ -197,3 +197,16 @@ html{
         background-color: #222c35;
         border-radius: 5rem;
     }
+    @media(max-width : 572px) {
+      .btn-head-tab{
+        height: 50px!important;
+        width: 150px!important;
+        font-size: 8px!important;
+        font-weight: 700!important;
+      }
+    }
+    @media(max-width : 426px) {
+      .left-button-cont {  
+        flex-direction: column!important;
+    }
+    }

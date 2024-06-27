@@ -75,7 +75,6 @@ html{
   }
   app-sidebar::-webkit-scrollbar{
   display: none;
-    
   }
   .sidebar {
     width: 25%; /* Adjust width as needed */
@@ -193,3 +192,16 @@ html{
   }
   .nav-link.active {
     background: white !important;}
+    @media(max-width : 572px) {
+      .btn-head-tab{
+        height: 50px!important;
+        width: 150px!important;
+        font-size: 8px!important;
+        font-weight: 700!important;
+      }
+    }
+    @media(max-width : 426px) {
+      .left-button-cont {  
+        flex-direction: column!important;
+    }
+    }

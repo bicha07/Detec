@@ -4,17 +4,19 @@
             <div class="d-none d-lg-block divider-5"></div>
             <div class="col-sm-12 text-center">
                 <h2 class="header-section">Fondateurs</h2>
-                <div class="owl-carousel" data-responsive-lg="3" data-responsive-md="2" data-responsive-sm="2" data-responsive-xs="1" data-nav="true" data-loop="true">
-                    <div *ngFor="let personne of personnes" class="vertical-item hero-bg content-padding text-center shadow-mid ">
+                <div class="owl-carousel team-carousel" data-responsive-lg="3" data-responsive-md="2" data-responsive-sm="2"
+                    data-responsive-xs="1" data-nav="true" data-loop="true" data-center="true">
+                    <div *ngFor="let personne of personnes"
+                        class="vertical-item hero-bg content-padding text-center shadow-mid ">
                         <div class="item-media">
                             <img [src]="personne.photo" alt="">
                             <div class="media-links">
-                                <a  ></a>
+                                <a></a>
                             </div>
                         </div>
                         <div class="item-content">
                             <h5>
-                                <a  >{{personne.name}}</a>
+                                <a>{{personne.name}}</a>
                             </h5>
 
                             <p class="small-text color-main">
@@ -26,11 +28,13 @@
 
                         </div>
                         <div class="link">
-                            <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page" class="btn btn-link">voir Plus</a>
+                            <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page"
+                                class="btn btn-link">voir Plus</a>
                         </div>
 
                     </div>
-                   
-
-
-                  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

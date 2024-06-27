@@ -13,7 +13,7 @@ import { LocationComponent } from "../location/location.component";
     standalone: true,
     templateUrl: './link-home.component.html',
     styleUrl: './link-home.component.css',
-    imports: [BannerComponent, WelcomComponent, ServiceComponent, SpecialityComponent, PricingComponent, TeamComponent, FooterComponent]
+    imports: [LocationComponent,BannerComponent, WelcomComponent, ServiceComponent, SpecialityComponent, PricingComponent, TeamComponent, FooterComponent]
 })
 export class LinkHomeComponent {
 

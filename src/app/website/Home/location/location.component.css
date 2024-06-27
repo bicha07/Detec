@@ -6,7 +6,7 @@
 }
 
 img {
-    max-width: 50%;             /* Limite la largeur maximale de l'image à 50% de son conteneur */
+    max-width: 80%;             /* Limite la largeur maximale de l'image à 50% de son conteneur */
     height: auto;               /* Garde l'aspect ratio de l'image */
 }
 .ls .black{
@@ -15,6 +15,22 @@ img {
 .ls .black:hover{
     color: #c3001e ;
 }
-.larg{
-    font-size: larger;
+.larg {
+    font-size: large;
+    line-height: 1.5;
 }
+.entry-header{
+    width: 80%;
+}
+.location-display-flex{
+    display: flex;
+    justify-content: center;
+}
+@media(max-width : 767px) {
+    .entry-header{
+        width: 100%;
+    }
+    .location-display-flex{
+        display:block;
+    }
+  }

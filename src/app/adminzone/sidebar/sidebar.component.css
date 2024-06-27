@@ -131,6 +131,7 @@ label #cancel{
   }
  
 }
+
 @media(max-width : 427px){
   #check:checked ~ label #btn{
     margin-left: 45vh; 
