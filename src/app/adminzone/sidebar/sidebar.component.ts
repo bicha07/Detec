@@ -1,6 +1,6 @@
 
 import { Component,Renderer2, AfterViewInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +11,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements AfterViewInit {
-  constructor(private renderer: Renderer2) {}
+  
+  constructor(private renderer: Renderer2, private router: Router) {}
 
   ngAfterViewInit() {
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
@@ -40,5 +41,8 @@ export class SidebarComponent implements AfterViewInit {
   collapseDown() {
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.setProperty(checkbox, 'checked', true);
+  }
+  navigate(path: string) {
+    this.router.navigate([path]);
   }
 }

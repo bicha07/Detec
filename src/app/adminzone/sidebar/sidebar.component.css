@@ -249,6 +249,7 @@ label #cancel{
   width: 100%;
 }
 .under-drop {
+  cursor: pointer;
   transition: all .5s ease!important;
   padding-left: 1rem!important;
   font-family: "Lato", sans-serif!important;

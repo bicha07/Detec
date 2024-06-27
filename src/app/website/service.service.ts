@@ -208,5 +208,11 @@ export class ServiceService {
     return this.http.get<Pack[]>(url);
   }
 
+//////////////////////////////
+
+public sendFormData(formData: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}/send-form`, formData);
+}
+
 
 }
