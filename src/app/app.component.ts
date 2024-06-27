@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NavbarComponent } from './website/navbar/navbar.component';
 
 
 declare var windowLoadInit: any; // Global declaration for existing init function
@@ -11,7 +12,7 @@ declare var initializeToggleMenu: any; // Global declaration for toggle menu fun
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [RouterOutlet]
+  imports: [NavbarComponent,RouterOutlet]
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   title = 'canada';

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from "../navbar/navbar.component";
 import { BannerComponent } from "../../Home/banner/banner.component";
 import { FooterComponent } from "../../Home/footer/footer.component";
 import { CategoryComponent } from "../category/category.component";
@@ -12,7 +11,7 @@ import { SingleSComponent } from '../single-s/single-s.component';
     standalone: true,
     templateUrl: './link-service.component.html',
     styleUrl: './link-service.component.css',
-    imports: [SingleSComponent,NavbarComponent, BannerComponent, FooterComponent, CategoryComponent, ServiceComponent, SpecialityComponent, ProgressComponent]
+    imports: [SingleSComponent, BannerComponent, FooterComponent, CategoryComponent, ServiceComponent, SpecialityComponent, ProgressComponent]
 })
 export class LinkServiceComponent {
  

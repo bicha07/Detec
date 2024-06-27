@@ -63,19 +63,14 @@ html{
   
   .page-container {
     display: flex;
-    flex-direction: row; /* Align items horizontally */
-    width: 100%; /* Full width of the container */
+    flex-direction: row;
+    height: 100vh;
   }
   app-sidebar{
-    max-width:20%;
-    max-height: 100vh;
-    overflow-y: scroll;
-    background-color: #F9F8FA;
-  
+    z-index: 99;
   }
   app-sidebar::-webkit-scrollbar{
   display: none;
-    
   }
   .sidebar {
     width: 25%; /* Adjust width as needed */
@@ -83,7 +78,6 @@ html{
   }
   .main-content::-webkit-scrollbar{
     display: none;
-  
   }
   .table-responsive{
     height: 100%!important;
@@ -104,7 +98,7 @@ html{
   
   @media (max-width: 768px) {
     .page-container {
-        flex-direction: column;
+      
     }
   
     .sidebar, .main-content {

@@ -1,5 +1,4 @@
 import { FooterComponent } from "../../Home/footer/footer.component";
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
@@ -16,7 +15,7 @@ declare var initializeToggleMenu: any; // Global declaration for toggle menu fun
     standalone: true,
     templateUrl: './single-sc.component.html',
     styleUrls: ['./single-sc.component.css'],
-    imports: [FooterComponent, NavbarComponent,CommonModule]
+    imports: [FooterComponent,CommonModule]
 })
 export class SingleSCComponent implements OnInit, AfterViewInit, OnDestroy {
     private routerSubscription: Subscription;
