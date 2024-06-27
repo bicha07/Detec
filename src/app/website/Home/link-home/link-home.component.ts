@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { BannerComponent } from "../banner/banner.component";
 import { WelcomComponent } from "../welcom/welcom.component";
 import { ServiceComponent } from "../service/service.component";
@@ -14,7 +13,7 @@ import { LocationComponent } from "../location/location.component";
     standalone: true,
     templateUrl: './link-home.component.html',
     styleUrl: './link-home.component.css',
-    imports: [NavbarComponent, BannerComponent, WelcomComponent, ServiceComponent, SpecialityComponent, PricingComponent, TeamComponent, FooterComponent, LocationComponent]
+    imports: [BannerComponent, WelcomComponent, ServiceComponent, SpecialityComponent, PricingComponent, TeamComponent, FooterComponent]
 })
 export class LinkHomeComponent {
 

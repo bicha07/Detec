@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Part1Component } from "../part1/part1.component";
 import { SignatureComponent } from "../signature/signature.component";
 import { ProcessComponent } from "../process/process.component";
@@ -13,7 +12,7 @@ import { BannerComponent } from "../../Home/banner/banner.component";
     standalone: true,
     templateUrl: './link-about.component.html',
     styleUrl: './link-about.component.css',
-    imports: [BannerComponent, NavbarComponent, Part1Component, SignatureComponent, ProcessComponent, NumbersComponent, FooterComponent]
+    imports: [BannerComponent,  Part1Component, SignatureComponent, ProcessComponent, NumbersComponent, FooterComponent]
 })
 export class LinkAboutComponent {
 

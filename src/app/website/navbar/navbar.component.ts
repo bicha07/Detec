@@ -1,5 +1,6 @@
 import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +11,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   private lastScrollTop = 0;
+  night = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private router: Router) {
+    // Listen for route changes
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.applyTheme();
+      this.closeMenuOnMobile();
+    });
+  }
 
   ngOnInit() {
     this.rearrangeElements();
@@ -23,10 +33,10 @@ export class NavbarComponent implements OnInit {
     if (navbar) {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScroll > this.lastScrollTop) {
-        // Scrolling down
+        //Scrolling down
         navbar.classList.add('hidden');
       } else {
-        // Scrolling up
+        //Scrolling up
         navbar.classList.remove('hidden');
       }
       this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
@@ -68,6 +78,8 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleTheme() {
+    this.night = !this.night;
+
     // Get all elements with class 'ds' or 'ls'
     const dsElements = document.querySelectorAll('.ds');
     const lsElements = document.querySelectorAll('.ls');
@@ -84,7 +96,7 @@ export class NavbarComponent implements OnInit {
       this.renderer.addClass(element, 'ds');
     });
 
-    // Change the icon
+    // Change the icon and images based on theme
     const icon = document.getElementById('toggle-icon') as HTMLImageElement;
     const logo = document.getElementById('detec') as HTMLImageElement;
     const banner1 = document.getElementById('banner1') as HTMLImageElement;
@@ -94,7 +106,9 @@ export class NavbarComponent implements OnInit {
     const welcome = document.getElementById('welcome') as HTMLImageElement;
     const logof = document.getElementById('logof') as HTMLImageElement;
     const lang = document.getElementById('lang') as HTMLImageElement;
-
+    const pr1 = document.getElementById('pr1') as HTMLImageElement;
+    const pr2 = document.getElementById('pr2') as HTMLImageElement;
+    const pr3 = document.getElementById('pr3') as HTMLImageElement;
 
     if (icon) {
       if (icon.src.includes('sun.png')) {
@@ -104,7 +118,12 @@ export class NavbarComponent implements OnInit {
         banner1.src = './assets/images/16.jpg';
         banner2.src = './assets/images/6.jpg';
         banner3.src = './assets/images/17.jpg';
-        lang.src = './assets/images/langb.png';
+        if (speciality) speciality.style.backgroundImage = 'url(./assets/images/18.png)';
+        if (welcome) welcome.style.backgroundImage = 'url(./assets/images/5.webp)';
+        if (lang) lang.src = './assets/images/langb.png';
+        if (pr1) pr1.src = './assets/images/1.svg';
+        if (pr2) pr2.src = './assets/images/2.svg';
+        if (pr3) pr3.src = './assets/images/3.svg';
 
       } else {
         icon.src = './assets/images/sun.png';
@@ -113,8 +132,61 @@ export class NavbarComponent implements OnInit {
         banner1.src = './assets/images/9.jpg';
         banner2.src = './assets/images/8.jpg';
         banner3.src = './assets/images/14.jpg';
-        lang.src = './assets/images/langw.png';
+        if (speciality) speciality.style.backgroundImage = 'url(./assets/images/6.webp)';
+        if (welcome) welcome.style.backgroundImage = 'url(./assets/images/8.png)';
+        if (lang) lang.src = './assets/images/langw.png';
+        if (pr1) pr1.src = './assets/images/1w.svg';
+        if (pr2) pr2.src = './assets/images/2w.svg';
+        if (pr3) pr3.src = './assets/images/3w.svg';
+      }
+    }
+  }
 
+  applyTheme() {
+    const speciality = document.getElementById('speciality') as HTMLImageElement;
+    const welcome = document.getElementById('welcome') as HTMLImageElement;
+    const lang = document.getElementById('lang') as HTMLImageElement;
+    const pr1 = document.getElementById('pr1') as HTMLImageElement;
+    const pr2 = document.getElementById('pr2') as HTMLImageElement;
+    const pr3 = document.getElementById('pr3') as HTMLImageElement;
+    const dsElements = document.querySelectorAll('.ds');
+    const lsElements = document.querySelectorAll('.ls');
+
+    if (this.night) {
+      if (speciality) speciality.style.backgroundImage = 'url(./assets/images/6.webp)';
+      if (welcome) welcome.style.backgroundImage = 'url(./assets/images/8.png)';
+      if (lang) lang.src = './assets/images/langw.png';
+      if (pr1) pr1.src = './assets/images/1w.svg';
+      if (pr2) pr2.src = './assets/images/2w.svg';
+      if (pr3) pr3.src = './assets/images/3w.svg';
+      // Change 'ls' to 'ds'
+      lsElements.forEach((element) => {
+        this.renderer.removeClass(element, 'ls');
+        this.renderer.addClass(element, 'ds');
+      });
+
+    } else {
+      if (speciality) speciality.style.backgroundImage = 'url(./assets/images/18.png)';
+      if (welcome) welcome.style.backgroundImage = 'url(./assets/images/5.webp)';
+      if (lang) lang.src = './assets/images/langb.png';
+      if (pr1) pr1.src = './assets/images/1.svg';
+      if (pr2) pr2.src = './assets/images/2.svg';
+      if (pr3) pr3.src = './assets/images/3.svg';
+      // Change 'ds' to 'ls'
+      dsElements.forEach((element) => {
+        this.renderer.removeClass(element, 'ds');
+        this.renderer.addClass(element, 'ls');
+
+      });
+    }
+  }
+  closeMenuOnMobile() {
+    const toggleMenu = document.querySelector('.toggle_menu');
+    if (toggleMenu && window.getComputedStyle(toggleMenu).display !== 'none') {
+      const navbar = document.querySelector('#navbar');
+      if (navbar && navbar.classList.contains('mobile-active') && toggleMenu.classList.contains('mobile-active')){
+        navbar.classList.remove('mobile-active');
+        toggleMenu.classList.remove('mobile-active');
       }
     }
   }
