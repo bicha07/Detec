@@ -1,0 +1,20 @@
+.image-container {
+    display: flex;              /* Utilise flexbox pour le conteneur */
+    justify-content: center;    /* Centre l'image horizontalement */
+    align-items: center;        /* Centre l'image verticalement */
+    height: 70vh;              /* Assure que le conteneur prend toute la hauteur de la vue */
+}
+
+img {
+    max-width: 50%;             /* Limite la largeur maximale de l'image à 50% de son conteneur */
+    height: auto;               /* Garde l'aspect ratio de l'image */
+}
+.ls .black{
+    color: black ;
+}
+.ls .black:hover{
+    color: #c3001e ;
+}
+.larg{
+    font-size: larger;
+}

@@ -6,6 +6,7 @@ import { SpecialityComponent } from "../speciality/speciality.component";
 import { PricingComponent } from "../pricing/pricing.component";
 import { TeamComponent } from "../team/team.component";
 import { FooterComponent } from "../footer/footer.component";
+import { LocationComponent } from "../location/location.component";
 
 @Component({
     selector: 'app-link-home',

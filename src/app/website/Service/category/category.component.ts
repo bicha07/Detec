@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../service.service';
 import { Technique } from '../../interfaces/interface.technique';
+import { SingleSComponent } from "../single-s/single-s.component";
 
 @Component({
-  selector: 'app-category',
-  standalone: true,
-  imports: [RouterOutlet,RouterLink, RouterLinkActive,CommonModule],
-  templateUrl: './category.component.html',
-  styleUrl: './category.component.css'
+    selector: 'app-category',
+    standalone: true,
+    templateUrl: './category.component.html',
+    styleUrl: './category.component.css',
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule, SingleSComponent]
 })
 export class CategoryComponent implements OnInit {
   techniques: Technique[] = []; // Utilisez l'interface Category pour typer le tableau

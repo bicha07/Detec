@@ -1,10 +1,10 @@
 export class ContactTel {
-  id: BigInteger;
+  id: number;
   tel: string;
   name:string;
 
   constructor(
-    id: BigInteger,
+    id: number,
     tel: string,
     name:string,
 

@@ -1,11 +1,11 @@
 export class Portfolio {
-  id: BigInteger;
+  id: number;
   photo: string;
   title: string;
 
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     title: string,
 
