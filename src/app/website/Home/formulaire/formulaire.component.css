@@ -50,11 +50,12 @@
 }
 
 .ls .black {
-    color: black;
+    color: #fe5b5b;
+    border:2px solid #bababa;
 }
 
 .ls .black:hover {
-    color: #c3001e;
+    color: white;
 }
 
 
@@ -130,4 +131,11 @@ legend {
         display: block;
     }
 
+}
+.btn-form{
+    border-radius: 0.5rem;
+}
+.ls .btn-form:hover{
+background-color:#fe5b5b;
+border: 2px solid #bababa;
 }
