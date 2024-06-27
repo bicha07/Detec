@@ -10,47 +10,49 @@
             <div id="accordion01" role="tablist" class="sidebar-content">
                 <div class="card">
                     <div class="card-header" role="tab" id="collapse01_header">
-                        
-                            <a class="collapsed" data-toggle="collapse" href="#collapse01" aria-expanded="true"
-                                aria-controls="collapse01" (click)="collapseDown()">
-                                Gestion site
-                            </a>
-                        
+
+                        <a class="collapsed" data-toggle="collapse" href="#collapse01" aria-expanded="true"
+                            aria-controls="collapse01" (click)="collapseDown()">
+                            Gestion site
+                        </a>
+
                     </div>
 
                     <div id="collapse01" class="collapse" role="tabpanel" aria-labelledby="collapse01_header"
                         data-parent="#accordion01">
                         <div class="card-body under-cont ">
-                            <a class="under-drop" href="">under 1</a>
-                            <a class="under-drop" href="">under 2</a>
-                            <a class="under-drop" href="">under 3</a>
+                            <a class="under-drop" (click)="navigate('/homeAdmin')">Home</a>
+                            <a class="under-drop" (click)="navigate('/aboutAdmin')">About</a>
+                            <a class="under-drop" (click)="navigate('/serviceAdmin')">Service</a>
+                            <a class="under-drop" (click)="navigate('/portfolioAdmin')">Portfolio</a>
+                            <a class="under-drop" (click)="navigate('/contactAdmin')">Contact</a>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header" role="tab" id="collapse02_header">
-                        
-                            <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="true"
-                                aria-controls="collapse02" (click)="collapseDown()">
-                                Client's Full Satisfaction
-                            </a>
-                        
+
+                        <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="true"
+                            aria-controls="collapse02" (click)="collapseDown()">
+                            Client's Full Satisfaction
+                        </a>
+
                     </div>
                     <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header"
                         data-parent="#accordion01">
                         <div class="card-body under-cont">
-                            <a class="under-drop" href="">under 1</a>          
+                            <a class="under-drop" href="">under 1</a>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header" role="tab" id="collapse03_header">
-                        
-                            <a class="collapsed" data-toggle="collapse" href="#collapse03" aria-expanded="false"
-                                aria-controls="collapse03" (click)="collapseDown()">
-                                gestion emp
-                            </a>
-                        
+
+                        <a class="collapsed" data-toggle="collapse" href="#collapse03" aria-expanded="false"
+                            aria-controls="collapse03" (click)="collapseDown()">
+                            gestion emp
+                        </a>
+
                     </div>
                     <div id="collapse03" class="collapse" role="tabpanel" aria-labelledby="collapse03_header"
                         data-parent="#accordion01">
@@ -69,14 +71,14 @@
             <div id="div1">
                 <div id="div-1-1">
                     <div class="the-btn-content">
-                    <div id="avatar" >
-                        <img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547" />
+                        <div id="avatar">
+                            <img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547" />
+                        </div>
+                        <div id="title-down">
+                            <div id="title-down-1">Bicha</div>
+                            <span id="title-down-2">Admin</span>
+                        </div>
                     </div>
-                    <div id="title-down">
-                        <div id="title-down-1" >Bicha</div>
-                        <span id="title-down-2">Admin</span>
-                    </div>
-                </div>
                     <label for="the-btn"><i class="fa fa-caret-up"></i></label>
                 </div>
                 <div id="div-1-2" class="under-cont">

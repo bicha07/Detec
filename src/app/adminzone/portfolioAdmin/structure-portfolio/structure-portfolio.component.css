@@ -125,7 +125,6 @@ app-sidebar::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
-  .page-container {}
 
   .sidebar,
   .main-content {
@@ -215,13 +214,13 @@ app-sidebar::-webkit-scrollbar {
 }
 
 .coleu {
+  cursor: pointer;
+
   color: #6c757d !important;
   border-radius: 0.5rem 0.5rem 0 0 !important;
   -webkit-border-radius: 0.5rem 0.5rem 0 0 !important;
   -moz-border-radius: 10.5rem 0.5rem 0 0 !important;
 }
-
-.nav-margi {}
 
 .marg-4 {
   margin-top: 4%
