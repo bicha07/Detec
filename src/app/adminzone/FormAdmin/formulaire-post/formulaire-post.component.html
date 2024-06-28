@@ -1,0 +1,48 @@
+<div class="card mx-4 mb-4">
+  <div class="d-flex flex-row justify-content-between card-header">
+    <div><p>Liste des Soumissions</p></div>
+    <div><button class="btn btn-secondary btn-head-tab" (click)="reloadForms()">Actualiser</button></div>
+  </div>
+  <div class="card-body px-0 pt-0 pb-0">
+    <div class="table-responsive p-0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Entreprise</th>
+            <th class="text-center">Message</th>
+            <th class="text-center">Main d'oeuvre</th>
+            <th class="text-center">Chantiers</th>
+            <th class="left-button-cont">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let form of forms">
+            <td class="text-center">{{ form.id }}</td>
+            <td class="text-center">{{ form.name }}</td>
+            <td class="text-center">{{ form.email }}</td>
+            <td class="text-center">{{ form.company }}</td>
+            <td class="text-center">{{ form.message }}</td>
+            <td class="text-center">
+              <ul>
+                <li *ngFor="let nature of form.natures">{{ nature.name }}</li>
+              </ul>
+            </td>
+            <td class="text-center">
+              <ul>
+                <li *ngFor="let chantier of form.chantiers">{{ chantier.name }}</li>
+              </ul>
+            </td>
+            <td class="left-button-cont">
+              <button class="btn" (click)="onDelete(form.id)">
+                <i class="fa fa-trash cursor-pointer text-secondary"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

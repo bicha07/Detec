@@ -213,6 +213,14 @@ export class ServiceService {
 public sendFormData(formData: any): Observable<any> {
   return this.http.post(`${this.apiUrl}/devis`, formData);
 }
+getForms(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/devis`);
+}
 
-
+// deleteForm(id: number): Observable<void> {
+//   return this.http.delete<void>(`${this.apiUrl}/devis/${id}`);
+// }
+deleteForm(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/devis/${id}`);
+}
 }
