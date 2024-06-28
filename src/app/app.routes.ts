@@ -18,6 +18,8 @@ import { StructureAboutComponent } from './adminzone/AboutAdmin/structure-about/
 import { StructurePortfolioComponent } from './adminzone/portfolioAdmin/structure-portfolio/structure-portfolio.component';
 import { StructureContactComponent } from './adminzone/contactAdmin/structure-contact/structure-contact.component';
 import { FormulaireComponent } from './website/Home/formulaire/formulaire.component';
+import { FormulairePostComponent } from './adminzone/FormAdmin/formulaire-post/formulaire-post.component';
+import { StructureFormulaireComponent } from './adminzone/FormAdmin/structure-formulaire/structure-formulaire.component';
 
 export const routes: Routes = [
     // { path: '', component: LinkHomeComponent },
@@ -38,5 +40,7 @@ export const routes: Routes = [
     { path: 'portfolioAdmin', component: StructurePortfolioComponent },
     { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },
+    { path: 'devis', component: StructureFormulaireComponent },
+
     { path: '**', redirectTo: 'home' } 
 ];
