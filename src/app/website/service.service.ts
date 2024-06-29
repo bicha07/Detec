@@ -11,6 +11,7 @@ import { ContactTel } from './interfaces/interface.contactTel';
 import { ContactEmail } from './interfaces/interface.contactEmail';
 import { Portfolio } from './interfaces/interface.portfolio';
 import { Pack } from './interfaces/interface.pack';
+import {  User } from './interfaces/interface.user';
 
 
 
@@ -196,7 +197,6 @@ export class ServiceService {
     return this.http.put<Portfolio>(`${this.apiUrl}/portfolios/${id}`, portfolios);
   }
 
-  // Delete an expertise
   deletePortfolio(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/portfolios/${id}`);
   }
@@ -217,10 +217,28 @@ getForms(): Observable<any[]> {
   return this.http.get<any[]>(`${this.apiUrl}/devis`);
 }
 
-// deleteForm(id: number): Observable<void> {
-//   return this.http.delete<void>(`${this.apiUrl}/devis/${id}`);
-// }
 deleteForm(id: number): Observable<any> {
   return this.http.delete(`${this.apiUrl}/devis/${id}`);
 }
+
+/////////////////////
+
+getUsers(): Observable<User[]> {
+  const url = `${this.apiUrl}/users`;
+  return this.http.get<User[]>(url);
+}
+
+addUser(user: FormData): Observable<User> {
+  return this.http.post<User>(`${this.apiUrl}/users`, user);
+}
+
+updateUser(id: number, user: FormData): Observable<User> {
+  return this.http.put<User>(`${this.apiUrl}/users/${id}`, user);
+}
+
+deleteUser(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
+}
+
+
 }

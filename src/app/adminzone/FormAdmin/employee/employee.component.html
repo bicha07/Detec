@@ -1,0 +1,62 @@
+<div class="card mx-4 mb-4">
+  <div class="d-flex flex-row justify-content-between card-header">
+    <div><p>Liste des Utilisateurs</p></div>
+    <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouvel Utilisateur</button></div>
+  </div>
+  <div class="card-body px-0 pt-0 pb-0">
+    <div class="table-responsive p-0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Role</th>
+            <th class="left-button-cont">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="text-center">{{ user.id }}</td>
+            <td class="text-center">{{ user.username }}</td>
+            <td class="text-center">{{ user.email }}</td>
+            <td class="text-center">{{ user.role }}</td>
+            <td class="left-button-cont">
+              <button class="btn" (click)="onEdit(user)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+              <button class="btn" (click)="onDelete(user.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
+  <div class="modal-content">
+    <span class="close" (click)="closeForm()">&times;</span>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="username">Nom</label>
+        <input type="text" id="username" formControlName="username" name="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email" name="email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" id="role" formControlName="role" name="role" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" id="password" formControlName="password" name="password" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="text" id="confirmPassword" formControlName="confirmPassword" name="confirmPassword" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
+    </form>
+  </div>
+</div>
