@@ -144,17 +144,17 @@ export class ServiceService {
     return this.http.get<ContactTel[]>(url);
   }
 
-  createTel(tel: FormData): Observable<ContactTel> {
-    return this.http.post<ContactTel>(`${this.apiUrl}/tels`, tel);
+  createTel(tel: ContactTel): Observable<ContactTel> {
+    return this.http.post<ContactTel>(`${this.apiUrl}/contactstel`, tel);
   }
 
-  updateTel(id: number, tels: Partial<ContactTel>): Observable<ContactTel> {
-    return this.http.put<ContactTel>(`${this.apiUrl}/tels/${id}`, tels);
+  updateTel(id: number, tels:Partial<ContactTel>): Observable<ContactTel> {
+    return this.http.put<ContactTel>(`${this.apiUrl}/contactstel/${id}`, tels);
   }
 
   // Delete an expertise
   deleteTel(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/tels/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/contactstel/${id}`);
   }
 
 

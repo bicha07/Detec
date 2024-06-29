@@ -288,7 +288,10 @@ border-radius: 0.5rem;
   font-family: "Lato", sans-serif;
   transition: transform 0.5s, opacity 0.5s;
   align-items: center;
-}
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;}
 #div-1-2{
 display: flex;
 flex-direction: column;
