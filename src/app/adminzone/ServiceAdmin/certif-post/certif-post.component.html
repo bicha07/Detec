@@ -71,6 +71,8 @@
                         <textarea [(ngModel)]="adv.description" name="advDesc{{i}}" class="form-control" placeholder="Description"></textarea>
                     </div>
                 </div>
+                <button type="button" class="btn btn-secondary" (click)="addAdvantage()">Ajouter un avantage</button>
+
             </div>
             <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
         </form>

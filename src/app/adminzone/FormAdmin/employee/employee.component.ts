@@ -55,9 +55,16 @@ export class UserComponent implements OnInit {
     this.showForm = true;
     this.isEditing = true;
     this.currentUser = { ...user };
+    this.registrationForm.patchValue({
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      password: user.password, // Prépassez le mot de passe actuel (non recommandé pour des raisons de sécurité)
+      confirmPassword: user.password 
+    });
     this.selectedFile = null; // Reset the selected file
-
   }
+  
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       this.userService.deleteUser(id).subscribe({
@@ -99,14 +106,15 @@ export class UserComponent implements OnInit {
   }
   saveUser(): void {
     if (this.registrationForm.valid) {
-      const formData = new FormData();
-      formData.append('username', this.registrationForm.value.username);
-      formData.append('email', this.registrationForm.value.email);
-      formData.append('role', this.registrationForm.value.role);
-      formData.append('password', this.registrationForm.value.password);
-      // formData.append('password_confirmation', this.registrationForm.value.confirmPassword);
-
-      this.userService.updateUser(this.currentUser.id, formData).subscribe({
+      const updatedUser = {
+        username: this.registrationForm.value.username,
+        email: this.registrationForm.value.email,
+        role: this.registrationForm.value.role,
+        password: this.registrationForm.value.password,
+        confirmPassword: this.registrationForm.value.confirmPassword
+      };
+  
+      this.userService.updateUser(this.currentUser.id, updatedUser).subscribe({
         next: () => {
           console.log('Mise à jour réussie');
           this.loadUsers();
@@ -116,7 +124,7 @@ export class UserComponent implements OnInit {
       });
     }
   }
-
+  
   closeForm(): void {
     this.showForm = false;
   }
