@@ -21,6 +21,7 @@ import { FormulaireComponent } from './website/Home/formulaire/formulaire.compon
 import { FormulairePostComponent } from './adminzone/FormAdmin/formulaire-post/formulaire-post.component';
 import { StructureFormulaireComponent } from './adminzone/FormAdmin/structure-formulaire/structure-formulaire.component';
 import { StructureProjectComponent } from './adminzone/projectAdmin/structure-project/structure-project.component';
+import { StructureServiceComponent } from './adminzone/ServiceAdmin/structure-service/structure-service.component';
 
 export const routes: Routes = [
     // { path: '', component: LinkHomeComponent },
@@ -37,7 +38,7 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'homeAdmin', component: StructureComponent },
     { path: 'aboutAdmin', component: StructureAboutComponent},
-    { path: 'serviceAdmin', component: StructureComponent },
+    { path: 'serviceAdmin', component: StructureServiceComponent },
     { path: 'portfolioAdmin', component: StructurePortfolioComponent },
     { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },

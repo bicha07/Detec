@@ -82,6 +82,7 @@ export class FormulaireComponent implements OnInit {
       this.formulaireService.sendFormData(finalData).subscribe({
         next: (response) => {
           console.log('Données envoyées avec succès:', response);
+          this.resetForm();
         },
         error: (error) => {
           console.error('Erreur lors de l\'envoi des données:', error);
@@ -90,6 +91,12 @@ export class FormulaireComponent implements OnInit {
     } else {
       console.log('Form is not valid:', this.formulaireForm);
     }
+}
+private resetForm() {
+  this.formulaireForm.reset();  // Reset all form fields
+  this.naturesArray.clear();
+  this.chantiersArray.clear();
+  this.addCheckboxes();  // Re-add checkboxes with initial unselected state
 }
 }
 

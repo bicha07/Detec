@@ -1,5 +1,5 @@
 export interface CertAdvantage {
-    id:BigInteger;
+    id:number;
     title: string;
     description: string;
 
