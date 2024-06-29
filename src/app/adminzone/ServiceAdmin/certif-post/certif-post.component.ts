@@ -99,13 +99,19 @@ export class CertifPostComponent implements OnInit {
       formData.append('desc_photo', this.currentCertif.desc_photo);
       formData.append('conclusion', this.currentCertif.conclusion);
       formData.append('certadvantages', JSON.stringify(this.currentCertif.certadvantages)); // Convert advantages to JSON
+  
+      // Log the FormData content
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+  
       this.serviceService.createCertif(formData).subscribe(() => {
         this.loadCertifs();
       });
     }
     this.closeForm();
   }
-
+  
   saveCertif(): void {
     const updatedCertif: Partial<Certif> = {
       title: this.currentCertif.title,
