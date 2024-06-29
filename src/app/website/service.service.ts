@@ -249,6 +249,7 @@ updateUser(id: number, user: any): Observable<any> {
 }
 
 
+
 deleteUser(id: number): Observable<void> {
   return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
 }
