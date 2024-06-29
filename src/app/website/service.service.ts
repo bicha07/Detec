@@ -27,31 +27,43 @@ export class ServiceService {
     const url = `${this.apiUrl}/techniques`; // Endpoint spécifique
     return this.http.get<Technique[]>(url);
   }
-  getCertifs(): Observable<Certif[]> {
-    const url = `${this.apiUrl}/certifs`; // Endpoint spécifique
-    return this.http.get<Certif[]>(url);
-  }
+
   getTechniqueById(id: BigInteger): Observable<Technique> {
     const url = `${this.apiUrl}/techniques/${id}`; // Endpoint spécifique pour récupérer une technique par ID
     return this.http.get<Technique>(url);
   }
-  getCertifById(id: BigInteger): Observable<Certif> {
-    const url = `${this.apiUrl}/certifs/${id}`; // Endpoint spécifique pour récupérer une technique par ID
-    return this.http.get<Certif>(url);
+  ///////////////////////////////////
+
+  getCertifs(): Observable<Certif[]> {
+    const url = `${this.apiUrl}/certifs`; // Endpoint spécifique
+    return this.http.get<Certif[]>(url);
   }
+  getCertifById(id: number): Observable<Certif> {
+    return this.http.get<Certif>(`${this.apiUrl}/certifs/${id}`);
+  }
+
+  createCertif(certif: FormData): Observable<Certif> {
+    return this.http.post<Certif>(`${this.apiUrl}/certifs`, certif);
+  }
+
+  updateCertif(id: number, certif: Partial<Certif>): Observable<Certif> {
+    return this.http.put<Certif>(`${this.apiUrl}/certifs/${id}`, certif);
+  }
+
+  deleteCertif(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/certifs/${id}`);
+  }
+
+
+
+
+
+  ///////////////////////////////////
   getExpertises(): Observable<Expertise[]> {
     const url = `${this.apiUrl}/expertises`; // Endpoint spécifique
     return this.http.get<Expertise[]>(url);
   }
-  // // Create a new expertise
-  // createExpertise(expertise: Expertise): Observable<Expertise> {
-  //   return this.http.post<Expertise>(`${this.apiUrl}/expertises`, expertise);
-  // }
 
-  // // Update an existing expertise
-  // updateExpertise(id: BigInt, expertise: Partial<Expertise>): Observable<Expertise> {
-  //   return this.http.put<Expertise>(`${this.apiUrl}/expertises/${id.toString()}`, expertise);
-  // }
   createExpertise(expertise: FormData): Observable<Expertise> {
     return this.http.post<Expertise>(`${this.apiUrl}/expertises`, expertise);
   }

@@ -1,0 +1,78 @@
+<div class="card mx-4 mb-4 ">
+    <div class="d-flex flex-row justify-content-between card-header">
+        <div><p>Liste des Certificats</p></div>
+        <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Certificat</button></div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-0">
+        <div class="table-responsive p-0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Photo</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Recap</th>
+                        <th class="left-button-cont">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let certif of certifs">
+                        <td class="text-center">{{ certif.id }}</td>
+                        <td class="text-center"><img [src]="certif.photo" alt="{{ certif.title }}" width="50"></td>
+                        <td class="text-center">{{ certif.title }}</td>
+                        <td class="text-center">{{ certif.recap }}</td>
+                        <td class="left-button-cont">
+                            <button class="btn" (click)="onEdit(certif)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+                            <button class="btn" (click)="onDelete(certif.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
+    <div class="modal-content">
+        <span class="close" (click)="closeForm()">&times;</span>
+        <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" (change)="onFileChange($event)" name="photo" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" [(ngModel)]="currentCertif.title" name="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="recap">Recap</label>
+                <textarea id="recap" [(ngModel)]="currentCertif.recap" name="recap" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="description1">Description 1</label>
+                <textarea id="description1" [(ngModel)]="currentCertif.description1" name="description1" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="description2">Description 2</label>
+                <textarea id="description2" [(ngModel)]="currentCertif.description2" name="description2" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="conclusion">Conclusion</label>
+                <textarea id="conclusion" [(ngModel)]="currentCertif.conclusion" name="conclusion" class="form-control"></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label for="certadvantages">Avantages</label>
+                <div *ngFor="let adv of currentCertif.certadvantages; let i = index">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="adv.title" name="advTitle{{i}}" class="form-control" placeholder="Titre">
+                        <textarea [(ngModel)]="adv.description" name="advDesc{{i}}" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { CertAdvantage } from "./interface.certadvantages";
 export class Certif {
-  id: BigInteger;
+  id: number;
   photo: string;
   title: string;
   recap: string;
@@ -11,7 +11,7 @@ export class Certif {
   certadvantages: CertAdvantage[];
 
   constructor(
-    id: BigInteger,
+    id: number,
     photo: string,
     title: string,
     recap: string,

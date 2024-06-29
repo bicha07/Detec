@@ -25,7 +25,7 @@ export class SingleSCComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private router: Router, private route: ActivatedRoute, private serviceService: ServiceService) {
         this.routerSubscription = this.route.params.subscribe(params => {
-            const certifId: BigInteger = params['id']; // Assurez-vous que l'ID est récupéré correctement
+            const certifId: number = params['id']; // Assurez-vous que l'ID est récupéré correctement
             this.serviceService.getCertifById(certifId).subscribe(data => {
                 this.certif = data;
             });

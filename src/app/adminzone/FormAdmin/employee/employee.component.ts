@@ -17,9 +17,10 @@ import { LoginService } from '../../../registration/login.service';
 export class UserComponent implements OnInit {
   users: User[] = [];
   currentUser: User = new User(0, '', '', '', '');
-  showForm: boolean = false;
-  isEditing: boolean = false;
+  showForm= false;
+  isEditing = false;
   registrationForm: FormGroup;
+  selectedFile: File | null = null;
 
 
   constructor(private userService: ServiceService , private fb: FormBuilder,private registrationService: LoginService,private router: Router) {
@@ -54,13 +55,8 @@ export class UserComponent implements OnInit {
     this.showForm = true;
     this.isEditing = true;
     this.currentUser = { ...user };
-    this.registrationForm.patchValue({
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      password: '',
-      confirmPassword: ''
-    });
+    this.selectedFile = null; // Reset the selected file
+
   }
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
