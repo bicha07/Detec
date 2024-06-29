@@ -92,6 +92,9 @@ export class CertifPostComponent implements OnInit {
       if (this.selectedFile) {
         formData.append('photo', this.selectedFile, this.selectedFile.name);
       }
+      else{
+        formData.append('photo', "empty");
+      }
       formData.append('title', this.currentCertif.title);
       formData.append('recap', this.currentCertif.recap);
       formData.append('description1', this.currentCertif.description1);
