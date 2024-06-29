@@ -18,7 +18,7 @@
                 <tbody>
                     <tr *ngFor="let certif of certifs">
                         <td class="text-center">{{ certif.id }}</td>
-                        <td class="text-center"><img [src]="certif.photo" alt="{{ certif.title }}" width="50"></td>
+                        <td class="text-center"><img [src]="'https://detec-industriels-backend/storage/uploads/'+certif.photo" alt="{{ certif.title }}" width="50"></td>
                         <td class="text-center">{{ certif.title }}</td>
                         <td class="text-center">{{ certif.recap }}</td>
                         <td class="left-button-cont">
