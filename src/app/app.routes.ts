@@ -20,6 +20,7 @@ import { StructureContactComponent } from './adminzone/contactAdmin/structure-co
 import { FormulaireComponent } from './website/Home/formulaire/formulaire.component';
 import { FormulairePostComponent } from './adminzone/FormAdmin/formulaire-post/formulaire-post.component';
 import { StructureFormulaireComponent } from './adminzone/FormAdmin/structure-formulaire/structure-formulaire.component';
+import { StructureProjectComponent } from './adminzone/projectAdmin/structure-project/structure-project.component';
 
 export const routes: Routes = [
     // { path: '', component: LinkHomeComponent },
@@ -41,6 +42,7 @@ export const routes: Routes = [
     { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },
     { path: 'devis', component: StructureFormulaireComponent },
+    { path: 'project', component: StructureProjectComponent },
 
     { path: '**', redirectTo: 'home' } 
 ];

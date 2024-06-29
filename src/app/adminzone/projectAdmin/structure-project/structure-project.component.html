@@ -6,13 +6,12 @@
                 <h3 class="ml-5">Simple Tabs</h3>
                 <ul class="nav nav-tabs nav-margi" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'devis'" [class.active]="activeTab === 'devis'" role="tab" aria-controls="tab01_pane" aria-expanded="true">Devis</a>
+                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'project'" [class.active]="activeTab === 'project'" role="tab" aria-controls="tab01_pane" aria-expanded="true">Projet</a>
                     </li>
-
 
                 </ul>
             </div>
         </div>
-        <app-formulaire-post *ngIf="activeTab === 'devis'"></app-formulaire-post>
+        <app-project-post *ngIf="activeTab === 'project'"></app-project-post>
     </div>
 </div>

@@ -65,7 +65,7 @@ export class PortfolioImgPostComponent {
       if (this.selectedFile) {
         formData.append('photo', this.selectedFile, this.selectedFile.name);
       }
-      formData.append('name', this.currentPortfolio.title);
+      formData.append('title', this.currentPortfolio.title);
       this.partnerService.createPortfolio(formData).subscribe(() => {
         this.loadPortfolios();
       });
