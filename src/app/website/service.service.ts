@@ -244,9 +244,10 @@ addUser(user: FormData): Observable<User> {
   return this.http.post<User>(`${this.apiUrl}/users`, user);
 }
 
-updateUser(id: number, user: FormData): Observable<User> {
-  return this.http.put<User>(`${this.apiUrl}/users/${id}`, user);
+updateUser(id: number, user: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/users/${id}`, user);
 }
+
 
 deleteUser(id: number): Observable<void> {
   return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
