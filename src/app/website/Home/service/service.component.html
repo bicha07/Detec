@@ -23,7 +23,7 @@
 				  <div class="ls icon-box text-center service-box service-dark grow">
 					<img [src]="'http://localhost:8000/storage/uploads/'+ expertise.photo" alt="">
 					<h5>
-					  <a [routerLink]="['/sgc', expertise.id]" routerLinkActive="active" ariaCurrentWhenActive="page">{{ expertise.title }}</a>
+					  <a  style="cursor: pointer;">{{ expertise.title }}</a>
 					</h5>
 					<p>{{ expertise.recap }}</p>
 				  </div>

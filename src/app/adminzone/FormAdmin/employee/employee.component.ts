@@ -17,22 +17,22 @@ import { LoginService } from '../../../registration/login.service';
 export class UserComponent implements OnInit {
   users: User[] = [];
   currentUser: User = new User(0, '', '', '', '');
-  showForm= false;
+  showForm = false;
   isEditing = false;
   registrationForm: FormGroup;
   selectedFile: File | null = null;
 
-
-  constructor(private userService: ServiceService , private fb: FormBuilder,private registrationService: LoginService,private router: Router) {
+  constructor(private userService: ServiceService, private fb: FormBuilder, private registrationService: LoginService, private router: Router) {
     this.registrationForm = this.fb.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
-      role: ['', [Validators.required]]
+      role: ['', [Validators.required]],
+      password: [''],
+      confirmPassword: ['']
     });
-
   }
+  
+  
 
   ngOnInit(): void {
     this.loadUsers();
@@ -58,13 +58,11 @@ export class UserComponent implements OnInit {
     this.registrationForm.patchValue({
       username: user.username,
       email: user.email,
-      role: user.role,
-      password: user.password, // Prépassez le mot de passe actuel (non recommandé pour des raisons de sécurité)
-      confirmPassword: user.password 
+      role: user.role
     });
     this.selectedFile = null; // Reset the selected file
   }
-  
+
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       this.userService.deleteUser(id).subscribe({
@@ -84,6 +82,7 @@ export class UserComponent implements OnInit {
       this.addUser();
     }
   }
+  
 
   addUser(): void {
     if (this.registrationForm.valid) {
@@ -91,6 +90,7 @@ export class UserComponent implements OnInit {
         ...this.registrationForm.value,
         password_confirmation: this.registrationForm.value.confirmPassword
       };
+  
       this.registrationService.registerUser(userData).subscribe({
         next: (response) => {
           console.log('Ajout réussi');
@@ -104,15 +104,20 @@ export class UserComponent implements OnInit {
       });
     }
   }
+  
+
   saveUser(): void {
     if (this.registrationForm.valid) {
-      const updatedUser = {
+      const updatedUser: any = {
         username: this.registrationForm.value.username,
         email: this.registrationForm.value.email,
-        role: this.registrationForm.value.role,
-        password: this.registrationForm.value.password,
-        confirmPassword: this.registrationForm.value.confirmPassword
+        role: this.registrationForm.value.role
       };
+  
+      if (this.registrationForm.value.password) {
+        updatedUser.password = this.registrationForm.value.password;
+        updatedUser.confirmPassword = this.registrationForm.value.confirmPassword;
+      }
   
       this.userService.updateUser(this.currentUser.id, updatedUser).subscribe({
         next: () => {
@@ -125,6 +130,7 @@ export class UserComponent implements OnInit {
     }
   }
   
+
   closeForm(): void {
     this.showForm = false;
   }

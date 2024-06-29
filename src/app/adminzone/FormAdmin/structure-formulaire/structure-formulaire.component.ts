@@ -16,5 +16,5 @@ import { UserComponent } from '../employee/employee.component';
 })  
 
 export class StructureFormulaireComponent {
-  activeTab: 'devis'| 'employee' = 'employee';
+  activeTab: 'devis'| 'employee' = 'devis';
 }
