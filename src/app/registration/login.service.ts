@@ -38,11 +38,11 @@ export class LoginService {
     );
   }
 
-  forgotPassword(email: string): Observable<any> {
+  forgotPassword(identifier: string): Observable<any> {
     return this.getCsrfToken().pipe(
       switchMap(() => {
         const headers = new HttpHeaders().set('X-XSRF-TOKEN', this.getXsrfTokenFromCookie());
-        return this.http.post(`${this.apiUrl}/forgot-password`, { email }, { headers, withCredentials: true });
+        return this.http.post(`${this.apiUrl}/forgot-password`, { identifier }, { headers, withCredentials: true });
       })
     );
   }
