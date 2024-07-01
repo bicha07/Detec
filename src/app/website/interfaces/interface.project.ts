@@ -4,6 +4,7 @@ export class Project {
   id: number;
   name_chef: string;
   photo_chef : string;
+  chef_id :string;
   name: string;
   progress: string;
   status: string;
@@ -15,6 +16,8 @@ export class Project {
   constructor(
     id: number,
     name: string,
+    chef_id :string,
+
     name_chef: string,
     photo_chef: string,
     progress: string,    
@@ -27,6 +30,7 @@ export class Project {
   ) {
     this.id = id;
     this.name = name;
+    this.chef_id =chef_id;
     this.name_chef = name_chef;
     this.photo_chef = photo_chef;
     this.progress = progress;

@@ -46,8 +46,8 @@
         <span class="close" (click)="closeForm()">&times;</span>
         <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="project_leader">Chef de Projet</label>
-                <select id="project_leader" formControlName="name_chef" name="project_leader" class="form-control" required>
+                <label for="chef_id">Chef de Projet</label>
+                <select id="chef_id" formControlName="chef_id" name="chef_id" class="form-control" required>
                     <option *ngFor="let employee of users" [value]="employee.id">{{ employee.username }}</option>
                 </select>
             </div>
@@ -62,7 +62,7 @@
                 <div *ngFor="let employeeControl of employees.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2" id="emps">
                     <select id="employee_{{i}}" formControlName="employee" class="form-control mr-2" aria-placeholder="Selectionner un employé">
                         <option value="" disabled [selected]="employeeControl.value.employee == null">Sélectionner un employé</option>
-                        <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+                        <option *ngFor="let user of users" [ngValue]="user.id">{{ user.username }}</option>
                     </select>
                     <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployeeField(i)">Supprimer</button>
                 </div>
