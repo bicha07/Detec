@@ -77,7 +77,7 @@ export class RegistrationComponent implements OnInit {
           // Store the token or any other response data
           localStorage.setItem('token', response.token);
           // Navigate to the dashboard or any other route
-          this.router.navigate(['/backend']);
+          this.router.navigate(['/homeAdmin']);
         },
         error => {
           // Handle error in login

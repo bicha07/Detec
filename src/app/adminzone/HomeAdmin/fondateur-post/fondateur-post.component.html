@@ -19,7 +19,7 @@
           <tbody>
             <tr *ngFor="let personne of personne">
               <td class="text-center">{{ personne.id }}</td>
-              <td class="text-center"><img [src]="'http://localhost:8000/storage/uploads/'+ personne.photo" alt="{{ personne.name }}" width="50"></td>
+              <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ personne.photo" alt="{{ personne.name }}" width="50"></td>
               <td class="text-center">{{ personne.name }}</td>
               <td class="text-center">{{ personne.post }}</td>
               <td class="text-center">{{ personne.description }}</td>

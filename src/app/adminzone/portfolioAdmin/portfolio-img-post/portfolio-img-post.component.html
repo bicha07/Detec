@@ -17,7 +17,7 @@
           <tbody>
             <tr *ngFor="let portfolio of portfolios">
               <td class="text-center">{{ portfolio.id }}</td>
-              <td class="text-center"><img [src]="'http://localhost:8000/storage/uploads/'+ portfolio.photo" alt="{{ portfolio.title }}" width="50"></td>
+              <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ portfolio.photo" alt="{{ portfolio.title }}" width="50"></td>
               <td class="text-center">{{ portfolio.title }}</td>
               <td class="left-button-cont">
                 <button class="btn" (click)="onEdit(portfolio)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>

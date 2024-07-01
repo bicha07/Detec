@@ -7,7 +7,7 @@
                     <div class="owl-carousel partners-carousel" data-center="true" data-loop="true" data-responsive-lg="4 " data-responsive-md="4" data-responsive-sm="3" data-responsive-xs="2">
                         <div *ngFor="let partner of partners" class="item">
                             <a>
-                              <img [src]="'http://localhost:8000/storage/uploads/'+partner.photo" alt="">
+                              <img [src]=" baseUrl +'/storage/uploads/'+ partner.photo" alt="">
                             </a>
                           </div>
                         <!-- <a  >

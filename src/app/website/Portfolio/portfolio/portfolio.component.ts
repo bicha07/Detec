@@ -19,10 +19,12 @@ export class PortfolioComponent implements OnInit, AfterViewInit {
   startX: number = 0;
   currentX: number = 0;
   dragOffset: number = 0;
-
+  baseUrl : String;
   @ViewChild('sliderTrack') sliderTrack!: ElementRef;
 
-  constructor(private serviceService: ServiceService, private renderer: Renderer2) { }
+  constructor(private serviceService: ServiceService, private renderer: Renderer2) { 
+    this.baseUrl = this.serviceService.apiUrlbase;
+  }
 
   ngOnInit(): void {
     this.serviceService.getPortfolios().subscribe(data => {

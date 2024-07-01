@@ -16,8 +16,11 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ServiceComponent implements OnInit {
   expertises: Expertise[] = []; // Utilisez l'interface Category pour typer le tableau
+  baseUrl : String;
+  constructor(private serviceService: ServiceService) { 
+    this.baseUrl = this.serviceService.apiUrlbase;
 
-  constructor(private serviceService: ServiceService) { }
+  }
 
   ngOnInit(): void {
     this.serviceService.getExpertises().subscribe(data => {

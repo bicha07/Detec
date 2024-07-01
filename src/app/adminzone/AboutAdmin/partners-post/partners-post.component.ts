@@ -13,14 +13,19 @@ import { ServiceService } from '../../../website/service.service';
     providers: [ServiceService],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
 })
+
 export class PartnerPostComponent implements OnInit {
   partners: Partner[] = [];
   showForm = false;
   isEditing = false;
   currentPartner: Partner = new Partner(0, '', '');
   selectedFile: File | null = null;
+  baseUrl : String;
 
-  constructor(private partnerService: ServiceService) {}
+  constructor(private partnerService: ServiceService) {
+    this.baseUrl = this.partnerService.apiUrlbase;
+
+  }
 
   ngOnInit(): void {
     this.loadPartners();

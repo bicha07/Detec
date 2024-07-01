@@ -20,8 +20,13 @@ export class FondateurPostComponent implements OnInit {
   isEditing = false;
   currentPersonne: Personne = new Personne(0, '', '', '', '');
   selectedFile: File | null = null;
+  baseUrl : String;
 
-  constructor(private teamService: ServiceService) {}
+
+  constructor(private teamService: ServiceService) {
+    this.baseUrl = this.teamService.apiUrlbase;
+
+  }
 
   ngOnInit(): void {
     this.loadTeam();
