@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule,FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceService } from '../../../website/service.service'; // Assurez-vous que le chemin d'accès est correct
 import { Project } from '../../../website/interfaces/interface.project'; // Ajustez le chemin selon vos besoins
-import { Charge } from '../../../website/interfaces/interface.charges';// Ajustez le chemin selon vos besoins
 import { User } from '../../../website/interfaces/interface.user'; // Ajustez le chemin selon vos besoins
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +17,6 @@ export class ProjectPostComponent implements OnInit {
   users: User[] = [];
   showForm = false;
   isEditing = false;
-  currentProject: Project = new Project(0, '', '', '', '', '', '', '', [], []);
   selectedFile: File | null = null;
   projectForm!: FormGroup;
 
@@ -34,8 +32,7 @@ export class ProjectPostComponent implements OnInit {
   createForm() {
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
-      name_chef: ['', Validators.required],
-      photo_chef: ['', Validators.required],
+      chef_id: ['', Validators.required],
       progress: ['', Validators.required],
       status: ['', Validators.required],
       start_date: ['', Validators.required],
@@ -79,34 +76,46 @@ export class ProjectPostComponent implements OnInit {
   onAdd(): void {
     this.showForm = true;
     this.isEditing = false;
-    this.currentProject = new Project(0, '', '', '', '', '', '', '', [], []);
+    this.projectForm.reset(); // Réinitialiser le formulaire
+    this.employees.clear(); // Vider la liste des employés
     this.selectedFile = null;
   }
 
   onEdit(project: Project): void {
     this.showForm = true;
     this.isEditing = true;
-    this.currentProject = { ...project };
+    this.projectForm.patchValue({
+      name: project.name,
+      chef_id: project.chef_id,
+      progress: project.progress,
+      status: project.status,
+      start_date: project.start_date,
+      end_date: project.end_date
+    });
+    this.employees.clear();
+    project.employees.forEach(emp => {
+      this.addEmployeeField();
+      this.employees.at(this.employees.length - 1).patchValue({ employee: emp });
+    });
     this.selectedFile = null;
-    this.currentProject = JSON.parse(JSON.stringify(project));
   }
 
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('name', this.currentProject.name);
-    formData.append('name_chef', this.currentProject.name_chef);
-    formData.append('photo_chef', this.selectedFile ? this.selectedFile.name : this.currentProject.photo_chef);
-    formData.append('progress', this.currentProject.progress);
-    formData.append('status', this.currentProject.status);
-    formData.append('start_date', this.currentProject.start_date);
-    formData.append('end_date', this.currentProject.end_date);
+    const formValues = this.projectForm.value;
 
-    // Ajouter les employés
-    const employees = this.employees.controls.map(control => control.value.employee);
+    const formData = new FormData();
+    formData.append('name', formValues.name);
+    formData.append('chef_id', formValues.chef_id);
+    formData.append('progress', formValues.progress);
+    formData.append('status', formValues.status);
+    formData.append('start_date', formValues.start_date);
+    formData.append('end_date', formValues.end_date);
+
+    const employees = formValues.employees.map((control: { employee: any; }) => control.employee);
     formData.append('employees', JSON.stringify(employees));
 
     if (this.isEditing) {
-      this.updateProject(this.currentProject.id, formData);
+      this.updateProject(this.projectForm.value.id, formData); // Assurez-vous que le formulaire contient l'ID du projet lors de l'édition
     } else {
       this.addProject(formData);
     }
@@ -136,4 +145,13 @@ export class ProjectPostComponent implements OnInit {
   closeForm(): void {
     this.showForm = false;
   }
+
+  // @HostListener('document:click', ['$event'])
+  // onClickOutside(event: MouseEvent) {
+  //   const modalContent = document.querySelector('.modal-content');
+  //   const target = event.target as HTMLElement;
+  //   if (this.showForm && modalContent && !modalContent.contains(target)) {
+  //     this.closeForm();
+  //   }
+  // }
 }
