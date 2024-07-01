@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Certif } from './interfaces/interface.certif';
 import { Technique } from './interfaces/interface.technique';
 import { Expertise } from './interfaces/interface.expertise';
@@ -11,248 +12,336 @@ import { ContactTel } from './interfaces/interface.contactTel';
 import { ContactEmail } from './interfaces/interface.contactEmail';
 import { Portfolio } from './interfaces/interface.portfolio';
 import { Pack } from './interfaces/interface.pack';
-import {  User } from './interfaces/interface.user';
-
-
+import { User } from './interfaces/interface.user';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
-  private apiUrl = 'http://localhost:8000/api'; // Remplacez par l'URL de votre backend
+  public readonly apiUrlbase: string = environment.apiUrl;
+  public readonly apiUrl: string = environment.apiUrl + '/api';
 
   constructor(private http: HttpClient) { }
 
+  // Fetch CSRF token
+  private getCsrfToken(): Observable<any> {
+    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true });
+  }
+
+  private getXsrfTokenFromCookie(): string {
+    const name = 'XSRF-TOKEN=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    const xsrfToken = this.getXsrfTokenFromCookie();
+    return new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+      .set('X-XSRF-TOKEN', xsrfToken);
+  }
+
+  // Techniques
   getTechniques(): Observable<Technique[]> {
-    const url = `${this.apiUrl}/techniques`; // Endpoint spécifique
-    return this.http.get<Technique[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Technique[]>(`${this.apiUrl}/techniques`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   getTechniqueById(id: BigInteger): Observable<Technique> {
-    const url = `${this.apiUrl}/techniques/${id}`; // Endpoint spécifique pour récupérer une technique par ID
-    return this.http.get<Technique>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Technique>(`${this.apiUrl}/techniques/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
-  ///////////////////////////////////
 
+  // Certifs
   getCertifs(): Observable<Certif[]> {
-    const url = `${this.apiUrl}/certifs`; // Endpoint spécifique
-    return this.http.get<Certif[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Certif[]>(`${this.apiUrl}/certifs`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
+
   getCertifById(id: number): Observable<Certif> {
-    return this.http.get<Certif>(`${this.apiUrl}/certifs/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Certif>(`${this.apiUrl}/certifs/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createCertif(certif: FormData): Observable<Certif> {
-    return this.http.post<Certif>(`${this.apiUrl}/certifs`, certif);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Certif>(`${this.apiUrl}/certifs`, certif, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   updateCertif(id: number, certif: Partial<Certif>): Observable<Certif> {
-    return this.http.put<Certif>(`${this.apiUrl}/certifs/${id}`, certif);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Certif>(`${this.apiUrl}/certifs/${id}`, certif, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   deleteCertif(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/certifs/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/certifs/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-
-
-
-
-  ///////////////////////////////////
+  // Expertises
   getExpertises(): Observable<Expertise[]> {
-    const url = `${this.apiUrl}/expertises`; // Endpoint spécifique
-    return this.http.get<Expertise[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Expertise[]>(`${this.apiUrl}/expertises`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createExpertise(expertise: FormData): Observable<Expertise> {
-    return this.http.post<Expertise>(`${this.apiUrl}/expertises`, expertise);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Expertise>(`${this.apiUrl}/expertises`, expertise, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   updateExpertise(id: number, expertise: Partial<Expertise>): Observable<Expertise> {
-    return this.http.put<Expertise>(`${this.apiUrl}/expertises/${id}`, expertise);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Expertise>(`${this.apiUrl}/expertises/${id}`, expertise, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
+
+  deleteExpertise(id: number): Observable<void> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/expertises/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
   uploadFile(file: File): Observable<{ path: string }> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<{ path: string }>(`${this.apiUrl}/upload`, formData);
-}
-  // Delete an expertise
-  deleteExpertise(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/expertises/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<{ path: string }>(`${this.apiUrl}/upload`, formData, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-//////////////////////
-
-
+  // Personnes
   getPersonnes(): Observable<Personne[]> {
-    const url = `${this.apiUrl}/personnes`; // Endpoint spécifique
-    return this.http.get<Personne[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Personne[]>(`${this.apiUrl}/personnes`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createPersonne(personne: FormData): Observable<Personne> {
-    return this.http.post<Personne>(`${this.apiUrl}/personnes`, personne);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Personne>(`${this.apiUrl}/personnes`, personne, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   updatePersonne(id: number, personne: Partial<Personne>): Observable<Personne> {
-    return this.http.put<Personne>(`${this.apiUrl}/personnes/${id}`, personne);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Personne>(`${this.apiUrl}/personnes/${id}`, personne, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-  // Delete an expertise
   deletePersonne(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/personnes/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/personnes/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
-  
 
-  ///////////////////////
-
-
-
+  // Partners
   getPartners(): Observable<Partner[]> {
-    const url = `${this.apiUrl}/partners`; // Endpoint spécifique
-    return this.http.get<Partner[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Partner[]>(`${this.apiUrl}/partners`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createPartner(partner: FormData): Observable<Partner> {
-    return this.http.post<Partner>(`${this.apiUrl}/partners`, partner);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Partner>(`${this.apiUrl}/partners`, partner, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   updatePartner(id: number, partners: Partial<Partner>): Observable<Partner> {
-    return this.http.put<Partner>(`${this.apiUrl}/partners/${id}`, partners);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Partner>(`${this.apiUrl}/partners/${id}`, partners, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-  // Delete an expertise
   deletePartner(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/partners/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/partners/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-
-
-  /////////////////
-
-
+  // Stats
   getStats(): Observable<Stat[]> {
-    const url = `${this.apiUrl}/stats`; // Endpoint spécifique
-    return this.http.get<Stat[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Stat[]>(`${this.apiUrl}/stats`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createStat(stat: FormData): Observable<Stat> {
-    return this.http.post<Stat>(`${this.apiUrl}/stats`, stat);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Stat>(`${this.apiUrl}/stats`, stat, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-  updateStat(id: number, stats: Partial<Stat>): Observable<Stat> {
-    return this.http.put<Stat>(`${this.apiUrl}/stats/${id}`, stats);
+  updateStat(id: number, stat: Partial<Stat>): Observable<Stat> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Stat>(`${this.apiUrl}/stats/${id}`, stat, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-  // Delete an expertise
   deleteStat(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/stats/${id}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/stats/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-
-
-  //////////////////////////
+  // Contact Tel
   getContactsTel(): Observable<ContactTel[]> {
-    const url = `${this.apiUrl}/contactstel`; // Endpoint spécifique
-    return this.http.get<ContactTel[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<ContactTel[]>(`${this.apiUrl}/contactstel`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createTel(tel: ContactTel): Observable<ContactTel> {
-    return this.http.post<ContactTel>(`${this.apiUrl}/contactstel`, tel);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<ContactTel>(`${this.apiUrl}/contactstel`, tel, { headers, withCredentials: true }))
+    );
   }
 
-  updateTel(id: number, tels:Partial<ContactTel>): Observable<ContactTel> {
-    return this.http.put<ContactTel>(`${this.apiUrl}/contactstel/${id}`, tels);
+  updateTel(id: number, tel: Partial<ContactTel>): Observable<ContactTel> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<ContactTel>(`${this.apiUrl}/contactstel/${id}`, tel, { headers, withCredentials: true }))
+    );
   }
 
-  // Delete an expertise
   deleteTel(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/contactstel/${id}`);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/contactstel/${id}`, { headers, withCredentials: true }))
+    );
   }
 
-
-  ////////////////////////
-
-  
+  // Contact Email
   getContactsEmail(): Observable<ContactEmail[]> {
-    const url = `${this.apiUrl}/contactsemail`; // Endpoint spécifique
-    return this.http.get<ContactEmail[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<ContactEmail[]>(`${this.apiUrl}/contactsemail`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createMail(mail: FormData): Observable<ContactEmail> {
-    return this.http.post<ContactEmail>(`${this.apiUrl}/contactsemail`, mail);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<ContactEmail>(`${this.apiUrl}/contactsemail`, mail, { headers, withCredentials: true }))
+    );
   }
 
-  updateMail(id: number, mails: Partial<ContactEmail>): Observable<ContactEmail> {
-    return this.http.put<ContactEmail>(`${this.apiUrl}/contactsemail/${id}`, mails);
+  updateMail(id: number, mail: Partial<ContactEmail>): Observable<ContactEmail> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<ContactEmail>(`${this.apiUrl}/contactsemail/${id}`, mail, { headers, withCredentials: true }))
+    );
   }
 
-  // Delete an expertise
   deleteMail(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/contactsemail/${id}`);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/contactsemail/${id}`, { headers, withCredentials: true }))
+    );
   }
 
-
-  ///////////////////
-
-
-
+  // Portfolios
   getPortfolios(): Observable<Portfolio[]> {
-    const url = `${this.apiUrl}/portfolios`; // Endpoint spécifique
-    return this.http.get<Portfolio[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Portfolio[]>(`${this.apiUrl}/portfolios`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createPortfolio(portfolio: FormData): Observable<Portfolio> {
-    return this.http.post<Portfolio>(`${this.apiUrl}/portfolios`, portfolio);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Portfolio>(`${this.apiUrl}/portfolios`, portfolio, { headers, withCredentials: true }))
+    );
   }
 
-  updatePortfolio(id: number, portfolios: Partial<Portfolio>): Observable<Portfolio> {
-    return this.http.put<Portfolio>(`${this.apiUrl}/portfolios/${id}`, portfolios);
+  updatePortfolio(id: number, portfolio: Partial<Portfolio>): Observable<Portfolio> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Portfolio>(`${this.apiUrl}/portfolios/${id}`, portfolio, { headers, withCredentials: true }))
+    );
   }
 
   deletePortfolio(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/portfolios/${id}`);
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/portfolios/${id}`, { headers, withCredentials: true }))
+    );
   }
 
-
-  /////////////////
+  // Packs
   getPacks(): Observable<Pack[]> {
-    const url = `${this.apiUrl}/pack`; // Endpoint spécifique
-    return this.http.get<Pack[]>(url);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Pack[]>(`${this.apiUrl}/pack`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
-//////////////////////////////
+  // Devis
+  sendFormData(formData: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post(`${this.apiUrl}/devis`, formData, { headers, withCredentials: true }))
+    );
+  }
 
-public sendFormData(formData: any): Observable<any> {
-  return this.http.post(`${this.apiUrl}/devis`, formData);
-}
-getForms(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.apiUrl}/devis`);
-}
+  getForms(): Observable<any[]> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<any[]>(`${this.apiUrl}/devis`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
 
-deleteForm(id: number): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/devis/${id}`);
-}
+  deleteForm(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete(`${this.apiUrl}/devis/${id}`, { headers, withCredentials: true }))
+    );
+  }
 
-/////////////////////
+  // Users
+  getUsers(): Observable<User[]> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<User[]>(`${this.apiUrl}/users`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
 
-getUsers(): Observable<User[]> {
-  const url = `${this.apiUrl}/users`;
-  return this.http.get<User[]>(url);
-}
+  createUser(user: FormData): Observable<User> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<User>(`${this.apiUrl}/users`, user, { headers, withCredentials: true }))
+    );
+  }
 
-addUser(user: FormData): Observable<User> {
-  return this.http.post<User>(`${this.apiUrl}/users`, user);
-}
+  updateUser(id: number, user: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put(`${this.apiUrl}/users/${id}`, user, { headers, withCredentials: true }))
+    );
+  }
 
-updateUser(id: number, user: any): Observable<any> {
-  return this.http.put(`${this.apiUrl}/users/${id}`, user);
-}
-
-
-
-deleteUser(id: number): Observable<void> {
-  return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
-}
-
-
+  deleteUser(id: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/users/${id}`, { headers, withCredentials: true }))
+    );
+  }
 }

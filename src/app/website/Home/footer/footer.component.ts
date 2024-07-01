@@ -21,10 +21,13 @@ export class FooterComponent implements OnInit, AfterViewInit, AfterContentCheck
   contactstel: ContactTel[] = [];
   contactsemail: ContactEmail[] = [];
   partners: Partner[] = [];
-
+  baseUrl : String;
   private isCarouselInitialized = false;
 
-  constructor(private serviceService: ServiceService, private cdr: ChangeDetectorRef) {}
+  constructor(private serviceService: ServiceService, private cdr: ChangeDetectorRef) {
+    this.baseUrl = this.serviceService.apiUrlbase;
+
+  }
 
   ngOnInit(): void {
     this.loadAllData();

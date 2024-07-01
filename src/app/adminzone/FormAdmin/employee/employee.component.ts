@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
         password_confirmation: this.registrationForm.value.confirmPassword
       };
   
-      this.registrationService.registerUser(userData).subscribe({
+      this.userService.createUser(userData).subscribe({
         next: (response) => {
           console.log('Ajout réussi');
           this.users.push(response); // Add the new user to the users array

@@ -28,8 +28,12 @@ export class CertifPostComponent implements OnInit {
     certadvantages: [] 
   };
   selectedFile: File | null = null;
+  baseUrl : String;
+  
+  constructor(private serviceService: ServiceService) {
+    this.baseUrl = this.serviceService.apiUrlbase;
 
-  constructor(private serviceService: ServiceService) {}
+  }
 
   ngOnInit(): void {
     this.loadCertifs();

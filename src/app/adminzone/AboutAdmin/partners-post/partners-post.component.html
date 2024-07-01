@@ -17,7 +17,7 @@
           <tbody>
             <tr *ngFor="let partner of partners">
               <td class="text-center">{{ partner.id }}</td>
-              <td class="text-center "><img class="dark-bg" [src]="'http://localhost:8000/storage/uploads/'+ partner.photo" alt="{{ partner.name }}" width="50"></td>
+              <td class="text-center "><img class="dark-bg" [src]=" baseUrl +'/storage/uploads/'+ partner.photo" alt="{{ partner.name }}" width="50"></td>
               <td class="text-center">{{ partner.name }}</td>
               <td class="left-button-cont">
                 <button class="btn" (click)="onEdit(partner)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>

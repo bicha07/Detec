@@ -19,8 +19,11 @@ export class PortfolioImgPostComponent {
   isEditing = false;
   currentPortfolio: Portfolio = new Portfolio(0, '', '');
   selectedFile: File | null = null;
+  baseUrl : String;
+  constructor(private partnerService: ServiceService) {
+    this.baseUrl = this.partnerService.apiUrlbase;
 
-  constructor(private partnerService: ServiceService) {}
+  }
 
   ngOnInit(): void {
     this.loadPortfolios();

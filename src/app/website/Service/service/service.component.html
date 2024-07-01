@@ -16,7 +16,7 @@
 	  <div class="row">
 		<div *ngFor="let certif of certifs" class="col-12 col-md-6 col-lg-4 animate animated fadeInUp" style="z-index:999;" data-animation="fadeInUp">
 		  <div class="ls icon-box text-center service-box service-dark grow">
-			<img [src]="certif.photo" alt="">
+			<img [src]=" baseUrl +'/storage/uploads/'+ certif.photo" alt="">
 			<h5>
 			  <a [routerLink]="['/sgc', certif.id]" routerLinkActive="active" ariaCurrentWhenActive="page">{{ certif.title }}</a>
 			</h5>

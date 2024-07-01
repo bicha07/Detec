@@ -19,8 +19,13 @@ export class ServicePostComponent implements OnInit {
   isEditing = false;
   currentExpertise: Expertise = { id: 0, photo: '', title: '', recap: '' };
   selectedFile: File | null = null;
+  baseUrl : String;
 
-  constructor(private serviceService: ServiceService) {}
+
+  constructor(private serviceService: ServiceService) {
+    this.baseUrl = this.serviceService.apiUrlbase;
+
+  }
 
   ngOnInit(): void {
     this.loadExpertises();

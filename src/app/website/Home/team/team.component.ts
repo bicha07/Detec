@@ -17,10 +17,13 @@ declare var removeDirectChildOwlStageItems: any; // Declare the function
 })
 export class TeamComponent implements OnInit, AfterViewInit, AfterContentChecked {
   personnes: Personne[] = [];
-
+  baseUrl : String;
   private isCarouselInitialized = false;
 
-  constructor(private serviceService: ServiceService, private cdr: ChangeDetectorRef) {}
+  constructor(private serviceService: ServiceService, private cdr: ChangeDetectorRef) {
+    this.baseUrl = this.serviceService.apiUrlbase;
+
+  }
 
   ngOnInit(): void {
     this.loadAllData();

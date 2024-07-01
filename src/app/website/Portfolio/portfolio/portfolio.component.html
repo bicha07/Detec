@@ -6,7 +6,7 @@
     </div>
     <div class="gallery-container">
       <div *ngFor="let portfolio of portfolios; let i = index" class="gallery-item" (click)="openModal(i)">
-        <img class="gallery-img" [src]="portfolio.photo" alt="Image description">
+        <img class="gallery-img" [src]=" baseUrl +'/storage/uploads/'+ portfolio.photo" alt="Image description">
       </div>
     </div>
     <div [ngClass]="{'modal': true, 'show': showModal}" class="modal" (click)="closeModalOnBackground($event)">
@@ -17,13 +17,13 @@
         <div class="slider">
           <div class="slider-track" #sliderTrack [style.transform]="transform">
             <div class="slider-item" *ngFor="let portfolio of portfolios">
-              <img [src]="portfolio.photo" alt="Image description" class="modal-image">
+              <img [src]=" baseUrl +'/storage/uploads/'+ portfolio.photo" alt="Image description" class="modal-image">
             </div>
           </div>
         </div>
         <div class="thumbnails">
           <div *ngFor="let portfolio of portfolios; let i = index" class="thumbnail-item" [class.active]="i === selectedIndex" (click)="goToSlide(i)">
-            <img [src]="portfolio.photo" alt="Thumbnail description" class="thumbnail-image">
+            <img [src]=" baseUrl +'/storage/uploads/'+ portfolio.photo" alt="Thumbnail description" class="thumbnail-image">
           </div>
         </div>
       </div>
