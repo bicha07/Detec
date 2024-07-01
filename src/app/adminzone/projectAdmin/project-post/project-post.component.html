@@ -44,33 +44,50 @@
 <div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
     <div class="modal-content">
         <span class="close" (click)="closeForm()">&times;</span>
-        <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="project_leader">Chef de Projet</label>
-                <select id="project_leader" [(ngModel)]="currentProject.name_chef" name="project_leader" class="form-control" required>
-                  <option *ngFor="let employee of users" [value]="employee.id">{{ employee.username }}</option>
+                <select id="project_leader" formControlName="name_chef" name="project_leader" class="form-control" required>
+                    <option *ngFor="let employee of users" [value]="employee.id">{{ employee.username }}</option>
                 </select>
-              </div>
-            <div class="form-group">
-                <label for="name">Nom du Projet</label>
-                <input type="text" id="name" [(ngModel)]="currentProject.name" name="name" class="form-control" required>
             </div>
             <div class="form-group">
+                <label for="name">Nom du Projet</label>
+                <input type="text" id="name" formControlName="name" name="name" class="form-control" required>
+            </div>
+
+            <div formArrayName="employees">
+                <label for="emps" class="mr-2">Employees affectés</label>
+            
+                <div *ngFor="let employeeControl of employees.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2" id="emps">
+                    <select id="employee_{{i}}" formControlName="employee" class="form-control mr-2" aria-placeholder="Selectionner un employé">
+                        <option value="" disabled [selected]="employeeControl.value.employee == null">Sélectionner un employé</option>
+                        <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+                    </select>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployeeField(i)">Supprimer</button>
+                </div>
+            </div>
+            
+
+            <button type="button" class="btn btn-secondary mb-3" (click)="addEmployeeField()">Ajouter un autre employé</button>
+
+            <div class="form-group" *ngIf="isEditing">
                 <label for="progress">Avancement</label>
-                <input type="text" id="progress" [(ngModel)]="currentProject.progress" name="progress" class="form-control" required>
+                <input type="text" id="progress" formControlName="progress" name="progress" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="status">Statut</label>
-                <input type="text" id="status" [(ngModel)]="currentProject.status" name="status" class="form-control" required>
+                <input type="text" id="status" formControlName="status" name="status" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="start_date">Date de Début</label>
-                <input type="date" id="start_date" [(ngModel)]="currentProject.start_date" name="start_date" class="form-control" required>
+                <input type="date" id="start_date" formControlName="start_date" name="start_date" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="end_date">Date de Fin</label>
-                <input type="date" id="end_date" [(ngModel)]="currentProject.end_date" name="end_date" class="form-control" required>
+                <input type="date" id="end_date" formControlName="end_date" name="end_date" class="form-control" required>
             </div>
+
             <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
         </form>
     </div>
