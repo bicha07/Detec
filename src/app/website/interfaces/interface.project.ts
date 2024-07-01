@@ -1,0 +1,48 @@
+import { User } from "./interface.user";
+import { Charge } from "./interface.charges";
+export class Project {
+  id: number;
+  name_chef: string;
+  photo_chef : string;
+  name: string;
+  progress: string;
+  status: string;
+  start_date: string;
+  end_date: string;
+  employees: User[];
+  charges: Charge[];
+
+  constructor(
+    id: number,
+    name: string,
+    name_chef: string,
+    photo_chef: string,
+    progress: string,    
+    status: string,
+    start_date: string,
+    end_date: string,
+    employees: User[],
+    charges: Charge[]
+
+  ) {
+    this.id = id;
+    this.name = name;
+    this.name_chef = name_chef;
+    this.photo_chef = photo_chef;
+    this.progress = progress;
+    this.status = status;
+    this.photo_chef = photo_chef;
+    this.start_date = start_date;
+    this.end_date = end_date;
+    this.employees = employees;
+    this.charges = charges;
+  }
+}
+
+export class Employees {
+    employees: User[];
+
+  constructor(employees: User[]) {
+    this.employees = employees;
+  }
+}

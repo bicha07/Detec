@@ -14,6 +14,7 @@ import { Portfolio } from './interfaces/interface.portfolio';
 import { Pack } from './interfaces/interface.pack';
 import { User } from './interfaces/interface.user';
 import { environment } from '../../environment/environment';
+import { Project } from './interfaces/interface.project';
 
 @Injectable({
   providedIn: 'root'
@@ -344,4 +345,35 @@ export class ServiceService {
       switchMap(() => this.http.delete<void>(`${this.apiUrl}/users/${id}`, { headers, withCredentials: true }))
     );
   }
+
+
+
+    // Projects
+
+    getProjects(): Observable<Project[]> {
+      return this.getCsrfToken().pipe(
+        switchMap(() => this.http.get<Project[]>(`${this.apiUrl}/projects`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      );
+    }
+  
+    createProject(project: FormData): Observable<any> {
+      const headers = this.getAuthHeaders();
+      return this.getCsrfToken().pipe(
+        switchMap(() => this.http.post<any>(`${this.apiUrl}/projects`, project, { headers, withCredentials: true }))
+      );
+    }
+  
+    updateProject(id: number, project: any): Observable<any> {
+      const headers = this.getAuthHeaders();
+      return this.getCsrfToken().pipe(
+        switchMap(() => this.http.put(`${this.apiUrl}/projects/${id}`, project, { headers, withCredentials: true }))
+      );
+    }
+  
+    deleteProject(id: number): Observable<void> {
+      const headers = this.getAuthHeaders();
+      return this.getCsrfToken().pipe(
+        switchMap(() => this.http.delete<void>(`${this.apiUrl}/projects/${id}`, { headers, withCredentials: true }))
+      );
+    }
 }
