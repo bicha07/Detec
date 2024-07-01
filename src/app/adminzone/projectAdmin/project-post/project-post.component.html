@@ -1,1 +1,77 @@
-<p>project-post works!</p>
+<div class="card mx-4 mb-4">
+    <div class="d-flex flex-row justify-content-between card-header">
+        <div><p>Liste des Projets</p></div>
+        <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Projet</button></div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-0">
+        <div class="table-responsive p-0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Chef de Projet</th>
+                        <th class="text-center">Nom du Projet</th>
+                        <th class="text-center">Avancement</th>
+                        <th class="text-center">Statut</th>
+                        <th class="text-center">Date de Début</th>
+                        <th class="text-center">Date de Fin</th>
+                        <th class="left-button-cont">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of projects">
+                        <td class="text-center">{{ project.id }}</td>
+                        <td class="text-center">
+                            <img [src]="project.photo_chef" alt="{{ project.name_chef }}" width="50">
+                            <div>{{ project.name_chef }}</div>
+                        </td>
+                        <td class="text-center">{{ project.name }}</td>
+                        <td class="text-center">{{ project.progress }}</td>
+                        <td class="text-center">{{ project.status }}</td>
+                        <td class="text-center">{{ project.start_date }}</td>
+                        <td class="text-center">{{ project.end_date }}</td>
+                        <td class="left-button-cont">
+                            <button class="btn" (click)="onEdit(project)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+                            <button class="btn" (click)="onDelete(project.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
+    <div class="modal-content">
+        <span class="close" (click)="closeForm()">&times;</span>
+        <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="project_leader">Chef de Projet</label>
+                <select id="project_leader" [(ngModel)]="currentProject.name_chef" name="project_leader" class="form-control" required>
+                  <option *ngFor="let employee of users" [value]="employee.id">{{ employee.username }}</option>
+                </select>
+              </div>
+            <div class="form-group">
+                <label for="name">Nom du Projet</label>
+                <input type="text" id="name" [(ngModel)]="currentProject.name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="progress">Avancement</label>
+                <input type="text" id="progress" [(ngModel)]="currentProject.progress" name="progress" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Statut</label>
+                <input type="text" id="status" [(ngModel)]="currentProject.status" name="status" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="start_date">Date de Début</label>
+                <input type="date" id="start_date" [(ngModel)]="currentProject.start_date" name="start_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">Date de Fin</label>
+                <input type="date" id="end_date" [(ngModel)]="currentProject.end_date" name="end_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
+        </form>
+    </div>
+</div>

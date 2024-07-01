@@ -1,7 +1,81 @@
 html{
   background-color:#F9F8FA!important;
 }
+/* Styles de base pour le modal */
 .modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); /* Fond translucide */
+  padding-top: 100px; /* Espacement en haut pour centrer le contenu */
+}
+
+.modal.show {
+  display: block; /* Affiche le modal lorsqu'il est actif */
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Ajustez selon la largeur désirée */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Ombre portée pour un effet de profondeur */
+  border-radius: 10px; /* Bords arrondis */
+}
+
+/* Styles pour le bouton de fermeture */
+.close {
+  position: absolute;
+  top: 10px; /* Position en haut à droite */
+  right: 15px; /* Espacement du bord droit */
+  color: #aaa;
+  font-size: 30px; /* Agrandir le symbole de fermeture */
+  font-weight: bold;
+  border: none; /* Supprimer la bordure par défaut */
+  background: none; /* Supprimer le fond par défaut */
+  cursor: pointer;
+  border-radius: 50%; /* Rendre le bouton rond */
+  padding: 0 6px; /* Petit padding pour le format rond */
+  line-height: 30px; /* Hauteur de ligne pour centrer le 'x' verticalement */
+}
+
+.close:hover,
+.close:focus {
+  color: #000; /* Changement de couleur au survol */
+  text-decoration: none;
+  transform: scale(1.1); /* Agrandissement au survol */
+}
+
+.btn {
+  border-radius: 20px; /* Boutons arrondis */
+}
+
+/* Exemple pour les autres éléments de formulaire */
+input[type="text"], textarea, .form-control {
+  border-radius: 5px; /* Bords légèrement arrondis pour les champs de formulaire */
+}
+
+button[type="submit"] {
+  background-color: #4CAF50; /* Vert pour le bouton soumettre */
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px; /* Boutons arrondis */
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049; /* Un vert légèrement plus foncé au survol */
+}
+
+/* .modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -41,10 +115,10 @@ html{
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
+} */
 .btn {
-  padding: 4px 8px; /* Réduire le padding pour que les boutons soient moins volumineux */
-  font-size: 16px; /* Ajuster la taille des icônes à l'intérieur des boutons */
+  padding: 4px 8px;
+  font-size: 16px; 
 }
 
 .btn i {
