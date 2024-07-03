@@ -19,6 +19,7 @@ import { environment } from '../environment/environment';
   providedIn: 'root'
 })
 export class ServiceService {
+
   public readonly apiUrlbase: string = environment.apiUrl;
   public readonly apiUrl: string = environment.apiUrl + '/api';
 

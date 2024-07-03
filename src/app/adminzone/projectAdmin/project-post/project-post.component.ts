@@ -4,13 +4,14 @@ import { ServiceService } from '../../../website/service.service'; // Assurez-vo
 import { Project } from '../../../website/interfaces/interface.project'; // Ajustez le chemin selon vos besoins
 import { User } from '../../../website/interfaces/interface.user'; // Ajustez le chemin selon vos besoins
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-project-post',
   standalone: true,
   templateUrl: './project-post.component.html',
   styleUrls: ['./project-post.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterLink]
 })
 export class ProjectPostComponent implements OnInit {
   projects: Project[] = [];
