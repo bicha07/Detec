@@ -22,6 +22,8 @@ import { FormulairePostComponent } from './adminzone/FormAdmin/formulaire-post/f
 import { StructureFormulaireComponent } from './adminzone/FormAdmin/structure-formulaire/structure-formulaire.component';
 import { StructureProjectComponent } from './adminzone/projectAdmin/structure-project/structure-project.component';
 import { StructureServiceComponent } from './adminzone/ServiceAdmin/structure-service/structure-service.component';
+import { ProjectDetailComponent } from './adminzone/projectAdmin/project-details/project-details.component';
+// import { ProjectDetailsComponent } from './adminzone/projectAdmin/project-details/project-details.component';
 
 export const routes: Routes = [
     // { path: '', component: LinkHomeComponent },
@@ -44,6 +46,6 @@ export const routes: Routes = [
     { path: 'formulaire', component: FormulaireComponent },
     { path: 'devis', component: StructureFormulaireComponent },
     { path: 'project', component: StructureProjectComponent },
-
+    { path: 'project-detail', component: ProjectDetailComponent},
     { path: '**', redirectTo: 'home' } 
 ];

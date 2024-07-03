@@ -4,7 +4,7 @@ export class Project {
   id: number;
   name_chef: string;
   photo_chef : string;
-  chef_id :string;
+  chef_id :number;
   name: string;
   progress: string;
   status: string;
@@ -16,7 +16,7 @@ export class Project {
   constructor(
     id: number,
     name: string,
-    chef_id :string,
+    chef_id :number,
 
     name_chef: string,
     photo_chef: string,

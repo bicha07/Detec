@@ -15,6 +15,8 @@ import { Pack } from './interfaces/interface.pack';
 import { User } from './interfaces/interface.user';
 import { environment } from '../../environment/environment';
 import { Project } from './interfaces/interface.project';
+import { Charge } from './interfaces/interface.charges';
+import { EmployeeDailyPrice } from './interfaces/interface.employeedailyprice';
 
 @Injectable({
   providedIn: 'root'
@@ -317,6 +319,81 @@ export class ServiceService {
       switchMap(() => this.http.delete(`${this.apiUrl}/devis/${id}`, { headers, withCredentials: true }))
     );
   }
+ 
+  // Projects
+  getProjectById(id: number): Observable<Project> {
+    return this.http.get<Project>(`${this.apiUrl}/projects/${id}`);
+  }
+
+  getProjects(): Observable<Project[]> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Project[]>(`${this.apiUrl}/projects`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  createProject(project: FormData): Observable<Project> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Project>(`${this.apiUrl}/projects`, project, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  updateProject(id: number, project: FormData): Observable<Project> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Project>(`${this.apiUrl}/projects/${id}`, project, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  deleteProject(id: number): Observable<void> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/projects/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  // EmployeeDailyPrices
+  getEmployeeDailyPricesByProject(projectId: number): Observable<EmployeeDailyPrice[]> {
+    return this.http.get<EmployeeDailyPrice[]>(`${this.apiUrl}/projects/${projectId}/employees`);
+  }
+
+  createEmployeeDailyPrice(employee: any): Observable<EmployeeDailyPrice> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<EmployeeDailyPrice>(`${this.apiUrl}/employees`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  updateEmployeeDailyPrice(id: number, employee: any): Observable<EmployeeDailyPrice> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<EmployeeDailyPrice>(`${this.apiUrl}/employees/${id}`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  deleteEmployeeDailyPrice(id: number): Observable<void> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/employees/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  // Charges
+  getChargesByProject(projectId: number): Observable<Charge[]> {
+    return this.http.get<Charge[]>(`${this.apiUrl}/projects/${projectId}/charges`);
+  }
+
+  createCharge(charge: any): Observable<Charge> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.post<Charge>(`${this.apiUrl}/charges`, charge, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  updateCharge(id: number, charge: any): Observable<Charge> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<Charge>(`${this.apiUrl}/charges/${id}`, charge, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  deleteCharge(id: number): Observable<void> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/charges/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
 
   // Users
   getUsers(): Observable<User[]> {
@@ -326,54 +403,20 @@ export class ServiceService {
   }
 
   createUser(user: FormData): Observable<User> {
-    const headers = this.getAuthHeaders();
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.post<User>(`${this.apiUrl}/users`, user, { headers, withCredentials: true }))
+      switchMap(() => this.http.post<User>(`${this.apiUrl}/users`, user, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
-  updateUser(id: number, user: any): Observable<any> {
-    const headers = this.getAuthHeaders();
+  updateUser(id: number, user: any): Observable<User> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.put(`${this.apiUrl}/users/${id}`, user, { headers, withCredentials: true }))
+      switchMap(() => this.http.put<User>(`${this.apiUrl}/users/${id}`, user, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
   deleteUser(id: number): Observable<void> {
-    const headers = this.getAuthHeaders();
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.delete<void>(`${this.apiUrl}/users/${id}`, { headers, withCredentials: true }))
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/users/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
-
-
-
-    // Projects
-
-    getProjects(): Observable<Project[]> {
-      return this.getCsrfToken().pipe(
-        switchMap(() => this.http.get<Project[]>(`${this.apiUrl}/projects`, { headers: this.getAuthHeaders(), withCredentials: true }))
-      );
-    }
-  
-    createProject(project: FormData): Observable<any> {
-      const headers = this.getAuthHeaders();
-      return this.getCsrfToken().pipe(
-        switchMap(() => this.http.post<any>(`${this.apiUrl}/projects`, project, { headers, withCredentials: true }))
-      );
-    }
-  
-    updateProject(id: number, project: any): Observable<any> {
-      const headers = this.getAuthHeaders();
-      return this.getCsrfToken().pipe(
-        switchMap(() => this.http.put(`${this.apiUrl}/projects/${id}`, project, { headers, withCredentials: true }))
-      );
-    }
-  
-    deleteProject(id: number): Observable<void> {
-      const headers = this.getAuthHeaders();
-      return this.getCsrfToken().pipe(
-        switchMap(() => this.http.delete<void>(`${this.apiUrl}/projects/${id}`, { headers, withCredentials: true }))
-      );
-    }
 }

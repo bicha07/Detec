@@ -33,7 +33,9 @@
                         <td class="left-button-cont">
                             <button class="btn" (click)="onEdit(project)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
                             <button class="btn" (click)="onDelete(project.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+                            <button class="btn btn-info" [routerLink]="['/project-detail', project.id]"><i class="fa fa-info-circle cursor-pointer"></i></button>
                         </td>
+                        
                     </tr>
                 </tbody>
             </table>
