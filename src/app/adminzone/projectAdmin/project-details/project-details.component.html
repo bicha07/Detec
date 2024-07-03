@@ -1,169 +1,77 @@
-<!-- <div class="container">
+<div class="container" *ngIf="project">
     <div class="card mx-4 mb-4">
-        <div class="card-header">
-            <h2>Détails du Projet: Projet Exemplaire</h2>
-        </div>
-        <div class="card-body px-0 pt-0 pb-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="d-flex flex-row justify-content-between card-header">
-                            <div><p>Liste des Salaires</p></div>
-                            <div><button class="btn btn-secondary btn-head-tab" (click)="onAddEmployee()">+ Nouvel Employé</button></div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employé</th>
-                                        <th>Montant Reçu Hier</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Alice Martin</td>
-                                        <td>250 €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bob Lemoine</td>
-                                        <td>150 €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h5>Total des Salaires: 400 €</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="d-flex flex-row justify-content-between card-header">
-                            <div><p>Liste des Charges</p></div>
-                            <div><button class="btn btn-secondary btn-head-tab" (click)="onAddCharge()">+ Nouvelle Charge</button></div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Type de Charge</th>
-                                        <th>Montant</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Matériel</td>
-                                        <td>500 €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditCharge(charge)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteCharge(charge.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Logiciel</td>
-                                        <td>300 €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditCharge(charge)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteCharge(charge.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h5>Total des Charges: 800 €</h5>
-                        </div>
-                    </div>
-                </div>
+      <div class="card-header">
+        <h2>Détails du Projet: {{ project.name }}</h2>
+      </div>
+      <div class="card-body px-0 pt-0 pb-0">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <p>Liste des Salaires</p>
+                <button class="btn btn-secondary" (click)="onAddEmployee()">+ Nouvel Employé</button>
+              </div>
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Employé</th>
+                      <th>Montant Reçu Hier</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let employee of employees">
+                      <td>{{ employee.user_id }}</td>
+                      <td>{{ employee.daily_price }} €</td>
+                      <td>
+                        <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h5>Total des Salaires: {{ calculateTotalSalaries() }} €</h5>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
-
- -->
-
-
- <div class="container">
-    <div class="card mx-4 mb-4">
-        <div class="card-header">
-            <h2>Détails du Projet: {{ project.name }}</h2>
-        </div>
-        <div class="card-body px-0 pt-0 pb-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <p>Liste des Salaires</p>
-                            <button class="btn btn-secondary" (click)="onAddEmployee()">+ Nouvel Employé</button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employé</th>
-                                        <th>Montant Reçu Hier</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let employee of employees">
-                                        <td>{{ employee.user_id }}</td>
-                                        <td>{{ employee.daily_price }} €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h5>Total des Salaires: {{ calculateTotalSalaries() }} €</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <p>Liste des Charges</p>
-                            <button class="btn btn-secondary" (click)="onAddCharge()">+ Nouvelle Charge</button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Type de Charge</th>
-                                        <th>Montant</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let charge of charges">
-                                        <td>{{ charge.name }}</td>
-                                        <td>{{ charge.price }} €</td>
-                                        <td>
-                                            <button class="btn btn-secondary" (click)="onEditCharge(charge)"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger" (click)="onDeleteCharge(charge.id)"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h5>Total des Charges: {{ calculateTotalCharges() }} €</h5>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <p>Liste des Charges</p>
+                <button class="btn btn-secondary" (click)="onAddCharge()">+ Nouvelle Charge</button>
+              </div>
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Type de Charge</th>
+                      <th>Montant</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let charge of charges">
+                      <td>{{ charge.name }}</td>
+                      <td>{{ charge.price }} €</td>
+                      <td>
+                        <button class="btn btn-secondary" (click)="onEditCharge(charge)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" (click)="onDeleteCharge(charge.id)"><i class="fa fa-trash"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h5>Total des Charges: {{ calculateTotalCharges() }} €</h5>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
-
-<!-- Formulaire pour ajouter/modifier un employé -->
-<div *ngIf="showEmployeeForm" class="modal" [ngClass]="{'show': showEmployeeForm}">
+  </div>
+  
+  <!-- Formulaire pour ajouter/modifier un employé -->
+  <div *ngIf="showEmployeeForm" class="modal" [ngClass]="{'show': showEmployeeForm}">
     <div class="modal-content">
       <span class="close" (click)="closeEmployeeForm()">&times;</span>
       <form [formGroup]="employeeForm" (ngSubmit)="onSaveEmployee()">
@@ -199,3 +107,4 @@
       </form>
     </div>
   </div>
+  

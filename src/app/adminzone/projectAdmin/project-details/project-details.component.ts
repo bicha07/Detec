@@ -16,7 +16,7 @@ import { User } from '../../../website/interfaces/interface.user'; // Adjust imp
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class ProjectDetailComponent implements OnInit {
-  project!: Project;
+  project: Project = {} as Project;
   employees: EmployeeDailyPrice[] = [];
   charges: Charge[] = [];
   allUsers: User[] = [];  // List of all users for the dropdown
