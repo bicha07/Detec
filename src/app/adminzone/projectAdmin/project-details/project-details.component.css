@@ -52,7 +52,13 @@ html{
     text-decoration: none;
     transform: scale(1.1); /* Agrandissement au survol */
   }
-  
+  .coleu {
+    cursor: pointer;
+    color: #6c757d !important;
+    border-radius: 0.5rem 0.5rem  0px 0px!important;
+    -webkit-border-radius: 0.5rem 0.5rem 0px 0px!important;
+    -moz-border-radius: 0.5rem 0.5rem  0px 0px!important;
+  }
   .btn {
     border-radius: 20px; /* Boutons arrondis */
   }
