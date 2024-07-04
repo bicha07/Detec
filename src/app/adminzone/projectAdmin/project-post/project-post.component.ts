@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceService } from '../../../website/service.service'; // Assurez-vous que le chemin d'accès est correct
 import { Project } from '../../../website/interfaces/interface.project'; // Ajustez le chemin selon vos besoins
@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   templateUrl: './project-post.component.html',
   styleUrls: ['./project-post.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterLink]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink]
 })
 export class ProjectPostComponent implements OnInit {
   projects: Project[] = [];
@@ -32,6 +32,7 @@ export class ProjectPostComponent implements OnInit {
 
   createForm() {
     this.projectForm = this.fb.group({
+      id: [null],  // Include the id field in the form group
       name: ['', Validators.required],
       chef_id: ['', Validators.required],
       progress: ['', Validators.required],
@@ -86,6 +87,7 @@ export class ProjectPostComponent implements OnInit {
     this.showForm = true;
     this.isEditing = true;
     this.projectForm.patchValue({
+      id: project.id,  // Include the project id when patching the form
       name: project.name,
       chef_id: project.chef_id,
       progress: project.progress,
@@ -116,12 +118,13 @@ export class ProjectPostComponent implements OnInit {
     formData.append('employees', JSON.stringify(employees));
 
     if (this.isEditing) {
-      this.updateProject(this.projectForm.value.id, formData); // Assurez-vous que le formulaire contient l'ID du projet lors de l'édition
+        formData.append('_method', 'PUT'); // Indicate the intended method
+        this.updateProject(formValues.id, formData); // Use the id from formValues
     } else {
-      this.addProject(formData);
+        this.addProject(formData);
     }
     this.closeForm();
-  }
+}
 
   addProject(newProject: FormData): void {
     this.projectService.createProject(newProject).subscribe(() => {
