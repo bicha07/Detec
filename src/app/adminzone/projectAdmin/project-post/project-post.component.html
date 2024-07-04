@@ -19,8 +19,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let project of projects">
-                        <td class="text-center">{{ project.id }}</td>
+                    <tr *ngFor="let project of projects; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
                         <td class="text-center">
                             <img [src]="project.photo_chef" alt="{{ project.name_chef }}" width="50">
                             <div>{{ project.name_chef }}</div>
@@ -60,15 +60,17 @@
 
             <div formArrayName="employees">
                 <label for="emps" class="mr-2">Employees affectés</label>
-            
-                <div *ngFor="let employeeControl of employees.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2" id="emps">
-                    <select id="employee_{{i}}" formControlName="employee" class="form-control mr-2" aria-placeholder="Selectionner un employé">
+                <div *ngFor="let employeeControl of employees.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2" id="emps{{i}}">
+                    <select id="employee_{{i}}" formControlName="employee" class="form-control mr-2">
                         <option value="" disabled [selected]="employeeControl.value.employee == null">Sélectionner un employé</option>
                         <option *ngFor="let user of users" [ngValue]="user.id">{{ user.username }}</option>
                     </select>
+                    <!-- Ajout d'un champ de texte pour afficher le nom de l'employé -->
+                    <input type="text" formControlName="employee_name" class="form-control mr-2">
                     <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployeeField(i)">Supprimer</button>
                 </div>
             </div>
+            
             
 
             <button type="button" class="btn btn-secondary mb-3" (click)="addEmployeeField()">Ajouter un autre employé</button>

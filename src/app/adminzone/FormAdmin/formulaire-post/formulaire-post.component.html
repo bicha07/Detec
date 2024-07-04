@@ -19,8 +19,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let form of forms">
-            <td class="text-center">{{ form.id }}</td>
+          <tr *ngFor="let form of forms ; let i = index">
+            <td class="text-center">{{ i + 1 }}</td>
             <td class="text-center">{{ form.name }}</td>
             <td class="text-center">{{ form.email }}</td>
             <td class="text-center">{{ form.company }}</td>

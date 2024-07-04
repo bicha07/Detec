@@ -16,8 +16,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let certif of certifs">
-                        <td class="text-center">{{ certif.id }}</td>
+                    <tr *ngFor="let certif of certifs; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
                         <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ certif.photo" alt="{{ certif.title }}" width="50"></td>
                         <td class="text-center">{{ certif.title }}</td>
                         <td class="text-center">{{ certif.recap }}</td>

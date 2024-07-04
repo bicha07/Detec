@@ -15,8 +15,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tel of tels">
-              <td class="text-center">{{ tel.id }}</td>
+            <tr *ngFor="let tel of tels; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center">{{ tel.name }}</td>
               <td class="text-center">{{ tel.tel }}</td>
               <td class="left-button-cont">

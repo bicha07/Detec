@@ -15,8 +15,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let partner of partners">
-              <td class="text-center">{{ partner.id }}</td>
+            <tr *ngFor="let partner of partners; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center "><img class="dark-bg" [src]=" baseUrl +'/storage/uploads/'+ partner.photo" alt="{{ partner.name }}" width="50"></td>
               <td class="text-center">{{ partner.name }}</td>
               <td class="left-button-cont">

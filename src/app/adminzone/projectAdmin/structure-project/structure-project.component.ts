@@ -12,7 +12,7 @@ import { ProjectPostComponent } from '../../projectAdmin/project-post/project-po
   templateUrl: './structure-project.component.html',
   styleUrl: './structure-project.component.css'
 })
-export class StructureProjectComponent {
+export class StructureProjectsComponent {
   activeTab: 'project' = 'project';
 
 }

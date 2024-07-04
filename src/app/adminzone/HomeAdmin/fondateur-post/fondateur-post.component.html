@@ -17,8 +17,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let personne of personne">
-              <td class="text-center">{{ personne.id }}</td>
+            <tr *ngFor="let personne of personne; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ personne.photo" alt="{{ personne.name }}" width="50"></td>
               <td class="text-center">{{ personne.name }}</td>
               <td class="text-center">{{ personne.post }}</td>

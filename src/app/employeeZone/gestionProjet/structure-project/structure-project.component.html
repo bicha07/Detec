@@ -1,0 +1,41 @@
+<div class="page-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content ">
+        <!-- <div class="row padi">
+            <div class="col-lg-12">
+                <h3>Simple Tabs</h3>
+                <ul class="nav nav-tabs nav-margi" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'expertise'" [class.active]="activeTab === 'expertise'" role="tab" aria-controls="tab01_pane" aria-expanded="true">expertise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link coleu" id="tab02" (click)="activeTab = 'fondateur'" [class.active]="activeTab === 'fondateur'" data-toggle="tab" role="tab" aria-controls="tab02_pane">fondateur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link coleu" id="tab03" data-toggle="tab" (click)="activeTab = 'pack'" [class.active]="activeTab === 'pack'" role="tab" aria-controls="tab03_pane">pack</a>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+        <div class="row padi pt-3">
+            <div class="col-lg-12">
+                <h3 class="ml-5">Simple Tabs</h3>
+                <ul class="nav nav-tabs nav-margi" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'newproject'"
+                            [class.active]="activeTab === 'newproject'" role="tab" aria-controls="tab01_pane"
+                            aria-expanded="true">newproject</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link coleu active" id="tab01" data-toggle="tab" (click)="activeTab = 'oldproject'"
+                            [class.active]="activeTab === 'oldproject'" role="tab" aria-controls="tab01_pane"
+                            aria-expanded="true">oldproject</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <app-employee-projects *ngIf="activeTab === 'newproject'"></app-employee-projects>
+        <app-old-project *ngIf="activeTab === 'oldproject'"></app-old-project>
+
+    </div>
+</div>

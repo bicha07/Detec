@@ -73,3 +73,11 @@
 .ls .black:hover{
     color: #c3001e ;
 }
+
+.ajust{
+    padding-top:0vh;
+    padding-bottom: 2vh;
+}
+.ajustf{
+    padding-bottom: 0vh;
+}
