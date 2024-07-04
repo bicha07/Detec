@@ -71,7 +71,7 @@ export class ProjectDetailComponent implements OnInit {
     this.showEmployeeForm = true;
     this.editingEmployeeId = employee.id;
     this.employeeForm.setValue({
-      userId: employee.user_id,
+      userId: employee.personne_id,
       dailyPrice: employee.daily_price
     });
   }
@@ -80,7 +80,7 @@ export class ProjectDetailComponent implements OnInit {
     if (this.employeeForm.valid) {
       const employeeData = {
         project_id: this.project.id,
-        user_id: this.employeeForm.value.userId,
+        personne_id: this.employeeForm.value.userId,
         daily_price: this.employeeForm.value.dailyPrice
       };
 

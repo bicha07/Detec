@@ -113,7 +113,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let employee of employees">
-                                        <td>{{ employee.user_id }}</td>
+                                        <td>{{ employee.personne_id }}-{{employee.personne_name}}</td>
                                         <td>{{ employee.daily_price }} €</td>
                                         <td>
                                             <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>

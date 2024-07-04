@@ -322,7 +322,9 @@ export class ServiceService {
  
   // Projects
   getProjectById(id: number): Observable<Project> {
-    return this.http.get<Project>(`${this.apiUrl}/projects/${id}`);
+
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Project>(`${this.apiUrl}/projects/${id}`, { headers:this.getAuthHeaders(), withCredentials: true })));
   }
 
   getProjects(): Observable<Project[]> {
@@ -337,9 +339,9 @@ export class ServiceService {
     );
   }
 
-  updateProject(id: number, project: FormData): Observable<Project> {
+  updateProject(id: number, project: FormData): Observable<any> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.put<Project>(`${this.apiUrl}/projects/${id}`, project, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.post(`${this.apiUrl}/projects/${id}`, project, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
@@ -351,30 +353,34 @@ export class ServiceService {
 
   // EmployeeDailyPrices
   getEmployeeDailyPricesByProject(projectId: number): Observable<EmployeeDailyPrice[]> {
-    return this.http.get<EmployeeDailyPrice[]>(`${this.apiUrl}/projects/${projectId}/employees`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<EmployeeDailyPrice[]>(`${this.apiUrl}/employee-daily-prices/project/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createEmployeeDailyPrice(employee: any): Observable<EmployeeDailyPrice> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.post<EmployeeDailyPrice>(`${this.apiUrl}/employees`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.post<EmployeeDailyPrice>(`${this.apiUrl}/employee-daily-prices`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
   updateEmployeeDailyPrice(id: number, employee: any): Observable<EmployeeDailyPrice> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.put<EmployeeDailyPrice>(`${this.apiUrl}/employees/${id}`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.put<EmployeeDailyPrice>(`${this.apiUrl}/employee-daily-prices/${id}`, employee, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
   deleteEmployeeDailyPrice(id: number): Observable<void> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.delete<void>(`${this.apiUrl}/employees/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/employee-daily-prices/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
   // Charges
   getChargesByProject(projectId: number): Observable<Charge[]> {
-    return this.http.get<Charge[]>(`${this.apiUrl}/projects/${projectId}/charges`);
+    return this.getCsrfToken().pipe(
+      switchMap(() =>  this.http.get<Charge[]>(`${this.apiUrl}/projects/${projectId}/charges`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 
   createCharge(charge: any): Observable<Charge> {

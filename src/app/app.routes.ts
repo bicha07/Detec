@@ -46,6 +46,6 @@ export const routes: Routes = [
     { path: 'formulaire', component: FormulaireComponent },
     { path: 'devis', component: StructureFormulaireComponent },
     { path: 'project', component: StructureProjectComponent },
-    { path: 'project-detail', component: ProjectDetailComponent},
+    { path: 'project-detail/:id', component: ProjectDetailComponent},
     { path: '**', redirectTo: 'home' } 
 ];

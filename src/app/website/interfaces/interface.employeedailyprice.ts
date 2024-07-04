@@ -3,7 +3,9 @@ import { Project } from "./interface.project";
 export class EmployeeDailyPrice {
   id: number;
   project_id :number;
-  user_id: number;
+  personne_id: number;
+  personne_name: string;
+
   date: string;
   daily_price: string;
 
@@ -11,7 +13,8 @@ export class EmployeeDailyPrice {
   constructor(
     id: number,
     project_id: number,
-    user_id :number,
+    personne_id :number,
+    personne_name:string,
     date: string,
     daily_price: string
 
@@ -19,7 +22,8 @@ export class EmployeeDailyPrice {
   ) {
     this.id = id;
     this.project_id = project_id;
-    this.user_id =user_id;
+    this.personne_id =personne_id;
+    this.personne_name =personne_name;
     this.date = date;
     this.daily_price = daily_price;
 
