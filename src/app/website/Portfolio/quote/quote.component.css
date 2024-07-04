@@ -9,3 +9,7 @@
 .light-mode .carousel-control-next-icon {
   background-color: #757575; /* Mettez la couleur souhaitée ici pour le mode clair */
 }
+.ajust{
+  padding-top:0vh;
+  padding-bottom: 2vh;
+}

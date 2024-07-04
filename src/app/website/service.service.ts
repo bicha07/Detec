@@ -425,4 +425,22 @@ export class ServiceService {
       switchMap(() => this.http.delete<void>(`${this.apiUrl}/users/${id}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
+
+   // Récupérer les détails de l'utilisateur connecté with CSRF and Auth headers
+   getUserProfile(): Observable<User> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<User>(`${this.apiUrl}/user/profile`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  // Mettre à jour les informations de l'utilisateur with CSRF and Auth headers
+  updateUserProfile(userData: User): Observable<User> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.put<User>(`${this.apiUrl}/user/profile`, userData, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  getProjectsForEmployee(employeeId: number): Observable<Project[]> {
+    return this.http.get<Project[]>(`/api/projects/for-employee/${employeeId}`);
+  }
 }

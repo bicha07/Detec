@@ -48,16 +48,24 @@ export class ProjectPostComponent implements OnInit {
     return this.projectForm.get('employees') as FormArray;
   }
 
-  addEmployeeField(): void {
-    if (this.employees.length < this.users.length) {
-      const employeeControl = this.fb.group({
-        employee: [null, Validators.required]
-      });
-      this.employees.push(employeeControl);
-    } else {
-      alert('Vous avez atteint le nombre maximum d\'employés disponibles.');
-    }
+  // addEmployeeField(): void {
+  //   if (this.employees.length < this.users.length) {
+  //     const employeeControl = this.fb.group({
+  //       employee: [null, Validators.required]
+  //     });
+  //     this.employees.push(employeeControl);
+  //   } else {
+  //     alert('Vous avez atteint le nombre maximum d\'employés disponibles.');
+  //   }
+  // }
+  addEmployeeField(employee?: User): void {
+    const employeeControl = this.fb.group({
+      employee: [employee ? employee.id : null, Validators.required],
+      employee_name: [{value: employee ? employee.username : '', disabled: true}]  // Nom désactivé
+    });
+    this.employees.push(employeeControl);
   }
+  
 
   removeEmployeeField(index: number): void {
     this.employees.removeAt(index);
@@ -82,12 +90,11 @@ export class ProjectPostComponent implements OnInit {
     this.employees.clear(); // Vider la liste des employés
     this.selectedFile = null;
   }
-
   onEdit(project: Project): void {
     this.showForm = true;
     this.isEditing = true;
     this.projectForm.patchValue({
-      id: project.id,  // Include the project id when patching the form
+      id: project.id,
       name: project.name,
       chef_id: project.chef_id,
       progress: project.progress,
@@ -95,13 +102,19 @@ export class ProjectPostComponent implements OnInit {
       start_date: project.start_date,
       end_date: project.end_date
     });
-    this.employees.clear();
+    this.employees.clear();  // Nettoyer les entrées existantes pour éviter les doublons
+  
+    // Ajout des employés existants dans le FormArray
     project.employees.forEach(emp => {
-      this.addEmployeeField();
-      this.employees.at(this.employees.length - 1).patchValue({ employee: emp });
+      const employeeGroup = this.fb.group({
+        employee: [emp.id, Validators.required],
+        employee_name: [{value: emp.username, disabled: true}]  // Correctement désactivé ici
+      });
+      this.employees.push(employeeGroup);
     });
-    this.selectedFile = null;
   }
+  
+  
 
   onSubmit(): void {
     const formValues = this.projectForm.value;

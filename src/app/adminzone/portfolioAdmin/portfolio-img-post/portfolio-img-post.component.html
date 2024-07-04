@@ -15,8 +15,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let portfolio of portfolios">
-              <td class="text-center">{{ portfolio.id }}</td>
+            <tr *ngFor="let portfolio of portfolios; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ portfolio.photo" alt="{{ portfolio.title }}" width="50"></td>
               <td class="text-center">{{ portfolio.title }}</td>
               <td class="left-button-cont">

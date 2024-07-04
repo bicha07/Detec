@@ -16,8 +16,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let stat of stats">
-            <td class="text-center">{{ stat.id }}</td>
+          <tr *ngFor="let stat of stats; let i = index">
+            <td class="text-center">{{ i + 1 }}</td>
             <td class="text-center"><i [class]="stat.photo"></i></td>
             <td class="text-center">{{ stat.title }}</td>
             <td class="text-center">{{ stat.percent }} % </td>

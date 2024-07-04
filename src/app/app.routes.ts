@@ -20,9 +20,11 @@ import { StructureContactComponent } from './adminzone/contactAdmin/structure-co
 import { FormulaireComponent } from './website/Home/formulaire/formulaire.component';
 import { FormulairePostComponent } from './adminzone/FormAdmin/formulaire-post/formulaire-post.component';
 import { StructureFormulaireComponent } from './adminzone/FormAdmin/structure-formulaire/structure-formulaire.component';
-import { StructureProjectComponent } from './adminzone/projectAdmin/structure-project/structure-project.component';
+import { StructureProjectsComponent } from './adminzone/projectAdmin/structure-project/structure-project.component';
 import { StructureServiceComponent } from './adminzone/ServiceAdmin/structure-service/structure-service.component';
 import { ProjectDetailComponent } from './adminzone/projectAdmin/project-details/project-details.component';
+import { StructureComponentt } from './employeeZone/gestionProfile/structure/structure.component';
+import { StructureProjectComponent } from './employeeZone/gestionProjet/structure-project/structure-project.component';
 // import { ProjectDetailsComponent } from './adminzone/projectAdmin/project-details/project-details.component';
 
 export const routes: Routes = [
@@ -45,7 +47,9 @@ export const routes: Routes = [
     { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },
     { path: 'devis', component: StructureFormulaireComponent },
-    { path: 'project', component: StructureProjectComponent },
+    { path: 'project', component: StructureProjectsComponent },
     { path: 'project-detail/:id', component: ProjectDetailComponent},
+    { path: 'profile', component: StructureComponentt},
+    { path: 'newproject', component: StructureProjectComponent},
     { path: '**', redirectTo: 'home' } 
 ];
