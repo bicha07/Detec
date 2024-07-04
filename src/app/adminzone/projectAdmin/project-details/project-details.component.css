@@ -201,9 +201,10 @@ html{
       word-wrap: break-word;
       background-color: #fff;
       background-clip: border-box;
-      border: 0 solid rgba(0, 0, 0, .125);
       border-radius: 1rem;
-      box-shadow: 0 20px 27px 0 rgba(0, 0, 0, .05);
+      box-shadow: 0 20px 27px 0 rgb(0 0 0 / 21%);
+      margin-left:20px;
+      margin-right:20px;
   
     }
   .mb-4 {
@@ -280,3 +281,49 @@ html{
         flex-direction: column!important;
     }
     }
+    
+  
+  @media(max-width : 497px) {
+    .nav-link {
+      padding: 8px 0px;
+      font-size: 12px;
+      text-align: center;
+    }
+  
+    .nav-tabs .nav-item {
+      margin-bottom: 0;
+      width: 33%;
+    }
+  
+    @media(max-width : 400px) {
+      .nav-link {
+        font-size: 8px;
+      }
+    }
+  }
+  
+  .nav {
+    width: 90%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    flex-direction: row;
+  }
+  .gutter-rule{
+    margin-left:20px;
+  }
+  .card.gutty{
+    padding-top:60px;
+    padding-bottom:60px;
+  }
+  .navz{
+    position:relative;
+
+  }
+  .container-gutter{
+    margin:5%;
+  }
