@@ -7,31 +7,31 @@ import { Project } from '../../../../website/interfaces/interface.project';
 import { EmployeeDailyPrice } from '../../../../website/interfaces/interface.employeedailyprice';
 import { Charge } from '../../../../website/interfaces/interface.charges';
 import { User } from '../../../../website/interfaces/interface.user';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-factdaily',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './factdaily.component.html',
   styleUrl: './factdaily.component.css'
 })
-export class FactdailyComponent {
-
+export class FactdailyComponent implements OnInit {
   project!: Project;
   employees: EmployeeDailyPrice[] = [];
   charges: Charge[] = [];
-  allUsers: User[] = [];  // List of all users for the dropdown
-
+  allUsers: User[] = [];
   employeeForm: FormGroup;
   chargeForm: FormGroup;
   showEmployeeForm = false;
   showChargeForm = false;
   editingEmployeeId: number | null = null;
+  selectedEmployeeId: number | null = null;
   editingChargeId: number | null = null;
+  dateControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en')); // Initialize with today's date
 
   constructor(private serviceService: ServiceService, private route: ActivatedRoute) {
     this.employeeForm = new FormGroup({
-      userId: new FormControl('', [Validators.required]),
       dailyPrice: new FormControl('', [Validators.required])
     });
     this.chargeForm = new FormGroup({
@@ -46,12 +46,12 @@ export class FactdailyComponent {
       this.project = project;
       this.charges = project.charges;
     });
-    this.loadEmployeeDailyPrices(projectId);
+    this.loadEmployeeDailyPrices(projectId, this.dateControl.value!); // Use non-null assertion
     this.loadAllUsers();
   }
 
-  loadEmployeeDailyPrices(projectId: number): void {
-    this.serviceService.getEmployeeDailyPricesByProject(projectId).subscribe(employees => {
+  loadEmployeeDailyPrices(projectId: number, date: string): void {
+    this.serviceService.getEmployeeDailyPricesByProject(projectId, date).subscribe(employees => {
       this.employees = employees;
     });
   }
@@ -62,17 +62,37 @@ export class FactdailyComponent {
     });
   }
 
-  onAddEmployee() {
+  loadPreviousDay(): void {
+    const currentDate = new Date(this.dateControl.value!); // Use non-null assertion
+    currentDate.setDate(currentDate.getDate() - 1);
+    this.dateControl.setValue(formatDate(currentDate, 'yyyy-MM-dd', 'en'));
+    this.loadEmployeeDailyPrices(this.project.id, this.dateControl.value!); // Use non-null assertion
+  }
+
+  loadNextDay(): void {
+    const currentDate = new Date(this.dateControl.value!); // Use non-null assertion
+    currentDate.setDate(currentDate.getDate() + 1);
+    this.dateControl.setValue(formatDate(currentDate, 'yyyy-MM-dd', 'en'));
+    this.loadEmployeeDailyPrices(this.project.id, this.dateControl.value!); // Use non-null assertion
+  }
+
+  loadPricesForDate(): void {
+    if (this.dateControl.value) {
+      this.loadEmployeeDailyPrices(this.project.id, this.dateControl.value); // Use type narrowing
+    }
+  }
+
+  onAddEmployeeSalary(employee: EmployeeDailyPrice) {
     this.showEmployeeForm = true;
-    this.editingEmployeeId = null;
+    this.selectedEmployeeId = employee.personne_id;
     this.employeeForm.reset();
   }
 
   onEditEmployee(employee: EmployeeDailyPrice) {
     this.showEmployeeForm = true;
     this.editingEmployeeId = employee.id;
+    this.selectedEmployeeId = employee.personne_id; // Ensure selectedEmployeeId is set for editing
     this.employeeForm.setValue({
-      userId: employee.personne_id,
       dailyPrice: employee.daily_price
     });
   }
@@ -81,8 +101,9 @@ export class FactdailyComponent {
     if (this.employeeForm.valid) {
       const employeeData = {
         project_id: this.project.id,
-        personne_id: this.employeeForm.value.userId,
-        daily_price: this.employeeForm.value.dailyPrice
+        personne_id: this.selectedEmployeeId!, // Include personne_id in the payload
+        daily_price: this.employeeForm.value.dailyPrice,
+        date: this.dateControl.value! // Use non-null assertion
       };
 
       if (this.editingEmployeeId) {
@@ -159,6 +180,7 @@ export class FactdailyComponent {
   closeEmployeeForm() {
     this.showEmployeeForm = false;
     this.editingEmployeeId = null;
+    this.selectedEmployeeId = null;
   }
 
   closeChargeForm() {
@@ -167,7 +189,7 @@ export class FactdailyComponent {
   }
 
   calculateTotalSalaries() {
-    return this.employees.reduce((total, emp) => total + Number(emp.daily_price), 0);
+    return this.employees.reduce((total, emp) => total + Number(emp.daily_price || 0), 0);
   }
 
   calculateTotalCharges() {

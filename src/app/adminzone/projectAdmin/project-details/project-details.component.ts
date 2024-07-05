@@ -44,6 +44,7 @@ export class ProjectDetailComponent implements OnInit {
   showChargeForm = false;
   editingEmployeeId: number | null = null;
   editingChargeId: number | null = null;
+  dateControl: any;
 
   constructor(private serviceService: ServiceService, private route: ActivatedRoute) {
     this.employeeForm = new FormGroup({
@@ -67,7 +68,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   loadEmployeeDailyPrices(projectId: number): void {
-    this.serviceService.getEmployeeDailyPricesByProject(projectId).subscribe(employees => {
+    this.serviceService.getEmployeeDailyPricesByProject(projectId,this.dateControl.value).subscribe(employees => {
       this.employees = employees;
     });
   }

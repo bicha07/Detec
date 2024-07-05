@@ -353,9 +353,9 @@ export class ServiceService {
   }
 
   // EmployeeDailyPrices
-  getEmployeeDailyPricesByProject(projectId: number): Observable<EmployeeDailyPrice[]> {
+  getEmployeeDailyPricesByProject(projectId: number, date:string): Observable<EmployeeDailyPrice[]> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.get<EmployeeDailyPrice[]>(`${this.apiUrl}/employee-daily-prices/project/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.get<EmployeeDailyPrice[]>(`${this.apiUrl}/employee-daily-prices/project/${projectId}/employees?date=${date}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
@@ -465,4 +465,5 @@ export class ServiceService {
       switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
+  
 }
