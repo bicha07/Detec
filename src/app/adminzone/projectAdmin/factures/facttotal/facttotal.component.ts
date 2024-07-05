@@ -15,7 +15,7 @@ export class FacttotalComponent implements OnInit {
     id: 0, 
     num_facture: 0, 
     project_id: 0, 
-    total_charges: [], 
+    charges: [], 
     total_main_oeuvre: 0 
   }; // Initialisez facture avec des valeurs par défaut
   subtotal: number = 0;
@@ -38,7 +38,7 @@ export class FacttotalComponent implements OnInit {
   }
 
   calculateSubtotal() {
-    this.subtotal = this.facture.total_charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
+    this.subtotal = this.facture.charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
                     this.facture.total_main_oeuvre;
   }
 }

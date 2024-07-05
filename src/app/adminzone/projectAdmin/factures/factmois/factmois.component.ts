@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
     }
   
     loadFacture() {
-      const projectId = 1; // Exemple de project ID, à adapter selon votre logique
+      const projectId = 3; // Exemple de project ID, à adapter selon votre logique
       this.factureService.getFacturePreviousMonth(projectId).subscribe(data => {
         this.facture = {
           ...data,
@@ -36,7 +36,7 @@ import { CommonModule } from '@angular/common';
     }
   
     calculateSubtotal() {
-      this.subtotal = this.facture.total_charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
+      this.subtotal = this.facture.charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
                       this.facture.total_main_oeuvre;
     }
   }
