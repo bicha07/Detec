@@ -2,38 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ServiceService } from '../../../website/service.service';
-import { Project } from '../../../website/interfaces/interface.project';
-import { EmployeeDailyPrice } from '../../../website/interfaces/interface.employeedailyprice';
-import { Charge } from '../../../website/interfaces/interface.charges';
-import { User } from '../../../website/interfaces/interface.user';
-import { FactdailyComponent } from "../factures/factdaily/factdaily.component";
-import { FactmoisComponent } from "../factures/factmois/factmois.component";
-import { FactanneeComponent } from "../factures/factannee/factannee.component";
-import { FacttotalComponent } from "../factures/facttotal/facttotal.component"; // Adjust import paths as necessary
+import { ServiceService } from '../../../../website/service.service';
+import { Project } from '../../../../website/interfaces/interface.project';
+import { EmployeeDailyPrice } from '../../../../website/interfaces/interface.employeedailyprice';
+import { Charge } from '../../../../website/interfaces/interface.charges';
+import { User } from '../../../../website/interfaces/interface.user';
 
 @Component({
-    selector: 'app-project-detail',
-    templateUrl: './project-details.component.html',
-    styleUrls: ['./project-details.component.css'],
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FactdailyComponent, FactmoisComponent, FactanneeComponent, FacttotalComponent]
+  selector: 'app-factdaily',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule,],
+  templateUrl: './factdaily.component.html',
+  styleUrl: './factdaily.component.css'
 })
-export class ProjectDetailComponent implements OnInit {
+export class FactdailyComponent {
 
-  activeTab: 'factdaily'|'factmois'|'factannee'|'facttotal' = 'factdaily';
-
-  project: Project = {
-    id: 0, name: '', charges: [],
-    name_chef: '',
-    photo_chef: '',
-    chef_id: 0,
-    progress: '',
-    status: '',
-    start_date: '',
-    end_date: '',
-    employees: []
-  }; // Initialisation avec des valeurs par défaut
+  project!: Project;
   employees: EmployeeDailyPrice[] = [];
   charges: Charge[] = [];
   allUsers: User[] = [];  // List of all users for the dropdown

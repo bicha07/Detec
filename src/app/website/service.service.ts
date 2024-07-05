@@ -17,6 +17,7 @@ import { environment } from '../../environment/environment';
 import { Project } from './interfaces/interface.project';
 import { Charge } from './interfaces/interface.charges';
 import { EmployeeDailyPrice } from './interfaces/interface.employeedailyprice';
+import { Facture } from './interfaces/interface.facture';
 
 @Injectable({
   providedIn: 'root'
@@ -440,7 +441,28 @@ export class ServiceService {
     );
   }
 
+  
   getProjectsForEmployee(employeeId: number): Observable<Project[]> {
-    return this.http.get<Project[]>(`/api/projects/for-employee/${employeeId}`);
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Project[]>(`/api/projects/for-employee/${employeeId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  getFactureSinceStart(projectId: number): Observable<Facture> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/since-start/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  getFacturePreviousMonth(projectId: number): Observable<Facture> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/previous-month/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
+  }
+
+  getFacturePreviousYear(projectId: number): Observable<Facture> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+    );
   }
 }
