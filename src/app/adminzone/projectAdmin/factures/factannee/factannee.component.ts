@@ -26,7 +26,7 @@ export class FactanneeComponent implements OnInit {
     }
   
     loadFacture() {
-      const projectId = 1; // Exemple de project ID, à adapter selon votre logique
+      const projectId = 3; // Exemple de project ID, à adapter selon votre logique
       this.factureService.getFacturePreviousYear(projectId).subscribe(data => {
         this.facture = {
           ...data,
@@ -37,7 +37,7 @@ export class FactanneeComponent implements OnInit {
     }
   
     calculateSubtotal() {
-      this.subtotal = this.facture.total_charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
+      this.subtotal = this.facture.charges.reduce((acc, charge) => acc + parseFloat(charge.price), 0) +
                       this.facture.total_main_oeuvre;
     }
   }

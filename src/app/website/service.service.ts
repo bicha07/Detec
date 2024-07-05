@@ -380,7 +380,7 @@ export class ServiceService {
   // Charges
   getChargesByProject(projectId: number): Observable<Charge[]> {
     return this.getCsrfToken().pipe(
-      switchMap(() =>  this.http.get<Charge[]>(`${this.apiUrl}/projects/${projectId}/charges`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() =>  this.http.get<Charge[]>(`${this.apiUrl}'/projects/charges'${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
@@ -456,13 +456,13 @@ export class ServiceService {
 
   getFacturePreviousMonth(projectId: number): Observable<Facture> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/previous-month/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/previous-month/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 
   getFacturePreviousYear(projectId: number): Observable<Facture> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 }
