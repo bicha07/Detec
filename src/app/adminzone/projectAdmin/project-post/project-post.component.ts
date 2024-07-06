@@ -49,16 +49,6 @@ export class ProjectPostComponent implements OnInit {
     return this.projectForm.get('employees') as FormArray;
   }
 
-  // addEmployeeField(): void {
-  //   if (this.employees.length < this.users.length) {
-  //     const employeeControl = this.fb.group({
-  //       employee: [null, Validators.required]
-  //     });
-  //     this.employees.push(employeeControl);
-  //   } else {
-  //     alert('Vous avez atteint le nombre maximum d\'employés disponibles.');
-  //   }
-  // }
   addEmployeeField(employee?: User): void {
     const employeeControl = this.fb.group({
       employee: [employee ? employee.id : null, Validators.required],
@@ -67,7 +57,6 @@ export class ProjectPostComponent implements OnInit {
     this.employees.push(employeeControl);
   }
   
-
   removeEmployeeField(index: number): void {
     this.employees.removeAt(index);
   }
@@ -91,6 +80,7 @@ export class ProjectPostComponent implements OnInit {
     this.employees.clear(); // Vider la liste des employés
     this.selectedFile = null;
   }
+  
   onEdit(project: Project): void {
     this.showForm = true;
     this.isEditing = true;
@@ -101,7 +91,8 @@ export class ProjectPostComponent implements OnInit {
       progress: project.progress,
       status: project.status,
       start_date: project.start_date,
-      end_date: project.end_date
+      end_date: project.end_date,
+      description: project.description
     });
     this.employees.clear();  // Nettoyer les entrées existantes pour éviter les doublons
   
@@ -115,8 +106,6 @@ export class ProjectPostComponent implements OnInit {
     });
   }
   
-  
-
   onSubmit(): void {
     const formValues = this.projectForm.value;
 
@@ -125,6 +114,7 @@ export class ProjectPostComponent implements OnInit {
     formData.append('chef_id', formValues.chef_id);
     formData.append('progress', formValues.progress);
     formData.append('status', formValues.status);
+    formData.append('description', formValues.description);
     formData.append('start_date', formValues.start_date);
     formData.append('end_date', formValues.end_date);
 
@@ -132,13 +122,13 @@ export class ProjectPostComponent implements OnInit {
     formData.append('employees', JSON.stringify(employees));
 
     if (this.isEditing) {
-        formData.append('_method', 'PUT'); // Indicate the intended method
-        this.updateProject(formValues.id, formData); // Use the id from formValues
+      formData.append('_method', 'PUT'); // Indicate the intended method
+      this.updateProject(formValues.id, formData); // Use the id from formValues
     } else {
-        this.addProject(formData);
+      this.addProject(formData);
     }
     this.closeForm();
-}
+  }
 
   addProject(newProject: FormData): void {
     this.projectService.createProject(newProject).subscribe(() => {
@@ -163,13 +153,4 @@ export class ProjectPostComponent implements OnInit {
   closeForm(): void {
     this.showForm = false;
   }
-
-  // @HostListener('document:click', ['$event'])
-  // onClickOutside(event: MouseEvent) {
-  //   const modalContent = document.querySelector('.modal-content');
-  //   const target = event.target as HTMLElement;
-  //   if (this.showForm && modalContent && !modalContent.contains(target)) {
-  //     this.closeForm();
-  //   }
-  // }
 }

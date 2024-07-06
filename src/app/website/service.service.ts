@@ -417,7 +417,7 @@ export class ServiceService {
 
   updateUser(id: number, user: any): Observable<User> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.put<User>(`${this.apiUrl}/users/${id}`, user, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.post<User>(`${this.apiUrl}/users/${id}`, user, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 

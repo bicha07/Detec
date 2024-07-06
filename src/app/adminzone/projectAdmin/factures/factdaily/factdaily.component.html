@@ -1,10 +1,10 @@
 <div class="card gutty">
   <div class="px-0 pt-0 pb-0 mx-4 ms-4 row justify-content-center card-body">
-    <div class="col-md-12 col-lg-6 col-sm-12 card">
+    <div class="col-md-12 col-lg-12 col-sm-12 card">
       <div class="card-header d-flex flex-wrap justify-content-between">
         <p>Liste des Salaires</p>
       </div>
-      <div class="card-body">
+      <div class="card-body table-responsive">
         <div class="d-flex justify-content-between mb-3">
           <button class="btn btn-secondary" (click)="loadPreviousDay()"><</button>
           <input type="date" [formControl]="dateControl" (change)="loadPricesForDate()" class="form-control w-25">
@@ -23,7 +23,7 @@
               <td>{{ employee.personne_id }}-{{ employee.personne_name }}</td>
               <td>{{ employee.daily_price || 'Not assigned yet' }} €</td>
               <td>
-                <button class="btn btn-success" (click)="onAddEmployeeSalary(employee)"><i class="fa fa-plus"></i></button>
+                <!-- <button class="btn btn-success" (click)="onAddEmployeeSalary(employee)"><i class="fa fa-plus"></i></button> -->
                 <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
               </td>
@@ -34,12 +34,12 @@
       </div>
     </div>
     <br>
-    <div class="col-md-12 col-lg-5 col-sm-12 card">
+    <div class="col-md-12 col-lg-12 col-sm-12 card">
       <div class="card-header d-flex flex-wrap justify-content-between">
         <p>Liste des Charges</p>
         <button class="btn btn-secondary" (click)="onAddCharge()">+ Nouvelle Charge</button>
       </div>
-      <div class="card-body">
+      <div class="card-body table-responsive">
         <table class="table table-striped text-center">
           <thead>
             <tr>
@@ -71,7 +71,7 @@
     <span class="close" (click)="closeEmployeeForm()">&times;</span>
     <form [formGroup]="employeeForm" (ngSubmit)="onSaveEmployee()">
       <div class="form-group">
-        <label for="dailyPrice">Montant Reçu Hier</label>
+        <label for="dailyPrice">Montant</label>
         <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control">
       </div>
       <button type="submit" class="btn btn-success">{{ editingEmployeeId ? 'Modifier' : 'Ajouter' }}</button>
