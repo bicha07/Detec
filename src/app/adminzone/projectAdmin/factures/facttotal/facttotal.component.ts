@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ServiceService } from '../../../../website/service.service';
 import { Facture } from '../../../../website/interfaces/interface.facture';
 import { CommonModule } from '@angular/common';
@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './facttotal.component.html',
-  styleUrls: ['./facttotal.component.css'] // Assurez-vous que 'styleUrls' est correct
+  styleUrls: ['./facttotal.component.css']
 })
 export class FacttotalComponent implements OnInit {
+  @Input() projectId!: number; // Ajoutez cette ligne pour recevoir l'ID du projet
   facture: Facture = { 
     id: 0, 
     num_facture: 0, 
@@ -27,8 +28,7 @@ export class FacttotalComponent implements OnInit {
   }
 
   loadFacture() {
-    const projectId = 3; // Exemple de project ID, à adapter selon votre logique
-    this.factureService.getFactureSinceStart(projectId).subscribe(data => {
+    this.factureService.getFactureSinceStart(this.projectId).subscribe(data => { // Utilisez this.projectId ici
       this.facture = {
         ...data,
         total_main_oeuvre: +data.total_main_oeuvre // Convertir en nombre si nécessaire

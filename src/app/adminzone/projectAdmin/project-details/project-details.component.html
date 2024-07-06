@@ -142,9 +142,9 @@
                 </ul>
             </div>
         </div>
-        <app-factdaily *ngIf="activeTab === 'factdaily'"></app-factdaily>
-        <app-factmois *ngIf="activeTab === 'factmois'"></app-factmois>
-        <app-factannee *ngIf="activeTab === 'factannee'"></app-factannee>
-        <app-facttotal *ngIf="activeTab === 'facttotal'"></app-facttotal>
+        <app-factdaily *ngIf="activeTab === 'factdaily'" ></app-factdaily>
+        <app-factmois *ngIf="activeTab === 'factmois'" [projectId]="project.id"></app-factmois>
+        <app-factannee *ngIf="activeTab === 'factannee'" [projectId]="project.id"></app-factannee>
+        <app-facttotal *ngIf="activeTab === 'facttotal'" [projectId]="project.id"></app-facttotal>
 
        
