@@ -10,7 +10,7 @@ import { User } from '../../../website/interfaces/interface.user';
 import { FactdailyComponent } from "../factures/factdaily/factdaily.component";
 import { FactmoisComponent } from "../factures/factmois/factmois.component";
 import { FactanneeComponent } from "../factures/factannee/factannee.component";
-import { FacttotalComponent } from "../factures/facttotal/facttotal.component"; // Adjust import paths as necessary
+import { FacttotalComponent } from "../factures/facttotal/facttotal.component";
 
 @Component({
     selector: 'app-project-detail',
