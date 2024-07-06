@@ -15,9 +15,9 @@ export class FormulaireComponent implements OnInit {
   formulaireForm: FormGroup;
 
     // Define options as properties of the class
-    naturesOptions: string[] = ['1','2','3'];
+    naturesOptions: string[] = ['1','2','3','4'];
     chantiersOptions: string[] = ['1', '2', '3', '4', '5'];
-    naturez:string[]=['Soudeur', 'Assembleur', 'Soudeur Assembleur'];
+    naturez:string[]=['Soudeur', 'Assembleur', 'Soudeur Assembleur','Autre'];
     chantierz : string[] = ['Mine', 'Aluminerie', 'Pâte à papier', 'Shop de Soudure', 'Construction'];
 
 

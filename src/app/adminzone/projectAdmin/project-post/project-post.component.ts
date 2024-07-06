@@ -37,6 +37,7 @@ export class ProjectPostComponent implements OnInit {
       chef_id: ['', Validators.required],
       progress: ['', Validators.required],
       status: ['', Validators.required],
+      description: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
       employees: this.fb.array([]),

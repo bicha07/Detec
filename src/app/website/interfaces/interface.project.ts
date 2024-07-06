@@ -6,6 +6,7 @@ export class Project {
   photo_chef : string;
   chef_id :number;
   name: string;
+  description:string;
   progress: string;
   status: string;
   start_date: string;
@@ -22,6 +23,7 @@ export class Project {
     photo_chef: string,
     progress: string,    
     status: string,
+    description:string,
     start_date: string,
     end_date: string,
     employees: User[],
@@ -40,6 +42,7 @@ export class Project {
     this.end_date = end_date;
     this.employees = employees;
     this.charges = charges;
+    this.description = description;
   }
 }
 

@@ -32,7 +32,8 @@ export class ProjectDetailComponent implements OnInit {
     status: '',
     start_date: '',
     end_date: '',
-    employees: []
+    employees: [],
+    description: ''
   }; // Initialisation avec des valeurs par défaut
   employees: EmployeeDailyPrice[] = [];
   charges: Charge[] = [];

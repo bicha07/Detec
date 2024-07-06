@@ -26,7 +26,7 @@ export class FactanneeComponent implements OnInit {
   }
 
   loadFacture() {
-    this.factureService.getFacturePreviousMonth(this.projectId).subscribe(data => { // Utilisez this.projectId ici
+    this.factureService.getFacturePreviousYear(this.projectId).subscribe(data => { // Utilisez this.projectId ici
       this.facture = {
         ...data,
         total_main_oeuvre: +data.total_main_oeuvre // Convertir en nombre si nécessaire
