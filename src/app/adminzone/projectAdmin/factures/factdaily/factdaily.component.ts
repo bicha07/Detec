@@ -116,7 +116,8 @@ export class FactdailyComponent implements OnInit {
         });
       } else {
         this.serviceService.createEmployeeDailyPrice(employeeData).subscribe(employee => {
-          this.employees.push(employee);
+          const index = this.employees.findIndex(emp => emp.personne_id === this.selectedEmployeeId);
+          this.employees[index] = { ...this.employees[index], ...employeeData };
           this.employeeForm.reset();
           this.showEmployeeForm = false;
         });
@@ -126,7 +127,10 @@ export class FactdailyComponent implements OnInit {
 
   onDeleteEmployee(employeeId: number) {
     this.serviceService.deleteEmployeeDailyPrice(employeeId).subscribe(() => {
-      this.employees = this.employees.filter(emp => emp.id !== employeeId);
+      const index = this.employees.findIndex(emp => emp.id === employeeId);
+      if (index !== -1) {
+        this.employees[index].daily_price = 'Non assigné';
+      }
     });
   }
 
