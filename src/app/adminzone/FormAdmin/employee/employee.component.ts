@@ -16,13 +16,15 @@ import { LoginService } from '../../../registration/login.service';
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
-  currentUser: User = new User(0, '', '', '', '');
+  currentUser: User = new User(0,'', '', '', '', '');
   showForm = false;
   isEditing = false;
   registrationForm: FormGroup;
   selectedFile: File | null = null;
+  baseUrl: any;
 
-  constructor(private userService: ServiceService, private fb: FormBuilder, private registrationService: LoginService, private router: Router) {
+  constructor(private partnerService: ServiceService, private userService: ServiceService, private fb: FormBuilder, private registrationService: LoginService, private router: Router) {
+    this.baseUrl = this.partnerService.apiUrlbase;
     this.registrationForm = this.fb.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -31,8 +33,6 @@ export class UserComponent implements OnInit {
       confirmPassword: ['']
     });
   }
-  
-  
 
   ngOnInit(): void {
     this.loadUsers();
@@ -48,7 +48,8 @@ export class UserComponent implements OnInit {
   onAdd(): void {
     this.showForm = true;
     this.isEditing = false;
-    this.currentUser = new User(0, '', '', '', '');
+    this.currentUser = new User(0, '','', '', '', '');
+    this.registrationForm.reset(); // Clear the form
   }
 
   onEdit(user: User): void {
@@ -75,63 +76,77 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    if (this.isEditing) {
-      this.saveUser();
-    } else {
-      this.addUser();
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
     }
   }
-  
+
+  onSubmit(): void {
+    if (this.registrationForm.valid) {
+      if (this.isEditing) {
+        this.saveUser();
+      } else {
+        this.addUser();
+      }
+    }
+  }
 
   addUser(): void {
-    if (this.registrationForm.valid) {
-      const userData = {
-        ...this.registrationForm.value,
-        password_confirmation: this.registrationForm.value.confirmPassword
-      };
-  
-      this.userService.createUser(userData).subscribe({
-        next: (response) => {
-          console.log('Ajout réussi');
-          this.users.push(response); // Add the new user to the users array
-          this.closeForm();
-        },
-        error: (error) => {
-          console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
-          this.closeForm();
-        }
-      });
+    const formData = new FormData();
+    formData.append('username', this.registrationForm.value.username);
+    formData.append('email', this.registrationForm.value.email);
+    formData.append('role', this.registrationForm.value.role);
+    formData.append('password', this.registrationForm.value.password);
+    formData.append('password_confirmation', this.registrationForm.value.confirmPassword);
+
+    if (this.selectedFile) {
+      formData.append('photo', this.selectedFile);
     }
+    this.userService.createUser(formData).subscribe({
+      next: (response) => {
+        console.log('Ajout réussi');
+        this.users.push(response); // Add the new user to the users array
+        this.closeForm();
+      },
+      error: (error) => {
+        console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
+        this.closeForm();
+      }
+    });
   }
-  
 
   saveUser(): void {
-    if (this.registrationForm.valid) {
-      const updatedUser: any = {
-        username: this.registrationForm.value.username,
-        email: this.registrationForm.value.email,
-        role: this.registrationForm.value.role
-      };
-  
-      if (this.registrationForm.value.password) {
-        updatedUser.password = this.registrationForm.value.password;
-        updatedUser.confirmPassword = this.registrationForm.value.confirmPassword;
-      }
-  
-      this.userService.updateUser(this.currentUser.id, updatedUser).subscribe({
-        next: () => {
-          console.log('Mise à jour réussie');
-          this.loadUsers();
-          this.closeForm();
-        },
-        error: (error) => console.error('Erreur lors de la mise à jour de l\'utilisateur:', error)
-      });
+    const formData = new FormData();
+    formData.append('username', this.registrationForm.value.username);
+    formData.append('email', this.registrationForm.value.email);
+    formData.append('role', this.registrationForm.value.role);
+
+    if (this.registrationForm.value.password) {
+      formData.append('password', this.registrationForm.value.password);
+      formData.append('password_confirmation', this.registrationForm.value.confirmPassword);
     }
+
+    if (this.selectedFile) {
+      formData.append('photo', this.selectedFile);
+    }
+
+    // Use POST request with method override
+    formData.append('_method', 'PUT');
+    this.userService.updateUser(this.currentUser.id, formData).subscribe({
+      next: () => {
+        console.log('Mise à jour réussie');
+        this.loadUsers();
+        this.closeForm();
+      },
+      error: (error) => console.error('Erreur lors de la mise à jour de l\'utilisateur:', error)
+    });
   }
-  
 
   closeForm(): void {
     this.showForm = false;
+    this.registrationForm.reset(); // Clear the form
+    this.selectedFile = null; // Reset the selected file
   }
 }
