@@ -17,7 +17,8 @@ export class FacttotalComponent implements OnInit {
     num_facture: 0, 
     project_id: 0, 
     charges: [], 
-    total_main_oeuvre: 0 
+    total_main_oeuvre: 0 ,
+    total_heure_ouvrable:0,
   }; // Initialisez facture avec des valeurs par défaut
   subtotal: number = 0;
 

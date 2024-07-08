@@ -5,7 +5,7 @@ export class EmployeeDailyPrice {
   project_id :number;
   personne_id: number;
   personne_name: string;
-heure:string;
+  heure:string;
   date: string;
   daily_price: string;
 

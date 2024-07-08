@@ -32,7 +32,8 @@ export class FactdailyComponent implements OnInit {
 
   constructor(private serviceService: ServiceService, private route: ActivatedRoute) {
     this.employeeForm = new FormGroup({
-      dailyPrice: new FormControl('', [Validators.required])
+      dailyPrice: new FormControl('', [Validators.required]),
+      heure: new FormControl('', [Validators.required])
     });
     this.chargeForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -93,7 +94,8 @@ export class FactdailyComponent implements OnInit {
     this.editingEmployeeId = employee.id;
     this.selectedEmployeeId = employee.personne_id; // Ensure selectedEmployeeId is set for editing
     this.employeeForm.setValue({
-      dailyPrice: employee.daily_price
+      dailyPrice: employee.daily_price,
+      heure: employee.heure
     });
   }
 
@@ -103,6 +105,7 @@ export class FactdailyComponent implements OnInit {
         project_id: this.project.id,
         personne_id: this.selectedEmployeeId!, // Include personne_id in the payload
         daily_price: this.employeeForm.value.dailyPrice,
+        heure: this.employeeForm.value.heure,
         date: this.dateControl.value! // Use non-null assertion
       };
 
@@ -130,6 +133,7 @@ export class FactdailyComponent implements OnInit {
       const index = this.employees.findIndex(emp => emp.id === employeeId);
       if (index !== -1) {
         this.employees[index].daily_price = 'Non assigné';
+        this.employees[index].heure = 'Non assigné';
       }
     });
   }
