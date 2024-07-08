@@ -1,28 +1,33 @@
-<!-- profile.component.html -->
 <div class="card mx-4 mb-4">
     <div class="d-flex flex-row justify-content-between card-header">
         <div><p>Profil de l'Utilisateur</p></div>
         <div><button class="btn btn-secondary btn-head-tab" onclick="location.reload();">Rafraîchir</button></div>
     </div>
-    <div class="card-body px-0 pt-0 pb-0">
+    <div class="card-body">
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="p-4">
-            <div class="form-group mb-3">
-                <label for="username" class="form-label">Nom d'utilisateur</label>
-                <input type="text" class="form-control" id="username" formControlName="username" placeholder="Entrez votre nom d'utilisateur" >
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="username" class="form-label">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="username" formControlName="username" placeholder="Entrez votre nom d'utilisateur">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" placeholder="Entrez votre email">
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Entrez votre email">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre nouveau mot de passe">
+                </div>
+                <div class="col-md-6">
+                    <label for="confirmPassword" class="form-label">Confirmez le mot de passe</label>
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Réécrivez votre nouveau mot de passe">
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label for="password" class="form-label">password</label>
-                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Entrez votre nouveau password" >
+            <div class="d-flex justify-content-center">
+                <button type="submit" class=" coli">Mettre à jour</button>
             </div>
-            <div class="form-group mb-3">
-                <label for="confirmPassword" class="form-label">Confirme password</label>
-                <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="reecrivez votre nouveau password" >
-            </div>
-            <button type="submit" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
 </div>

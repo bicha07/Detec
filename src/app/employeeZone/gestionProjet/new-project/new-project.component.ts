@@ -28,7 +28,7 @@ export class EmployeeProjectsComponent implements OnInit {
     const currentUser = this.loginService.currentUserValue;
     if (currentUser) {
       this.projectService.getProjects().subscribe(projects => {
-        this.newProjects = projects.filter(project => project.status === 'fini');
+        this.newProjects = projects.filter(project => project.status === 'en attente' || project.status === 'en cours');
         this.filteredProjects = this.newProjects.filter(project =>
           project.employees.some(employee => employee.id === currentUser.id)
         );
