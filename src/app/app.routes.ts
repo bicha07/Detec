@@ -25,6 +25,7 @@ import { StructureServiceComponent } from './adminzone/ServiceAdmin/structure-se
 import { ProjectDetailComponent } from './adminzone/projectAdmin/project-details/project-details.component';
 import { StructureComponentt } from './employeeZone/gestionProfile/structure/structure.component';
 import { StructureProjectComponent } from './employeeZone/gestionProjet/structure-project/structure-project.component';
+import { EmployeeProjectDetailComponent } from './employeeZone/gestionProjet/employee-project-detail/employee-project-detail.component';
 // import { ProjectDetailsComponent } from './adminzone/projectAdmin/project-details/project-details.component';
 
 export const routes: Routes = [
@@ -49,6 +50,7 @@ export const routes: Routes = [
     { path: 'devis', component: StructureFormulaireComponent },
     { path: 'project', component: StructureProjectsComponent },
     { path: 'project-detail/:id', component: ProjectDetailComponent},
+    { path: 'employee-project-detail/:id', component: EmployeeProjectDetailComponent },
     { path: 'profile', component: StructureComponentt},
     { path: 'newproject', component: StructureProjectComponent},
     { path: '**', redirectTo: 'home' } 

@@ -1,0 +1,67 @@
+<!-- <div class="card gutty">
+    <div class="px-0 pt-0 pb-0 mx-4 ms-4 row justify-content-center card-body">
+      <div class="col-md-12 col-lg-12 col-sm-12 card">
+        <div class="card-header d-flex flex-wrap justify-content-between">
+          <p>Détails du Projet</p>
+        </div>
+        <div class="card-body table-responsive">
+          <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-secondary" (click)="loadPreviousDay()"><</button>
+            <input type="date" [formControl]="dateControl" (change)="loadPricesForDate()" class="form-control w-25">
+            <button class="btn btn-secondary" (click)="loadNextDay()">></button>
+          </div>
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>Nombre d'heure</th>
+                <th>Montant Assigné</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dailyPrice of dailyPrices">
+                <td>{{ dailyPrice.heure }}</td>
+                <td>{{ dailyPrice.daily_price }} €</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5>Total des Montants Assignés: {{ calculateTotalAmount() }} €</h5>
+          <h5>Total des Heures: {{ calculateTotalHeures() }} heures</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+
+   <div class="card gutty">
+    <div class="px-0 pt-0 pb-0 mx-4 ms-4 row justify-content-center card-body">
+      <div class="col-md-12 col-lg-12 col-sm-12 card">
+        <div class="card-header d-flex flex-wrap justify-content-between">
+          <p>Détails du Projet</p>
+        </div>
+        <div class="card-body table-responsive">
+          <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-secondary" (click)="loadPreviousDay()"><</button>
+            <input type="date" [formControl]="dateControl" (change)="loadPricesForDate()" class="form-control w-25">
+            <button class="btn btn-secondary" (click)="loadNextDay()">></button>
+          </div>
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>Nombre d'heure</th>
+                <th>Montant Assigné</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dailyPrice of filteredDailyPrices">
+                <td>{{ dailyPrice.heure }}</td>
+                <td>{{ dailyPrice.daily_price }} €</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5>Total des Montants Assignés: {{ calculateTotalAmount() }} €</h5>
+          <h5>Total des Heures: {{ calculateTotalHeures() }} heures</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  

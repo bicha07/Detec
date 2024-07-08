@@ -195,6 +195,10 @@ export class FactdailyComponent implements OnInit {
   calculateTotalSalaries() {
     return this.employees.reduce((total, emp) => total + Number(emp.daily_price || 0), 0);
   }
+  
+  calculateTotalHeures() {
+    return this.employees.reduce((total, emp) => total + Number(emp.heure || 0), 0);
+  }
 
   calculateTotalCharges() {
     return this.charges.reduce((total, charge) => total + Number(charge.price), 0);
