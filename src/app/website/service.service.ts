@@ -352,6 +352,10 @@ export class ServiceService {
     );
   }
 
+  getEmployeeProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.apiUrl}/employee-projects`, { headers: this.getAuthHeaders(), withCredentials: true });
+  }
+
   // EmployeeDailyPrices
   getEmployeeDailyPricesByProject(projectId: number, date:string): Observable<EmployeeDailyPrice[]> {
     return this.getCsrfToken().pipe(

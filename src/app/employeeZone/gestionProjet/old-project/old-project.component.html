@@ -1,1 +1,37 @@
-<p>old-project works!</p>
+<div class="card mx-4 mb-4">
+    <div class="d-flex flex-row justify-content-between card-header">
+      <div><p>Mes Anciens Projets</p></div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-0">
+      <div class="table-responsive p-0">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">ID</th>
+              <th class="text-center">Chef de Projet</th>
+              <th class="text-center">Nom du Projet</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Date de Début</th>
+              <th class="text-center">Date de Fin</th>
+              <th class="text-center">Description</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of oldProjects; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td class="text-center">{{ project.name_chef }}</td>
+              <td class="text-center">{{ project.name }}</td>
+              <td class="text-center">{{ project.status }}</td>
+              <td class="text-center">{{ project.start_date }}</td>
+              <td class="text-center">{{ project.end_date }}</td>
+              <td class="text-center">{{ project.description }}</td>
+              <td class="text-center">
+                <button class="btn btn-info" [routerLink]="['/employee-project-detail', project.id]">Détails</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

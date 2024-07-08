@@ -14,6 +14,7 @@
           <thead>
             <tr>
               <th>Employé</th>
+              <th>Nombre d'heure</th>
               <th>Montant Reçu Hier</th>
               <th>Action</th>
             </tr>
@@ -21,6 +22,8 @@
           <tbody>
             <tr *ngFor="let employee of employees">
               <td>{{ employee.personne_id }}-{{ employee.personne_name }}</td>
+              <td>{{ employee.heure || 'Not assigned yet' }} </td>
+
               <td>{{ employee.daily_price || 'Not assigned yet' }} €</td>
               <td>
                 <!-- <button class="btn btn-success" (click)="onAddEmployeeSalary(employee)"><i class="fa fa-plus"></i></button> -->
@@ -31,6 +34,7 @@
           </tbody>
         </table>
         <h5>Total des Salaires: {{ calculateTotalSalaries() }} €</h5>
+        <h5>Total des Heures: {{ calculateTotalHeures() }} €</h5>
       </div>
     </div>
     <br>
@@ -73,6 +77,10 @@
       <div class="form-group">
         <label for="dailyPrice">Montant</label>
         <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="heure">Heure Travaillé</label>
+        <input type="number" id="heure" formControlName="heure" class="form-control">
       </div>
       <button type="submit" class="btn btn-success">{{ editingEmployeeId ? 'Modifier' : 'Ajouter' }}</button>
     </form>
