@@ -21,7 +21,6 @@ export class Facture {
     this.project_id = project_id;
     this.total_main_oeuvre = total_main_oeuvre;
     this.total_heure_ouvrable = total_heure_ouvrable;
-
     this.charges = charges;
     
   }
