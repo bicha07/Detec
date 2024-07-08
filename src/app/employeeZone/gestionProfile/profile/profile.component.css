@@ -12,6 +12,12 @@
 .coli{
   color: #4d4a4a;
 }
+.colie{
+  background-color: #17a2b8;
+}
+.colie :hover{
+  color: #17a2b8;
+}
 .card-body {
   padding: 2rem;
 }
