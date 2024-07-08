@@ -30,7 +30,7 @@ export class ServiceService {
 
   // Fetch CSRF token
   private getCsrfToken(): Observable<any> {
-    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true });
+    return this.http.get(`${this.apiUrlbase}/sanctum/csrf-cookie`, { withCredentials: true });
   }
 
   private getXsrfTokenFromCookie(): string {

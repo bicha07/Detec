@@ -8,12 +8,13 @@ import { environment } from '../../environment/environment';
   providedIn: 'root'
 })
 export class LoginService {
+  public readonly baseUrl: string = environment.apiUrl
   public readonly apiUrl: string = environment.apiUrl + '/api';
   constructor(private http: HttpClient) { }
 
   // Fetch CSRF token
   private getCsrfToken(): Observable<any> {
-    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true });
+    return this.http.get(`${this.baseUrl}/sanctum/csrf-cookie`, { withCredentials: true });
   }
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');

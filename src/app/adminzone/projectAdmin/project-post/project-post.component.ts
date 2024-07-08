@@ -20,8 +20,10 @@ export class ProjectPostComponent implements OnInit {
   isEditing = false;
   selectedFile: File | null = null;
   projectForm!: FormGroup;
+  baseUrl: string;
 
-  constructor(private projectService: ServiceService, private fb: FormBuilder) {
+  constructor(private partnerService: ServiceService,private projectService: ServiceService, private fb: FormBuilder) {
+    this.baseUrl = this.partnerService.apiUrlbase;
     this.createForm();
   }
 
