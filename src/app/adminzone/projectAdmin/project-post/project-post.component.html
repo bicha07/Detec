@@ -22,7 +22,7 @@
                     <tr *ngFor="let project of projects; let i = index">
                         <td class="text-center">{{ i + 1 }}</td>
                         <td class="text-center">
-                            <img [src]="project.photo_chef" alt="{{ project.name_chef }}" width="50">
+                            <img [src]=" baseUrl +'/storage/uploads/'+ project.photo_chef" alt="{{ project.name_chef }}" width="50">
                             <div>{{ project.name_chef }}</div>
                         </td>
                         <td class="text-center">{{ project.name }}</td>
