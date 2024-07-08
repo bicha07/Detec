@@ -4,6 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, formatDate } from '@angular/common';
 import { ServiceService } from '../../../website/service.service';
 import { EmployeeDailyPrice } from '../../../website/interfaces/interface.employeedailyprice';
+import { LoginService } from '../../../registration/login.service'; // Ajustez le chemin selon vos besoins
 
 @Component({
   selector: 'app-employee-project-detail',
@@ -14,10 +15,11 @@ import { EmployeeDailyPrice } from '../../../website/interfaces/interface.employ
 })
 export class EmployeeProjectDetailComponent implements OnInit {
   dailyPrices: EmployeeDailyPrice[] = [];
+  filteredDailyPrices: EmployeeDailyPrice[] = [];
   dateControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
   projectId!: number;
 
-  constructor(private serviceService: ServiceService, private route: ActivatedRoute) {}
+  constructor(private serviceService: ServiceService, private loginService: LoginService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.params['id'];
@@ -25,10 +27,12 @@ export class EmployeeProjectDetailComponent implements OnInit {
   }
 
   loadPricesForDate(): void {
-    if (this.dateControl.value) {
+    const currentUser = this.loginService.currentUserValue;
+    if (this.dateControl.value && currentUser) {
       this.serviceService.getEmployeeDailyPricesByProject(this.projectId, this.dateControl.value)
         .subscribe(dailyPrices => {
           this.dailyPrices = dailyPrices;
+          this.filteredDailyPrices = this.dailyPrices.filter(price => price.personne_id === currentUser.id);
         });
     }
   }
@@ -48,43 +52,10 @@ export class EmployeeProjectDetailComponent implements OnInit {
   }
 
   calculateTotalAmount(): number {
-    return this.dailyPrices.reduce((total, price) => total + Number(price.daily_price), 0);
+    return this.filteredDailyPrices.reduce((total, price) => total + Number(price.daily_price), 0);
   }
 
   calculateTotalHeures(): number {
-    return this.dailyPrices.reduce((total, price) => total + Number(price.heure), 0);
+    return this.filteredDailyPrices.reduce((total, price) => total + Number(price.heure), 0);
   }
 }
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { Observable } from 'rxjs';
-// import { Project } from '../../../website/interfaces/interface.project'; // Assurez-vous d'avoir un modèle de projet
-// import { ServiceService } from '../../../website/service.service'; // Votre service qui appelle l'API
-// import { CommonModule } from '@angular/common';
-// import { RouterModule } from '@angular/router';
-
-// @Component({
-//   selector: 'app-employee-projects',
-//   standalone: true,
-//   templateUrl: './new-project.component.html',
-//   styleUrls: ['./new-project.component.css'],
-//   imports: [CommonModule,RouterModule] // Ajoutez ici les modules nécessaires
-// })
-// export class EmployeeProjectsComponent implements OnInit {
-//   newProjects: Project[] = [];
-
-//   constructor(private projectService: ServiceService) {}
-
-//   ngOnInit(): void {
-//     this.loadNewProjects();
-//   }
-
-//   loadNewProjects(): void {
-//     this.projectService.getProjects().subscribe(projects => {
-//       this.newProjects = projects.filter(project => project.status === 'en attente' || project.status === 'en cours');
-//     });
-//   }
-// }

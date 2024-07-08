@@ -1,9 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Project } from '../../../website/interfaces/interface.project'; // Assurez-vous d'avoir un modèle de projet
-import { ServiceService } from '../../../website/service.service'; // Votre service qui appelle l'API
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ServiceService } from '../../../website/service.service';
+import { Project } from '../../../website/interfaces/interface.project';
+import { LoginService } from '../../../registration/login.service'; // Ajustez le chemin selon vos besoins
 
 @Component({
   selector: 'app-employee-projects',
@@ -14,16 +15,24 @@ import { RouterModule } from '@angular/router';
 })
 export class EmployeeProjectsComponent implements OnInit {
   newProjects: Project[] = [];
+  filteredProjects: Project[] = [];
 
-  constructor(private projectService: ServiceService) {}
+
+  constructor(private projectService: ServiceService, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.loadNewProjects();
   }
 
   loadNewProjects(): void {
-    this.projectService.getProjects().subscribe(projects => {
-      this.newProjects = projects.filter(project => project.status === 'en attente' || project.status === 'en cours');
-    });
+    const currentUser = this.loginService.currentUserValue;
+    if (currentUser) {
+      this.projectService.getProjects().subscribe(projects => {
+        this.newProjects = projects.filter(project => project.status === 'fini');
+        this.filteredProjects = this.newProjects.filter(project =>
+          project.employees.some(employee => employee.id === currentUser.id)
+        );
+      });
+    }
   }
 }

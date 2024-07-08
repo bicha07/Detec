@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../environment/environment';
 
 @Injectable({
@@ -9,12 +9,23 @@ import { environment } from '../../environment/environment';
 })
 export class LoginService {
   public readonly apiUrl: string = environment.apiUrl + '/api';
-  constructor(private http: HttpClient) { }
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
+
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')!));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): any {
+    return this.currentUserSubject.value;
+  }
 
   // Fetch CSRF token
   private getCsrfToken(): Observable<any> {
     return this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true });
   }
+
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     const xsrfToken = this.getXsrfTokenFromCookie();
@@ -22,6 +33,7 @@ export class LoginService {
       .set('Authorization', `Bearer ${token}`)
       .set('X-XSRF-TOKEN', xsrfToken);
   }
+
   registerUser(user: FormData): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.getCsrfToken().pipe(
@@ -33,7 +45,13 @@ export class LoginService {
     return this.getCsrfToken().pipe(
       switchMap(() => {
         const headers = new HttpHeaders().set('X-XSRF-TOKEN', this.getXsrfTokenFromCookie());
-        return this.http.post(`${this.apiUrl}/login`, loginData, { headers, withCredentials: true });
+        return this.http.post(`${this.apiUrl}/login`, loginData, { headers, withCredentials: true }).pipe(
+          tap((response: any) => {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('currentUser', JSON.stringify(response.user));
+            this.currentUserSubject.next(response.user);
+          })
+        );
       })
     );
   }
@@ -45,6 +63,12 @@ export class LoginService {
         return this.http.post(`${this.apiUrl}/forgot-password`, { identifier }, { headers, withCredentials: true });
       })
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 
   private getXsrfTokenFromCookie(): string {
