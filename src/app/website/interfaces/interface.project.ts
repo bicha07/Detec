@@ -37,7 +37,6 @@ export class Project {
     this.photo_chef = photo_chef;
     this.progress = progress;
     this.status = status;
-    this.photo_chef = photo_chef;
     this.start_date = start_date;
     this.end_date = end_date;
     this.employees = employees;
