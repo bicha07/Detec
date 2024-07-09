@@ -439,9 +439,9 @@ export class ServiceService {
   }
 
   // Mettre à jour les informations de l'utilisateur with CSRF and Auth headers
-  updateUserProfile(userData: User): Observable<User> {
+  updateUserProfile(id: number,userData: User): Observable<User> {
     return this.getCsrfToken().pipe(
-      switchMap(() => this.http.put<User>(`${this.apiUrl}/user/profile`, userData, { headers: this.getAuthHeaders(), withCredentials: true }))
+      switchMap(() => this.http.put<User>(`${this.apiUrl}/users/${id}`, userData, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
 

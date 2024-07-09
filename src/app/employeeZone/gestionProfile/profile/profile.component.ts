@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
   onSubmit(): void {
     if (this.profileForm.valid) {
       // Appeler le service pour mettre à jour les données de l'utilisateur
-      this.userService.updateUser(this.currentUser.id, this.profileForm.value).subscribe({
+      this.userService.updateUserProfile(this.currentUser.id, this.profileForm.value).subscribe({
         next: () => {
           console.log('Mise à jour du profil réussie');
           // Redirection ou actions après la mise à jour
