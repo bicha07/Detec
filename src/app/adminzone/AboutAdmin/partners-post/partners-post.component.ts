@@ -4,27 +4,29 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { ServiceService } from '../../../website/service.service';
+import { AlertComponent } from '../../../alert/alert.component';
 
 @Component({
-    selector: 'app-partner-post',
-    standalone: true,
-    templateUrl: './partners-post.component.html',
-    styleUrls: ['./partners-post.component.css'],
-    providers: [ServiceService],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
+  selector: 'app-partner-post',
+  standalone: true,
+  templateUrl: './partners-post.component.html',
+  styleUrls: ['./partners-post.component.css'],
+  providers: [ServiceService],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent, AlertComponent]
 })
-
 export class PartnerPostComponent implements OnInit {
   partners: Partner[] = [];
   showForm = false;
   isEditing = false;
   currentPartner: Partner = new Partner(0, '', '');
   selectedFile: File | null = null;
-  baseUrl : String;
+  baseUrl: String;
+
+  alertType: string = '';
+  alertMessage: string = '';
 
   constructor(private partnerService: ServiceService) {
     this.baseUrl = this.partnerService.apiUrlbase;
-
   }
 
   ngOnInit(): void {
@@ -32,8 +34,15 @@ export class PartnerPostComponent implements OnInit {
   }
 
   loadPartners(): void {
-    this.partnerService.getPartners().subscribe(data => {
-      this.partners = data;
+    this.partnerService.getPartners().subscribe({
+      next: (data) => {
+        this.partners = data;
+        this.setAlert('success', 'Partners chargés avec succès.');
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des partners:', error);
+        this.setAlert('danger', 'Erreur lors du chargement des partners.');
+      }
     });
   }
 
@@ -71,8 +80,15 @@ export class PartnerPostComponent implements OnInit {
         formData.append('photo', this.selectedFile, this.selectedFile.name);
       }
       formData.append('name', this.currentPartner.name);
-      this.partnerService.createPartner(formData).subscribe(() => {
-        this.loadPartners();
+      this.partnerService.createPartner(formData).subscribe({
+        next: () => {
+          this.loadPartners();
+          this.setAlert('success', 'Partner ajouté avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'ajout du partner:', error);
+          this.setAlert('danger', 'Erreur lors de l\'ajout du partner.');
+        }
       });
     }
     this.closeForm();
@@ -85,21 +101,44 @@ export class PartnerPostComponent implements OnInit {
     };
 
     if (this.isEditing) {
-      this.partnerService.updatePartner(this.currentPartner.id, updatedPartner).subscribe(() => {
-        this.loadPartners();
+      this.partnerService.updatePartner(this.currentPartner.id, updatedPartner).subscribe({
+        next: () => {
+          this.loadPartners();
+          this.setAlert('primary', 'Partner mis à jour avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour du partner:', error);
+          this.setAlert('danger', 'Erreur lors de la mise à jour du partner.');
+        }
       });
     }
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this partner?')) {
-      this.partnerService.deletePartner(id).subscribe(() => {
-        this.loadPartners();
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce partner ?')) {
+      this.partnerService.deletePartner(id).subscribe({
+        next: () => {
+          this.loadPartners();
+          this.setAlert('danger', 'Partner supprimé avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression du partner:', error);
+          this.setAlert('danger', 'Erreur lors de la suppression du partner.');
+        }
       });
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

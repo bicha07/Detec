@@ -3,6 +3,7 @@ import { ServiceService } from '../../../website/service.service';
 import { Certif, CertAdvantages } from '../../../website/interfaces/interface.certif';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from '../../../alert/alert.component';
 
 @Component({
   selector: 'app-certif-post',
@@ -10,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './certif-post.component.html',
   styleUrls: ['./certif-post.component.css'],
   providers: [ServiceService],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, AlertComponent]
 })
 export class CertifPostComponent implements OnInit {
   certifs: Certif[] = [];
@@ -28,11 +29,13 @@ export class CertifPostComponent implements OnInit {
     certadvantages: [] 
   };
   selectedFile: File | null = null;
-  baseUrl : String;
-  
+  baseUrl: String;
+
+  alertType: string = '';
+  alertMessage: string = '';
+
   constructor(private serviceService: ServiceService) {
     this.baseUrl = this.serviceService.apiUrlbase;
-
   }
 
   ngOnInit(): void {
@@ -95,8 +98,7 @@ export class CertifPostComponent implements OnInit {
       const formData = new FormData();
       if (this.selectedFile) {
         formData.append('photo', this.selectedFile, this.selectedFile.name);
-      }
-      else{
+      } else {
         formData.append('photo', "empty");
       }
       formData.append('title', this.currentCertif.title);
@@ -106,19 +108,20 @@ export class CertifPostComponent implements OnInit {
       formData.append('desc_photo', this.currentCertif.desc_photo);
       formData.append('conclusion', this.currentCertif.conclusion);
       formData.append('certadvantages', JSON.stringify(this.currentCertif.certadvantages)); // Convert advantages to JSON
-  
-      // Log the FormData content
-      formData.forEach((value, key) => {
-        console.log(key, value);
-      });
-  
-      this.serviceService.createCertif(formData).subscribe(() => {
-        this.loadCertifs();
-      });
+
+      this.serviceService.createCertif(formData).subscribe(
+        () => {
+          this.loadCertifs();
+          this.setAlert('success', 'Certificat ajouté avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de l\'ajout du certificat.');
+        }
+      );
     }
     this.closeForm();
   }
-  
+
   saveCertif(): void {
     const updatedCertif: Partial<Certif> = {
       title: this.currentCertif.title,
@@ -132,31 +135,42 @@ export class CertifPostComponent implements OnInit {
     };
 
     if (this.isEditing) {
-      this.updateCertif(this.currentCertif.id, updatedCertif);
+      this.serviceService.updateCertif(this.currentCertif.id, updatedCertif).subscribe(
+        () => {
+          this.loadCertifs();
+          this.setAlert('primary', 'Certificat mis à jour avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la mise à jour du certificat.');
+        }
+      );
     }
-  }
-
-  addCertif(newCertif: FormData): void {
-    this.serviceService.createCertif(newCertif).subscribe(() => {
-      this.loadCertifs();
-    });
-  }
-
-  updateCertif(id: number, updatedCertif: Partial<Certif>): void {
-    this.serviceService.updateCertif(id, updatedCertif).subscribe(() => {
-      this.loadCertifs();
-    });
   }
 
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce certificat ?')) {
-      this.serviceService.deleteCertif(id).subscribe(() => {
-        this.loadCertifs();
-      });
+      this.serviceService.deleteCertif(id).subscribe(
+        () => {
+          this.loadCertifs();
+          this.setAlert('danger', 'Certificat supprimé avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la suppression du certificat.');
+        }
+      );
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

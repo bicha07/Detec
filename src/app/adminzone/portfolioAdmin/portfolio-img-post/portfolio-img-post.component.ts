@@ -4,25 +4,29 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { ServiceService } from '../../../website/service.service';
+import { AlertComponent } from '../../../alert/alert.component'; // Import the AlertModule
 
 @Component({
   selector: 'app-portfolio-img-post',
   standalone: true,
   templateUrl: './portfolio-img-post.component.html',
-  styleUrl: './portfolio-img-post.component.css',
+  styleUrls: ['./portfolio-img-post.component.css'],
   providers: [ServiceService],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent,AlertComponent]
 })
-export class PortfolioImgPostComponent {
+export class PortfolioImgPostComponent implements OnInit {
   portfolios: Portfolio[] = [];
   showForm = false;
   isEditing = false;
   currentPortfolio: Portfolio = new Portfolio(0, '', '');
   selectedFile: File | null = null;
-  baseUrl : String;
+  baseUrl: String;
+
+  alertType: string = '';
+  alertMessage: string = '';
+
   constructor(private partnerService: ServiceService) {
     this.baseUrl = this.partnerService.apiUrlbase;
-
   }
 
   ngOnInit(): void {
@@ -69,9 +73,15 @@ export class PortfolioImgPostComponent {
         formData.append('photo', this.selectedFile, this.selectedFile.name);
       }
       formData.append('title', this.currentPortfolio.title);
-      this.partnerService.createPortfolio(formData).subscribe(() => {
-        this.loadPortfolios();
-      });
+      this.partnerService.createPortfolio(formData).subscribe(
+        () => {
+          this.loadPortfolios();
+          this.setAlert('success', 'Portfolio ajouté avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de l\'ajout du portfolio.');
+        }
+      );
     }
     this.closeForm();
   }
@@ -83,21 +93,42 @@ export class PortfolioImgPostComponent {
     };
 
     if (this.isEditing) {
-      this.partnerService.updatePortfolio(this.currentPortfolio.id, updatedPortfolio).subscribe(() => {
-        this.loadPortfolios();
-      });
+      this.partnerService.updatePortfolio(this.currentPortfolio.id, updatedPortfolio).subscribe(
+        () => {
+          this.loadPortfolios();
+          this.setAlert('primary', 'Portfolio mis à jour avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la mise à jour du portfolio.');
+        }
+      );
     }
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this portfolio?')) {
-      this.partnerService.deletePortfolio(id).subscribe(() => {
-        this.loadPortfolios();
-      });
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce portfolio?')) {
+      this.partnerService.deletePortfolio(id).subscribe(
+        () => {
+          this.loadPortfolios();
+          this.setAlert('danger', 'Portfolio supprimé avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la suppression du portfolio.');
+        }
+      );
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

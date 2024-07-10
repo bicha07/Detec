@@ -1,6 +1,7 @@
 
 import { Component,Renderer2, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
+import { ServiceService } from '../../website/service.service';
 
 
 @Component({
@@ -11,10 +12,12 @@ import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/rou
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements AfterViewInit {
-  
-  constructor(private renderer: Renderer2, private router: Router) {}
+  currentUser: any;
+
+  constructor(private renderer: Renderer2, private router: Router,    private userService: ServiceService,  ) {}
 
   ngAfterViewInit() {
+    this.loadUserProfile();
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.listen(checkbox, 'change', (event: Event) => {
       if (!(event.target as HTMLInputElement).checked) {
@@ -22,6 +25,19 @@ export class SidebarComponent implements AfterViewInit {
       }
     });
   }
+  
+  loadUserProfile(): void {
+    this.userService.getUserProfile().subscribe({
+      next: (user) => {
+        this.currentUser = user;
+      },
+      error: (error) => console.error('Error loading profile:', error)
+    });
+  }
+  
+  
+
+
 
   collapseAllCards() {
     const cards = document.querySelectorAll('.card');

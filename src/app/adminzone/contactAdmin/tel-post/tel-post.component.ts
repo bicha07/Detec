@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { ServiceService } from '../../../website/service.service';
+import { AlertComponent } from '../../../alert/alert.component';
 
 @Component({
   selector: 'app-tel-post',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent, AlertComponent],
   templateUrl: './tel-post.component.html',
   styleUrls: ['./tel-post.component.css'],
   providers: [ServiceService]
@@ -19,6 +20,9 @@ export class TelPostComponent implements OnInit {
   isEditing = false;
   currentTel: ContactTel = new ContactTel(0, '', '');
 
+  alertType: string = '';
+  alertMessage: string = '';
+
   constructor(private TelService: ServiceService) {}
 
   ngOnInit(): void {
@@ -26,8 +30,15 @@ export class TelPostComponent implements OnInit {
   }
 
   loadTels(): void {
-    this.TelService.getContactsTel().subscribe(data => {
-      this.tels = data;
+    this.TelService.getContactsTel().subscribe({
+      next: (data) => {
+        this.tels = data;
+        this.setAlert('success', 'Contacts téléphoniques chargés avec succès.');
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des contacts téléphoniques:', error);
+        this.setAlert('danger', 'Erreur lors du chargement des contacts téléphoniques.');
+      }
     });
   }
 
@@ -44,29 +55,59 @@ export class TelPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const formData = new ContactTel( this.currentTel.id,this.currentTel.tel,this.currentTel.name);
+    const formData = new ContactTel(this.currentTel.id, this.currentTel.tel, this.currentTel.name);
 
     if (this.isEditing) {
-      this.TelService.updateTel(this.currentTel.id, formData).subscribe(() => {
-        this.loadTels();
+      this.TelService.updateTel(this.currentTel.id, formData).subscribe({
+        next: () => {
+          this.loadTels();
+          this.setAlert('primary', 'Contact mis à jour avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour du contact:', error);
+          this.setAlert('danger', 'Erreur lors de la mise à jour du contact.');
+        }
       });
     } else {
-      this.TelService.createTel(formData).subscribe(() => {
-        this.loadTels();
+      this.TelService.createTel(formData).subscribe({
+        next: () => {
+          this.loadTels();
+          this.setAlert('success', 'Contact ajouté avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'ajout du contact:', error);
+          this.setAlert('danger', 'Erreur lors de l\'ajout du contact.');
+        }
       });
     }
     this.closeForm();
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this contact?')) {
-      this.TelService.deleteTel(id).subscribe(() => {
-        this.loadTels();
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')) {
+      this.TelService.deleteTel(id).subscribe({
+        next: () => {
+          this.loadTels();
+          this.setAlert('danger', 'Contact supprimé avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression du contact:', error);
+          this.setAlert('danger', 'Erreur lors de la suppression du contact.');
+        }
       });
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

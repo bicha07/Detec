@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
- // Assure-toi d'avoir un service approprié
 import { Personne } from '../../../website/interfaces/interface.personne';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { ServiceService } from '../../../website/service.service';
+import { AlertComponent } from '../../../alert/alert.component';// Import the AlertModule
 
 @Component({
-    selector: 'app-fondateur-post',
-    standalone: true,
-    templateUrl: './fondateur-post.component.html',
-    styleUrls: ['./fondateur-post.component.css'],
-    providers: [ServiceService],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
+  selector: 'app-fondateur-post',
+  standalone: true,
+  templateUrl: './fondateur-post.component.html',
+  styleUrls: ['./fondateur-post.component.css'],
+  providers: [ServiceService],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent,AlertComponent]
 })
 export class FondateurPostComponent implements OnInit {
   personne: Personne[] = [];
@@ -20,12 +20,13 @@ export class FondateurPostComponent implements OnInit {
   isEditing = false;
   currentPersonne: Personne = new Personne(0, '', '', '', '');
   selectedFile: File | null = null;
-  baseUrl : String;
+  baseUrl: String;
 
+  alertType: string = '';
+  alertMessage: string = '';
 
   constructor(private teamService: ServiceService) {
     this.baseUrl = this.teamService.apiUrlbase;
-
   }
 
   ngOnInit(): void {
@@ -74,9 +75,15 @@ export class FondateurPostComponent implements OnInit {
       formData.append('name', this.currentPersonne.name);
       formData.append('post', this.currentPersonne.post);
       formData.append('description', this.currentPersonne.description);
-      this.teamService.createPersonne(formData).subscribe(() => {
-        this.loadTeam();
-      });
+      this.teamService.createPersonne(formData).subscribe(
+        () => {
+          this.loadTeam();
+          this.setAlert('success', 'Membre ajouté avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de l\'ajout du membre.');
+        }
+      );
     }
     this.closeForm();
   }
@@ -95,20 +102,41 @@ export class FondateurPostComponent implements OnInit {
   }
 
   updatePersonne(id: number, updatedPersonne: Partial<Personne>): void {
-    this.teamService.updatePersonne(id, updatedPersonne).subscribe(() => {
-      this.loadTeam();
-    });
+    this.teamService.updatePersonne(id, updatedPersonne).subscribe(
+      () => {
+        this.loadTeam();
+        this.setAlert('primary', 'Membre mis à jour avec succès.');
+      },
+      error => {
+        this.setAlert('danger', 'Erreur lors de la mise à jour du membre.');
+      }
+    );
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this team member?')) {
-      this.teamService.deletePersonne(id).subscribe(() => {
-        this.loadTeam();
-      });
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce membre?')) {
+      this.teamService.deletePersonne(id).subscribe(
+        () => {
+          this.loadTeam();
+          this.setAlert('danger', 'Membre supprimé avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la suppression du membre.');
+        }
+      );
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }
