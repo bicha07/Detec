@@ -4,6 +4,7 @@
         <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Projet</button></div>
     </div>
     <div class="card-body px-0 pt-0 pb-0">
+        <app-alert [type]="alertType" [message]="alertMessage"></app-alert>
         <div class="table-responsive p-0">
             <table class="table table-striped">
                 <thead>
@@ -35,7 +36,6 @@
                             <button class="btn" (click)="onDelete(project.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
                             <button class="btn btn-info" [routerLink]="['/project-detail', project.id]"><i class="fa fa-info-circle cursor-pointer"></i></button>
                         </td>
-                        
                     </tr>
                 </tbody>
             </table>
@@ -65,13 +65,10 @@
                         <option value="" disabled [selected]="employeeControl.value.employee == null">Sélectionner un employé</option>
                         <option *ngFor="let user of users" [ngValue]="user.id">{{ user.username }}</option>
                     </select>
-                    <!-- Ajout d'un champ de texte pour afficher le nom de l'employé -->
                     <input type="text" formControlName="employee_name" class="form-control mr-2">
                     <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployeeField(i)">Supprimer</button>
                 </div>
             </div>
-            
-            
 
             <button type="button" class="btn btn-secondary mb-3" (click)="addEmployeeField()">Ajouter un autre employé</button>
 
@@ -95,7 +92,7 @@
                     <option value="fini">Fini</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" id="description" formControlName="description" name="description" class="form-control" required>

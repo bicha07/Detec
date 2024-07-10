@@ -51,20 +51,20 @@
             <div id="div1">
                 <div id="div-1-1">
                     <div class="the-btn-content">
-                    <div id="avatar" >
-                        <img src="https://Marqenti.tn/images/maftoul.svg" />
+                        <div id="avatar" >
+                            <img [src]="currentUser?.imageUrl || 'https://Marqenti.tn/images/maftoul.svg'" />
+                        </div>
+                        <div id="title-down">
+                            <div id="title-down-1">{{ currentUser?.username }}</div>
+                        </div>
+                        <label for="the-btn"><i class="fa fa-caret-up"></i></label>
                     </div>
-                    <div id="title-down">
-                        <div id="title-down-1" >Bicha</div>
-                        <span id="title-down-2">Employee</span>
+                    <div id="div-1-2" class="under-cont">
+                        <a class="under-drop"><i class="fa fa-sign-out"></i> Log Out </a>
                     </div>
-                    <label for="the-btn"><i class="fa fa-caret-up"></i></label>
-                </div>
-                <div id="div-1-2" class="under-cont">
-                    <a class="under-drop"><i class="fa fa-sign-out"></i> Log Out </a>
                 </div>
             </div>
-
         </div>
+        
     </div>
 </div>

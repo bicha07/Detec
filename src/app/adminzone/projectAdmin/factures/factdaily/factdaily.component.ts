@@ -8,13 +8,14 @@ import { EmployeeDailyPrice } from '../../../../website/interfaces/interface.emp
 import { Charge } from '../../../../website/interfaces/interface.charges';
 import { User } from '../../../../website/interfaces/interface.user';
 import { formatDate } from '@angular/common';
+import { AlertComponent } from '../../../../alert/alert.component';
 
 @Component({
   selector: 'app-factdaily',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './factdaily.component.html',
-  styleUrl: './factdaily.component.css'
+  styleUrls: ['./factdaily.component.css']
 })
 export class FactdailyComponent implements OnInit {
   project!: Project;
@@ -29,6 +30,9 @@ export class FactdailyComponent implements OnInit {
   selectedEmployeeId: number | null = null;
   editingChargeId: number | null = null;
   dateControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en')); // Initialize with today's date
+
+  alertType: string = '';
+  alertMessage: string = '';
 
   constructor(private serviceService: ServiceService, private route: ActivatedRoute) {
     this.employeeForm = new FormGroup({
@@ -116,6 +120,10 @@ export class FactdailyComponent implements OnInit {
           this.editingEmployeeId = null;
           this.employeeForm.reset();
           this.showEmployeeForm = false;
+          this.setAlert('primary', 'Salaire de l\'employé mis à jour avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la mise à jour du salaire de l\'employé.');
         });
       } else {
         this.serviceService.createEmployeeDailyPrice(employeeData).subscribe(employee => {
@@ -123,19 +131,29 @@ export class FactdailyComponent implements OnInit {
           this.employees[index] = { ...this.employees[index], ...employeeData };
           this.employeeForm.reset();
           this.showEmployeeForm = false;
+          this.setAlert('success', 'Salaire de l\'employé ajouté avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de l\'ajout du salaire de l\'employé.');
         });
       }
     }
   }
 
   onDeleteEmployee(employeeId: number) {
-    this.serviceService.deleteEmployeeDailyPrice(employeeId).subscribe(() => {
-      const index = this.employees.findIndex(emp => emp.id === employeeId);
-      if (index !== -1) {
-        this.employees[index].daily_price = 'Non assigné';
-        this.employees[index].heure = 'Non assigné';
-      }
-    });
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce salaire ?')) {
+      this.serviceService.deleteEmployeeDailyPrice(employeeId).subscribe(() => {
+        const index = this.employees.findIndex(emp => emp.id === employeeId);
+        if (index !== -1) {
+          this.employees[index].daily_price = 'Non assigné';
+          this.employees[index].heure = 'Non assigné';
+        }
+        this.setAlert('danger', 'Salaire de l\'employé supprimé avec succès.');
+      },
+      error => {
+        this.setAlert('danger', 'Erreur lors de la suppression du salaire de l\'employé.');
+      });
+    }
   }
 
   onAddCharge() {
@@ -168,21 +186,35 @@ export class FactdailyComponent implements OnInit {
           this.editingChargeId = null;
           this.chargeForm.reset();
           this.showChargeForm = false;
+          this.setAlert('primary', 'Charge mise à jour avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de la mise à jour de la charge.');
         });
       } else {
         this.serviceService.createCharge(chargeData).subscribe(charge => {
           this.charges.push(charge);
           this.chargeForm.reset();
           this.showChargeForm = false;
+          this.setAlert('success', 'Charge ajoutée avec succès.');
+        },
+        error => {
+          this.setAlert('danger', 'Erreur lors de l\'ajout de la charge.');
         });
       }
     }
   }
 
   onDeleteCharge(chargeId: number) {
-    this.serviceService.deleteCharge(chargeId).subscribe(() => {
-      this.charges = this.charges.filter(chg => chg.id !== chargeId);
-    });
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette charge ?')) {
+      this.serviceService.deleteCharge(chargeId).subscribe(() => {
+        this.charges = this.charges.filter(chg => chg.id !== chargeId);
+        this.setAlert('danger', 'Charge supprimée avec succès.');
+      },
+      error => {
+        this.setAlert('danger', 'Erreur lors de la suppression de la charge.');
+      });
+    }
   }
 
   closeEmployeeForm() {
@@ -199,12 +231,21 @@ export class FactdailyComponent implements OnInit {
   calculateTotalSalaries() {
     return this.employees.reduce((total, emp) => total + Number(emp.daily_price || 0), 0);
   }
-  
+
   calculateTotalHeures() {
     return this.employees.reduce((total, emp) => total + Number(emp.heure || 0), 0);
   }
 
   calculateTotalCharges() {
     return this.charges.reduce((total, charge) => total + Number(charge.price), 0);
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

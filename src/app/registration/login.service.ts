@@ -95,4 +95,17 @@ export class LoginService {
     }
     return '';
   }
+  isUserAdmin(): boolean {
+    const currentUser = this.currentUserValue;
+    return currentUser && currentUser.role === 'admin';
+  }
+  
+  isUserEmployee(): boolean {
+    const currentUser = this.currentUserValue;
+    return currentUser && currentUser.role === 'employee';
+  }
+  public setCurrentUser(user: any): void {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user); // safely updating the BehaviorSubject
+  }
 }

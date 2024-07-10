@@ -6,13 +6,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../registration/login.service';
+import { AlertComponent } from '../../../alert/alert.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent, AlertComponent]
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
@@ -22,6 +23,9 @@ export class UserComponent implements OnInit {
   registrationForm: FormGroup;
   selectedFile: File | null = null;
   baseUrl: any;
+
+  alertType: string = '';
+  alertMessage: string = '';
 
   constructor(private partnerService: ServiceService, private userService: ServiceService, private fb: FormBuilder, private registrationService: LoginService, private router: Router) {
     this.baseUrl = this.partnerService.apiUrlbase;
@@ -68,10 +72,13 @@ export class UserComponent implements OnInit {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       this.userService.deleteUser(id).subscribe({
         next: () => {
-          console.log('Suppression réussie');
           this.loadUsers();
+          this.setAlert('danger', 'Utilisateur supprimé avec succès.');
         },
-        error: (error) => console.error('Erreur lors de la suppression de l\'utilisateur:', error)
+        error: (error) => {
+          console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+          this.setAlert('danger', 'Erreur lors de la suppression de l\'utilisateur.');
+        }
       });
     }
   }
@@ -106,12 +113,13 @@ export class UserComponent implements OnInit {
     }
     this.userService.createUser(formData).subscribe({
       next: (response) => {
-        console.log('Ajout réussi');
         this.users.push(response); // Add the new user to the users array
+        this.setAlert('success', 'Utilisateur ajouté avec succès.');
         this.closeForm();
       },
       error: (error) => {
         console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
+        this.setAlert('danger', 'Erreur lors de l\'ajout de l\'utilisateur.');
         this.closeForm();
       }
     });
@@ -136,11 +144,14 @@ export class UserComponent implements OnInit {
     formData.append('_method', 'PUT');
     this.userService.updateUser(this.currentUser.id, formData).subscribe({
       next: () => {
-        console.log('Mise à jour réussie');
         this.loadUsers();
+        this.setAlert('primary', 'Utilisateur mis à jour avec succès.');
         this.closeForm();
       },
-      error: (error) => console.error('Erreur lors de la mise à jour de l\'utilisateur:', error)
+      error: (error) => {
+        console.error('Erreur lors de la mise à jour de l\'utilisateur:', error);
+        this.setAlert('danger', 'Erreur lors de la mise à jour de l\'utilisateur.');
+      }
     });
   }
 
@@ -148,5 +159,14 @@ export class UserComponent implements OnInit {
     this.showForm = false;
     this.registrationForm.reset(); // Clear the form
     this.selectedFile = null; // Reset the selected file
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
   }
 }

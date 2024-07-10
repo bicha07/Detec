@@ -4,14 +4,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { ServiceService } from '../../../website/service.service';
+import { AlertComponent } from '../../../alert/alert.component';
 
 @Component({
-    selector: 'app-stat-post',
-    standalone: true,
-    templateUrl: './stat-post.component.html',
-    styleUrls: ['./stat-post.component.css'],
-    providers: [ServiceService],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent]
+  selector: 'app-stat-post',
+  standalone: true,
+  templateUrl: './stat-post.component.html',
+  styleUrls: ['./stat-post.component.css'],
+  providers: [ServiceService],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SidebarComponent, AlertComponent]
 })
 export class StatPostComponent implements OnInit {
   stats: Stat[] = [];
@@ -22,6 +23,9 @@ export class StatPostComponent implements OnInit {
   selectedIcon: string = '';
   selectedIconName: string = 'Select an icon';
   isOpen: boolean = false;
+
+  alertType: string = '';
+  alertMessage: string = '';
 
   icons = [
     { name: 'Address Book', class: 'fa fa-address-book' },
@@ -516,32 +520,22 @@ export class StatPostComponent implements OnInit {
     { name: 'Wrench', class: 'fa fa-wrench' }
   ];
 
-  toggleDropdown(): void {
-    this.isOpen = !this.isOpen;
-  }
-
-  selectIcon(icon: { name: string, class: string }, event: Event): void {
-    event.stopPropagation();  // Prevent the dropdown from closing immediately
-    this.selectedIcon = icon.class;
-    this.selectedIconName = icon.name;
-    this.isOpen = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event): void {
-    if (!this.eRef.nativeElement.contains(event.target)) {
-      this.isOpen = false;
-    }
-  }
-  constructor(private StatService: ServiceService,private eRef: ElementRef) {}
+  constructor(private StatService: ServiceService, private eRef: ElementRef) {}
 
   ngOnInit(): void {
     this.loadStats();
   }
 
   loadStats(): void {
-    this.StatService.getStats().subscribe(data => {
-      this.stats = data;
+    this.StatService.getStats().subscribe({
+      next: (data) => {
+        this.stats = data;
+        this.setAlert('success', 'Statistiques chargées avec succès.');
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des statistiques:', error);
+        this.setAlert('danger', 'Erreur lors du chargement des statistiques.');
+      }
     });
   }
 
@@ -577,8 +571,15 @@ export class StatPostComponent implements OnInit {
       formData.append('title', this.currentStat.title);
       formData.append('percent', this.currentStat.percent);
 
-      this.StatService.createStat(formData).subscribe(() => {
-        this.loadStats();
+      this.StatService.createStat(formData).subscribe({
+        next: () => {
+          this.loadStats();
+          this.setAlert('success', 'Statistique ajoutée avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'ajout de la statistique:', error);
+          this.setAlert('danger', 'Erreur lors de l\'ajout de la statistique.');
+        }
       });
     }
     this.closeForm();
@@ -588,25 +589,66 @@ export class StatPostComponent implements OnInit {
     const updatedStat: Partial<Stat> = {
       title: this.currentStat.title,
       percent: this.currentStat.percent,
-      photo:this.selectedIcon,
+      photo: this.selectedIcon,
     };
 
     if (this.isEditing) {
-      this.StatService.updateStat(this.currentStat.id, updatedStat).subscribe(() => {
-        this.loadStats();
+      this.StatService.updateStat(this.currentStat.id, updatedStat).subscribe({
+        next: () => {
+          this.loadStats();
+          this.setAlert('primary', 'Statistique mise à jour avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour de la statistique:', error);
+          this.setAlert('danger', 'Erreur lors de la mise à jour de la statistique.');
+        }
       });
     }
   }
 
   onDelete(id: number): void {
-    if (confirm('Are you sure you want to delete this partner?')) {
-      this.StatService.deleteStat(id).subscribe(() => {
-        this.loadStats();
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette statistique ?')) {
+      this.StatService.deleteStat(id).subscribe({
+        next: () => {
+          this.loadStats();
+          this.setAlert('danger', 'Statistique supprimée avec succès.');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression de la statistique:', error);
+          this.setAlert('danger', 'Erreur lors de la suppression de la statistique.');
+        }
       });
     }
   }
 
   closeForm(): void {
     this.showForm = false;
+  }
+
+  setAlert(type: string, message: string): void {
+    this.alertType = type;
+    this.alertMessage = message;
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 3000);
+  }
+
+  toggleDropdown(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  selectIcon(icon: { name: string, class: string }, event: Event): void {
+    event.stopPropagation();
+    this.selectedIcon = icon.class;
+    this.selectedIconName = icon.name;
+    this.isOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event): void {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.isOpen = false;
+    }
   }
 }

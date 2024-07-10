@@ -451,6 +451,17 @@ export class ServiceService {
       );
     }
 
+  updateUserProfileWithFile(id: number, formData: FormData): Observable<any> {
+    return this.getCsrfToken().pipe(
+      switchMap(csrfToken => {
+        const headers = new HttpHeaders({
+          'X-CSRF-Token': csrfToken, // Set CSRF token in headers if needed
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}` // Set the auth token from local storage
+        });
+        return this.http.put(`${this.apiUrl}/users/${id}`, formData, { headers: headers, withCredentials: true });
+      })
+    );
+  }
   
   getProjectsForEmployee(employeeId: number): Observable<Project[]> {
     return this.getCsrfToken().pipe(

@@ -26,9 +26,16 @@ import { ProjectDetailComponent } from './adminzone/projectAdmin/project-details
 import { StructureComponentt } from './employeeZone/gestionProfile/structure/structure.component';
 import { StructureProjectComponent } from './employeeZone/gestionProjet/structure-project/structure-project.component';
 import { EmployeeProjectDetailComponent } from './employeeZone/gestionProjet/employee-project-detail/employee-project-detail.component';
+import { AdminGuard } from './guards/admin.guard';
+import { EmployeeGuard } from './guards/employee.guard';
 // import { ProjectDetailsComponent } from './adminzone/projectAdmin/project-details/project-details.component';
 
 export const routes: Routes = [
+
+
+
+    //// tous les utilisateur peux deplacer dans ces premiers path 
+
     // { path: '', component: LinkHomeComponent },
     {path:'' , redirectTo: 'home' , pathMatch: 'full'},
     { path: 'home', component: LinkHomeComponent },
@@ -41,17 +48,24 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent },
     { path: 'resetpwd', component: ResetpwdComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'homeAdmin', component: StructureComponent },
-    { path: 'aboutAdmin', component: StructureAboutComponent},
-    { path: 'serviceAdmin', component: StructureServiceComponent },
-    { path: 'portfolioAdmin', component: StructurePortfolioComponent },
-    { path: 'contactAdmin', component: StructureContactComponent },
     { path: 'formulaire', component: FormulaireComponent },
-    { path: 'devis', component: StructureFormulaireComponent },
-    { path: 'project', component: StructureProjectsComponent },
-    { path: 'project-detail/:id', component: ProjectDetailComponent},
-    { path: 'employee-project-detail/:id', component: EmployeeProjectDetailComponent },
-    { path: 'profile', component: StructureComponentt},
-    { path: 'newproject', component: StructureProjectComponent},
-    { path: '**', redirectTo: 'home' } 
+
+
+
+
+//// sauf le role admin peux voir ces path 
+
+{ path: 'homeAdmin', component: StructureComponent, canActivate: [AdminGuard] },
+{ path: 'aboutAdmin', component: StructureAboutComponent, canActivate: [AdminGuard] },
+{ path: 'serviceAdmin', component: StructureServiceComponent, canActivate: [AdminGuard] },
+{ path: 'portfolioAdmin', component: StructurePortfolioComponent, canActivate: [AdminGuard] },
+{ path: 'contactAdmin', component: StructureContactComponent, canActivate: [AdminGuard] },
+{ path: 'devis', component: StructureFormulaireComponent, canActivate: [AdminGuard] },
+{ path: 'project', component: StructureProjectsComponent, canActivate: [AdminGuard] },
+{ path: 'project-detail/:id', component: ProjectDetailComponent, canActivate: [AdminGuard] },
+
+{ path: 'employee-project-detail/:id', component: EmployeeProjectDetailComponent, canActivate: [EmployeeGuard] },
+{ path: 'profile', component: StructureComponentt, canActivate: [EmployeeGuard] },
+{ path: 'newproject', component: StructureProjectComponent, canActivate: [EmployeeGuard] },
+
 ];

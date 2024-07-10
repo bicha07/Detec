@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
     this.baseUrl = this.userService.apiUrlbase;
   }
 
+
   ngOnInit(): void {
     this.initializeForm();
     this.loadUserProfile();
@@ -49,6 +50,12 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => console.error('Error loading profile:', error)
     });
+  }
+
+
+  onFileSelect(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.selectedFile = target.files ? target.files[0] : null;
   }
 
   onSubmit(): void {
@@ -97,9 +104,22 @@ export class ProfileComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
     }
+    Object.keys(this.profileForm.value).forEach(key => {
+      formData.append(key, this.profileForm.value[key]);
+    });
+
+    this.userService.updateUserProfileWithFile(this.currentUser.id, formData).subscribe({
+      next: () => {
+        console.log('Profile update successful');
+        // Redirect or other actions after update
+      },
+      error: (error) => console.error('Error updating profile:', error)
+    });
   }
 
   toggleEdit(): void {
     this.isEditing = !this.isEditing;
   }
+}
+
 }

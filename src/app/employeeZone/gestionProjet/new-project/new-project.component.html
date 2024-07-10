@@ -20,7 +20,10 @@
           <tbody>
             <tr *ngFor="let project of newProjects; let i = index">
               <td class="text-center">{{ i + 1 }}</td>
-              <td class="text-center">{{ project.name_chef }}</td>
+              <td class="text-center">
+                <img [src]=" baseUrl +'/storage/uploads/'+ project.photo_chef" alt="{{ project.name_chef }}" width="50">
+                <div>{{ project.name_chef }}</div>
+            </td>
               <td class="text-center">{{ project.name }}</td>
               <td class="text-center">{{ project.status }}</td>
               <td class="text-center">{{ project.start_date }}</td>
