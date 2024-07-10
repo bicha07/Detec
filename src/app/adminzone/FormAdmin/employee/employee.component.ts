@@ -16,7 +16,7 @@ import { LoginService } from '../../../registration/login.service';
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
-  currentUser: User = new User(0,'', '', '', '', '');
+  currentUser: User = new User(0,'', '', '', '', '','');
   showForm = false;
   isEditing = false;
   registrationForm: FormGroup;
@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
   onAdd(): void {
     this.showForm = true;
     this.isEditing = false;
-    this.currentUser = new User(0, '','', '', '', '');
+    this.currentUser = new User(0, '','', '', '', '','');
     this.registrationForm.reset(); // Clear the form
   }
 

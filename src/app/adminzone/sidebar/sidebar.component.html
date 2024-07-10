@@ -1,75 +1,65 @@
 <div class="navside">
     <input type="checkbox" id="check">
     <label for="check" class="check-label">
-        <i class="fa fa-bars" id="btn"></i>
-        <i class="fa fa-times" id="cancel"></i>
+      <i class="fa fa-bars" id="btn"></i>
+      <i class="fa fa-times" id="cancel"></i>
     </label>
     <div class="sidebar">
-        <div class="top-side">
-            <header>Zone Admin</header>
-            <div id="accordion01" role="tablist" class="sidebar-content">
-                <div class="card">
-                    <div class="card-header" role="tab" id="collapse01_header">
-
-                        <a class="collapsed" data-toggle="collapse" href="#collapse01" aria-expanded="true"
-                            aria-controls="collapse01" (click)="collapseDown()">
-                            Gestion site web
-                        </a>
-
-                    </div>
-
-                    <div id="collapse01" class="collapse" role="tabpanel" aria-labelledby="collapse01_header"
-                        data-parent="#accordion01">
-                        <div class="card-body under-cont ">
-                            <a class="under-drop" (click)="navigate('/homeAdmin')">Home</a>
-                            <a class="under-drop" (click)="navigate('/aboutAdmin')">About</a>
-                            <a class="under-drop" (click)="navigate('/serviceAdmin')">Service</a>
-                            <a class="under-drop" (click)="navigate('/portfolioAdmin')">Portfolio</a>
-                            <a class="under-drop" (click)="navigate('/contactAdmin')">Contact</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" role="tab" id="collapse02_header">
-
-                        <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="true"
-                            aria-controls="collapse02" (click)="collapseDown()">
-                            Gestion de sociéte
-                        </a>
-
-                    </div>
-                    <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header"
-                        data-parent="#accordion01">
-                        <div class="card-body under-cont">
-                            <a class="under-drop" (click)="navigate('/devis')">Devis</a>
-                            <a class="under-drop" (click)="navigate('/project')">Projet</a>
-                        </div>
-                    </div>
-                </div>
-                
+      <div class="top-side">
+        <header>Zone Admin</header>
+        <div id="accordion01" role="tablist" class="sidebar-content">
+          <div class="card">
+            <div class="card-header" role="tab" id="collapse01_header">
+              <a class="collapsed" data-toggle="collapse" href="#collapse01" aria-expanded="true" aria-controls="collapse01" (click)="collapseDown()">
+                Gestion site web
+              </a>
             </div>
-
-        </div>
-        <div class="buttom-side">
-            <input id="the-btn" type="checkbox" checked>
-            <div id="div1">
-                <div id="div-1-1">
-                    <div class="the-btn-content">
-                    <div id="avatar" >
-                        <img src="https://Marqenti.tn/images/maftoul.svg" />
-                    </div>
-                    <div id="title-down">
-                        <div id="title-down-1" >Bicha</div>
-                        <span id="title-down-2">Admin</span>
-                    </div>
-                    <label for="the-btn"><i class="fa fa-caret-up"></i></label>
-                </div>
-                <div id="div-1-2" class="under-cont">
-                    <a class="under-drop"><i class="fa fa-cog"></i> Profile </a>
-                    <a class="under-drop"><i class="fa fa-sign-out"></i> Log Out </a>
-                </div>
+            <div id="collapse01" class="collapse" role="tabpanel" aria-labelledby="collapse01_header" data-parent="#accordion01">
+              <div class="card-body under-cont ">
+                <a class="under-drop" (click)="navigate('/homeAdmin')">Home</a>
+                <a class="under-drop" (click)="navigate('/aboutAdmin')">About</a>
+                <a class="under-drop" (click)="navigate('/serviceAdmin')">Service</a>
+                <a class="under-drop" (click)="navigate('/portfolioAdmin')">Portfolio</a>
+                <a class="under-drop" (click)="navigate('/contactAdmin')">Contact</a>
+              </div>
             </div>
-
+          </div>
+          <div class="card">
+            <div class="card-header" role="tab" id="collapse02_header">
+              <a class="collapsed" data-toggle="collapse" href="#collapse02" aria-expanded="true" aria-controls="collapse02" (click)="collapseDown()">
+                Gestion de sociéte
+              </a>
+            </div>
+            <div id="collapse02" class="collapse" role="tabpanel" aria-labelledby="collapse02_header" data-parent="#accordion01">
+              <div class="card-body under-cont">
+                <a class="under-drop" (click)="navigate('/devis')">Devis</a>
+                <a class="under-drop" (click)="navigate('/project')">Projet</a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="buttom-side">
+        <input id="the-btn" type="checkbox" checked>
+        <div id="div1">
+          <div id="div-1-1">
+            <div class="the-btn-content">
+              <div id="avatar">
+                <img [src]="baseUrl + '/storage/uploads/' + photo" />
+              </div>
+              <div id="title-down">
+                <div id="title-down-1">{{ username }}</div>
+                <span id="title-down-2">{{ role }}</span>
+              </div>
+              <label for="the-btn"><i class="fa fa-caret-up"></i></label>
+            </div>
+            <div id="div-1-2" class="under-cont">
+              <a class="under-drop"><i class="fa fa-cog"></i> Profile </a>
+              <a class="under-drop" (click)="logout()"><i class="fa fa-sign-out"></i> Log Out </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  
