@@ -16,9 +16,12 @@ import { LoginService } from '../../../registration/login.service'; // Ajustez l
 export class EmployeeProjectsComponent implements OnInit {
   newProjects: Project[] = [];
   filteredProjects: Project[] = [];
+  baseUrl: string;
 
 
-  constructor(private projectService: ServiceService, private loginService: LoginService) {}
+  constructor(private projectService: ServiceService, private loginService: LoginService) {
+    this.baseUrl = this.projectService.apiUrlbase;
+  }
 
   ngOnInit(): void {
     this.loadNewProjects();

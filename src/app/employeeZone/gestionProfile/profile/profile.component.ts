@@ -13,11 +13,13 @@ import { ServiceService } from '../../../website/service.service'; // Assurez-vo
 export class ProfileComponent implements OnInit {
   currentUser: any;
   profileForm!: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(
-    private userService: ServiceService, // Ce service doit avoir une méthode pour récupérer et mettre à jour les données utilisateur
+    private userService: ServiceService,
     private fb: FormBuilder,
     private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -44,16 +46,30 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.profileForm.valid) {
-      // Appeler le service pour mettre à jour les données de l'utilisateur
-      this.userService.updateUserProfile(this.currentUser.id, this.profileForm.value).subscribe({
-        next: () => {
-          console.log('Mise à jour du profil réussie');
-          // Redirection ou actions après la mise à jour
-        },
-        error: (error) => console.error('Erreur lors de la mise à jour du profil:', error)
-      });
-    }
+
+  onFileSelect(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.selectedFile = target.files ? target.files[0] : null;
   }
+
+  onSubmit(): void {
+  if (this.profileForm.valid) {
+    const formData = new FormData();
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+    Object.keys(this.profileForm.value).forEach(key => {
+      formData.append(key, this.profileForm.value[key]);
+    });
+
+    this.userService.updateUserProfileWithFile(this.currentUser.id, formData).subscribe({
+      next: () => {
+        console.log('Profile update successful');
+        // Redirect or other actions after update
+      },
+      error: (error) => console.error('Error updating profile:', error)
+    });
+  }
+}
+
 }

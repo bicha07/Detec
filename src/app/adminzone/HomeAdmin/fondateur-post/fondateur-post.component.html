@@ -1,64 +1,68 @@
-<div class="card mx-4 mb-4 ">
-    <div class="d-flex flex-row justify-content-between card-header">
-      <div><p>Liste des Membres</p></div>
-      <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Membre</button></div>
+<div class="card mx-4 mb-4">
+  <div class="d-flex flex-row justify-content-between card-header">
+    <div>
+      <p>Liste des Membres</p>
     </div>
-    <div class="card-body px-0 pt-0 pb-0">
-      <div class="table-responsive p-0">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="text-center">ID</th>
-              <th class="text-center">Photo</th>
-              <th class="text-center">Nom</th>
-              <th class="text-center">Poste</th>
-              <th class="text-center">Description</th>
-              <th class="left-button-cont">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let personne of personne; let i = index">
-              <td class="text-center">{{ i + 1 }}</td>
-              <td class="text-center"><img [src]=" baseUrl +'/storage/uploads/'+ personne.photo" alt="{{ personne.name }}" width="50"></td>
-              <td class="text-center">{{ personne.name }}</td>
-              <td class="text-center">{{ personne.post }}</td>
-              <td class="text-center">{{ personne.description }}</td>
-              <td class="left-button-cont">
-                <button class="btn" (click)="onEdit(personne)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
-                <button class="btn" (click)="onDelete(personne.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div>
+      <button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Membre</button>
+    </div>
+  </div>
+  <div class="card-body px-0 pt-0 pb-0">
+    <app-alert [type]="alertType" [message]="alertMessage"></app-alert>
+    <div class="table-responsive p-0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Photo</th>
+            <th class="text-center">Nom</th>
+            <th class="text-center">Poste</th>
+            <th class="text-center">Description</th>
+            <th class="left-button-cont">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let personne of personne; let i = index">
+            <td class="text-center">{{ i + 1 }}</td>
+            <td class="text-center">
+              <img [src]="baseUrl +'/storage/uploads/'+ personne.photo" alt="{{ personne.name }}" width="50">
+            </td>
+            <td class="text-center">{{ personne.name }}</td>
+            <td class="text-center">{{ personne.post }}</td>
+            <td class="text-center">{{ personne.description }}</td>
+            <td class="left-button-cont">
+              <button class="btn" (click)="onEdit(personne)"><i class="fa fa-edit cursor-pointer text-secondary"></i></button>
+              <button class="btn" (click)="onDelete(personne.id)"><i class="fa fa-trash cursor-pointer text-secondary"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-
-  
-<!-- Formulaire pour ajouter/modifier une expertise -->
-<div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
-  <div class="modal-content">
-      <span class="close" (click)="closeForm()">&times;</span>
-      <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <!-- Formulaire pour ajouter/modifier une personne -->
+    <div *ngIf="showForm" class="modal" [ngClass]="{'show': showForm}">
+      <div class="modal-content">
+        <span class="close" (click)="closeForm()">&times;</span>
+        <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
           <div class="form-group">
-              <label for="photo">Photo</label>
-              <input type="file" id="photo" (change)="onFileChange($event)" name="photo" class="form-control">
+            <label for="photo">Photo</label>
+            <input type="file" id="photo" (change)="onFileChange($event)" name="photo" class="form-control">
           </div>
           <div class="form-group">
-              <label for="name">Nom</label>
-              <input type="Nom" id="Nom" [(ngModel)]="currentPersonne.name" name="name" class="form-control">
+            <label for="name">Nom</label>
+            <input type="text" id="name" [(ngModel)]="currentPersonne.name" name="name" class="form-control">
           </div>
           <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id="description" [(ngModel)]="currentPersonne.description" name="description" class="form-control"></textarea>
+            <label for="description">Description</label>
+            <textarea id="description" [(ngModel)]="currentPersonne.description" name="description" class="form-control"></textarea>
           </div>
           <div class="form-group">
             <label for="post">Poste</label>
             <textarea id="post" [(ngModel)]="currentPersonne.post" name="post" class="form-control"></textarea>
-        </div>
+          </div>
           <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
-      </form>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-
-</div>
-</div>
 </div>

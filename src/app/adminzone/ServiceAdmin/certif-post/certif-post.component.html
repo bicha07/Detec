@@ -1,9 +1,10 @@
-<div class="card mx-4 mb-4 ">
+<div class="card mx-4 mb-4">
     <div class="d-flex flex-row justify-content-between card-header">
         <div><p>Liste des Certificats</p></div>
         <div><button class="btn btn-secondary btn-head-tab" (click)="onAdd()">+ Nouveau Certificat</button></div>
     </div>
     <div class="card-body px-0 pt-0 pb-0">
+        <app-alert [type]="alertType" [message]="alertMessage"></app-alert>
         <div class="table-responsive p-0">
             <table class="table table-striped">
                 <thead>
@@ -72,7 +73,6 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary" (click)="addAdvantage()">Ajouter un avantage</button>
-
             </div>
             <button type="submit" class="btn btn-success">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
         </form>

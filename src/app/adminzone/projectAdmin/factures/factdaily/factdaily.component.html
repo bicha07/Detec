@@ -5,6 +5,7 @@
         <p>Liste des Salaires</p>
       </div>
       <div class="card-body table-responsive">
+        <app-alert [type]="alertType" [message]="alertMessage"></app-alert>
         <div class="d-flex justify-content-between mb-3">
           <button class="btn btn-secondary" (click)="loadPreviousDay()"><</button>
           <input type="date" [formControl]="dateControl" (change)="loadPricesForDate()" class="form-control w-25">
@@ -23,10 +24,8 @@
             <tr *ngFor="let employee of employees">
               <td>{{ employee.personne_id }}-{{ employee.personne_name }}</td>
               <td>{{ employee.heure || 'Not assigned yet' }} </td>
-
               <td>{{ employee.daily_price || 'Not assigned yet' }} €</td>
               <td>
-                <!-- <button class="btn btn-success" (click)="onAddEmployeeSalary(employee)"><i class="fa fa-plus"></i></button> -->
                 <button class="btn btn-secondary" (click)="onEditEmployee(employee)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger" (click)="onDeleteEmployee(employee.id)"><i class="fa fa-trash"></i></button>
               </td>
