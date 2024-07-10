@@ -444,6 +444,12 @@ export class ServiceService {
       switchMap(() => this.http.put<User>(`${this.apiUrl}/users/${id}`, userData, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
+    // Mettre à jour les informations de l'utilisateur with CSRF and Auth headers
+    updateUserProfileWithPhoto(id: number,userData: FormData): Observable<any> {
+      return this.getCsrfToken().pipe(
+        switchMap(() =>   this.http.post<void>(`${this.apiUrl}/users/${id}?_method=PUT`, userData,{ headers: this.getAuthHeaders(), withCredentials: true }))
+      );
+    }
 
   updateUserProfileWithFile(id: number, formData: FormData): Observable<any> {
     return this.getCsrfToken().pipe(
@@ -480,5 +486,5 @@ export class ServiceService {
       switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
-  
+
 }

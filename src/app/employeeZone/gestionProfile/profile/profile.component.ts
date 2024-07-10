@@ -1,26 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ServiceService } from '../../../website/service.service'; // Assurez-vous que le chemin est correct
+import { ServiceService } from '../../../website/service.service'; // Ensure the path is correct
+import { CommonModule } from '@angular/common';
+import { User } from '../../../website/interfaces/interface.user';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule], // Add CommonModule to imports
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: any;
+  baseUrl: string;
+  currentUser!: User;
   profileForm!: FormGroup;
+  isEditing: boolean = false;
   selectedFile: File | null = null;
 
   constructor(
-    private userService: ServiceService,
+    private userService: ServiceService, // This service should have methods to fetch and update user data
     private fb: FormBuilder,
     private router: Router
+  ) {
+    this.baseUrl = this.userService.apiUrlbase;
+  }
 
-  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -31,18 +37,18 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      role: ['', [Validators.required]]
+      role: ['', [Validators.required]],
+      description: ['']
     });
   }
 
   loadUserProfile(): void {
-    // Ici, vous devez appeler le service pour obtenir les données de l'utilisateur connecté
     this.userService.getUserProfile().subscribe({
-      next: (user) => {
+      next: (user: User) => {
         this.currentUser = user;
-        this.profileForm.patchValue(user); // Remplir le formulaire avec les données de l'utilisateur
+        this.profileForm.patchValue(user); // Populate the form with user data
       },
-      error: (error) => console.error('Erreur lors du chargement du profil:', error)
+      error: (error) => console.error('Error loading profile:', error)
     });
   }
 
@@ -53,10 +59,50 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(): void {
-  if (this.profileForm.valid) {
-    const formData = new FormData();
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
+    if (this.profileForm.valid) {
+      const updatedUser: User = {
+        id: this.currentUser.id,
+        username: this.profileForm.value.username,
+        email: this.profileForm.value.email,
+        role: this.profileForm.value.role,
+        description: this.profileForm.value.description,
+        photo: '', // Preserve the existing photo if not changed
+        password: this.currentUser.password // Preserve the existing password
+      };
+
+      if (this.selectedFile) {
+        const formData = new FormData();
+        formData.append('username', updatedUser.username);
+        formData.append('email', updatedUser.email);
+        formData.append('role', updatedUser.role);
+        formData.append('description', updatedUser.description);
+        formData.append('photo', this.selectedFile);
+
+        this.userService.updateUserProfileWithPhoto(this.currentUser.id, formData).subscribe({
+          next: () => {
+            console.log('Profile updated successfully');
+            this.isEditing = false;
+            this.loadUserProfile(); // Refresh the profile data after update
+          },
+          error: (error) => console.error('Error updating profile:', error)
+        });
+      } else {
+        this.userService.updateUserProfile(this.currentUser.id, updatedUser).subscribe({
+          next: () => {
+            console.log('Profile updated successfully');
+            this.isEditing = false;
+            this.loadUserProfile(); // Refresh the profile data after update
+          },
+          error: (error) => console.error('Error updating profile:', error)
+        });
+      }
+    }
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
     }
     Object.keys(this.profileForm.value).forEach(key => {
       formData.append(key, this.profileForm.value[key]);
@@ -69,6 +115,10 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => console.error('Error updating profile:', error)
     });
+  }
+
+  toggleEdit(): void {
+    this.isEditing = !this.isEditing;
   }
 }
 

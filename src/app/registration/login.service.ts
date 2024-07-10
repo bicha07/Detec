@@ -23,7 +23,7 @@ export class LoginService {
 
   // Fetch CSRF token
   private getCsrfToken(): Observable<any> {
-    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true });
+    return this.http.get(`${environment.apiUrl}/sanctum/csrf-cookie`, { withCredentials: true });
   }
 
   private getAuthHeaders(): HttpHeaders {
@@ -65,10 +65,19 @@ export class LoginService {
     );
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+  logout(): Observable<void> {
+    return this.getCsrfToken().pipe(
+      switchMap(() => {
+        const headers = this.getAuthHeaders();
+        return this.http.post<void>(`${this.apiUrl}/logout`, {}, { headers, withCredentials: true }).pipe(
+          tap(() => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('currentUser');
+            this.currentUserSubject.next(null);
+          })
+        );
+      })
+    );
   }
 
   private getXsrfTokenFromCookie(): string {
