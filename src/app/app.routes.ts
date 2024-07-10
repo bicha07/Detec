@@ -53,19 +53,23 @@ export const routes: Routes = [
 
 
 
-//// sauf le role admin peux voir ces path 
-
-{ path: 'homeAdmin', component: StructureComponent, canActivate: [AdminGuard] },
-{ path: 'aboutAdmin', component: StructureAboutComponent, canActivate: [AdminGuard] },
-{ path: 'serviceAdmin', component: StructureServiceComponent, canActivate: [AdminGuard] },
-{ path: 'portfolioAdmin', component: StructurePortfolioComponent, canActivate: [AdminGuard] },
-{ path: 'contactAdmin', component: StructureContactComponent, canActivate: [AdminGuard] },
-{ path: 'devis', component: StructureFormulaireComponent, canActivate: [AdminGuard] },
-{ path: 'project', component: StructureProjectsComponent, canActivate: [AdminGuard] },
-{ path: 'project-detail/:id', component: ProjectDetailComponent, canActivate: [AdminGuard] },
-
-{ path: 'employee-project-detail/:id', component: EmployeeProjectDetailComponent, canActivate: [EmployeeGuard] },
-{ path: 'profile', component: StructureComponentt, canActivate: [EmployeeGuard] },
-{ path: 'newproject', component: StructureProjectComponent, canActivate: [EmployeeGuard] },
-
-];
+        // Admin routes
+        { path: 'homeAdmin', component: StructureComponent, canActivate: [AdminGuard] },
+        { path: 'aboutAdmin', component: StructureAboutComponent, canActivate: [AdminGuard] },
+        { path: 'serviceAdmin', component: StructureServiceComponent, canActivate: [AdminGuard] },
+        { path: 'portfolioAdmin', component: StructurePortfolioComponent, canActivate: [AdminGuard] },
+        { path: 'contactAdmin', component: StructureContactComponent, canActivate: [AdminGuard] },
+        { path: 'devis', component: StructureFormulaireComponent, canActivate: [AdminGuard] },
+        { path: 'project', component: StructureProjectsComponent, canActivate: [AdminGuard] },
+        { path: 'project-detail/:id', component: ProjectDetailComponent, canActivate: [AdminGuard] },
+      
+        // Employee routes
+        { path: 'employee-project-detail/:id', component: EmployeeProjectDetailComponent, canActivate: [EmployeeGuard] },
+        { path: 'profile', component: StructureComponentt, canActivate: [EmployeeGuard] },
+        { path: 'newproject', component: StructureProjectComponent, canActivate: [EmployeeGuard] },
+      
+        // Default route
+        { path: '', redirectTo: '/home', pathMatch: 'full' },
+        { path: '**', redirectTo: '/home' }
+      ];
+      

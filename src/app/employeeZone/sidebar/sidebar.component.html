@@ -49,20 +49,22 @@
         <div class="buttom-side">
             <input id="the-btn" type="checkbox" checked>
             <div id="div1">
-                <div id="div-1-1">
-                    <div class="the-btn-content">
-                        <div id="avatar" >
-                            <img [src]="currentUser?.imageUrl || 'https://Marqenti.tn/images/maftoul.svg'" />
-                        </div>
-                        <div id="title-down">
-                            <div id="title-down-1">{{ currentUser?.username }}</div>
-                        </div>
-                        <label for="the-btn"><i class="fa fa-caret-up"></i></label>
-                    </div>
-                    <div id="div-1-2" class="under-cont">
-                        <a class="under-drop"><i class="fa fa-sign-out"></i> Log Out </a>
-                    </div>
+              <div id="div-1-1">
+                <div class="the-btn-content">
+                  <div id="avatar">
+                    <img [src]="baseUrl + '/storage/uploads/' + photo" />
+                  </div>
+                  <div id="title-down">
+                    <div id="title-down-1">{{ username }}</div>
+                    <span id="title-down-2">{{ role }}</span>
+                  </div>
+                  <label for="the-btn"><i class="fa fa-caret-up"></i></label>
                 </div>
+                <div id="div-1-2" class="under-cont">
+                  <a class="under-drop" (click)="navigate('/project')"><i class="fa fa-cog"></i> Admin Zone </a>
+                  <a class="under-drop" (click)="logout()"><i class="fa fa-sign-out"></i> Log Out </a>
+                </div>
+              </div>
             </div>
         </div>
         

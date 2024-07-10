@@ -2,6 +2,7 @@
 import { Component,Renderer2, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { ServiceService } from '../../website/service.service';
+import { LoginService } from '../../registration/login.service';
 
 
 @Component({
@@ -12,12 +13,20 @@ import { ServiceService } from '../../website/service.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements AfterViewInit {
-  currentUser: any;
+  username: string = 'Bicha'; // Default value
+  role: string = 'Admin'; // Default value
+  photo: string = 'null.png';
+  baseUrl: string;
 
-  constructor(private renderer: Renderer2, private router: Router,    private userService: ServiceService,  ) {}
+  constructor(private renderer: Renderer2, private router: Router, private serviceService1: ServiceService, private loginService:LoginService) {
+    this.baseUrl = this.serviceService1.apiUrlbase;
+  }
+
+  ngOnInit() {
+    this.loadUserProfile();
+  }
 
   ngAfterViewInit() {
-    this.loadUserProfile();
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.listen(checkbox, 'change', (event: Event) => {
       if (!(event.target as HTMLInputElement).checked) {
@@ -25,19 +34,19 @@ export class SidebarComponent implements AfterViewInit {
       }
     });
   }
-  
-  loadUserProfile(): void {
-    this.userService.getUserProfile().subscribe({
-      next: (user) => {
-        this.currentUser = user;
+
+  loadUserProfile() {
+    this.serviceService1.getUserProfile().subscribe({
+      next: (profile) => {
+        this.username = profile.username;
+        this.role = profile.role;
+        this.photo = profile.photo;
       },
-      error: (error) => console.error('Error loading profile:', error)
+      error: (error) => {
+        console.error('Error loading user profile:', error);
+      }
     });
   }
-  
-  
-
-
 
   collapseAllCards() {
     const cards = document.querySelectorAll('.card');
@@ -58,7 +67,20 @@ export class SidebarComponent implements AfterViewInit {
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.setProperty(checkbox, 'checked', true);
   }
+
   navigate(path: string) {
     this.router.navigate([path]);
+  }
+
+  logout() {
+    this.loginService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+        this.router.navigate(['/login']); // Redirect to login page after logout
+      },
+      error: (error) => {
+        console.error('Error during logout:', error);
+      }
+    });
   }
 }
