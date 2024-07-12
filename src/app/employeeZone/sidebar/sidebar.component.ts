@@ -13,13 +13,12 @@ import { LoginService } from '../../registration/login.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements AfterViewInit {
-  username: string = 'Bicha'; // Default value
-  role: string = 'Admin'; // Default value
-  photo: string = 'null.png';
+  currentUser: any;
   baseUrl: string;
 
-  constructor(private renderer: Renderer2, private router: Router, private serviceService1: ServiceService, private loginService:LoginService) {
-    this.baseUrl = this.serviceService1.apiUrlbase;
+  constructor(private renderer: Renderer2, private router: Router,    private userService: ServiceService,  ) {
+    this.baseUrl = this.userService.apiUrlbase;
+
   }
 
   ngOnInit() {
