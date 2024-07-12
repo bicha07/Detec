@@ -9,7 +9,7 @@ export class EmployeeGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.loginService.isUserEmployee()) {
+    if (this.loginService.isUserEmployee() || this.loginService.isUserAdmin()) {
       return true;
     } else {
       this.router.navigate(['/home']);

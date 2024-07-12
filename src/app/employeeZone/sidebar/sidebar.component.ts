@@ -2,6 +2,7 @@
 import { Component,Renderer2, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { ServiceService } from '../../website/service.service';
+import { LoginService } from '../../registration/login.service';
 
 
 @Component({
@@ -20,8 +21,11 @@ export class SidebarComponent implements AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.loadUserProfile();
+  }
+
+  ngAfterViewInit() {
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.listen(checkbox, 'change', (event: Event) => {
       if (!(event.target as HTMLInputElement).checked) {
@@ -29,19 +33,19 @@ export class SidebarComponent implements AfterViewInit {
       }
     });
   }
-  
-  loadUserProfile(): void {
-    this.userService.getUserProfile().subscribe({
-      next: (user) => {
-        this.currentUser = user;
+
+  loadUserProfile() {
+    this.serviceService1.getUserProfile().subscribe({
+      next: (profile) => {
+        this.username = profile.username;
+        this.role = profile.role;
+        this.photo = profile.photo;
       },
-      error: (error) => console.error('Error loading profile:', error)
+      error: (error) => {
+        console.error('Error loading user profile:', error);
+      }
     });
   }
-  
-  
-
-
 
   collapseAllCards() {
     const cards = document.querySelectorAll('.card');
@@ -62,7 +66,20 @@ export class SidebarComponent implements AfterViewInit {
     const checkbox = this.renderer.selectRootElement('#the-btn', true);
     this.renderer.setProperty(checkbox, 'checked', true);
   }
+
   navigate(path: string) {
     this.router.navigate([path]);
+  }
+
+  logout() {
+    this.loginService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+        this.router.navigate(['/login']); // Redirect to login page after logout
+      },
+      error: (error) => {
+        console.error('Error during logout:', error);
+      }
+    });
   }
 }
