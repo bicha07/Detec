@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NavbarComponent } from './website/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { ChatbotComponent } from "./website/chatbot/chatbot.component";
 
 declare var windowLoadInit: any; // Global declaration for existing init function
 declare var initializeToggleMenu: any; // Global declaration for toggle menu function
@@ -13,7 +14,7 @@ declare var initializeToggleMenu: any; // Global declaration for toggle menu fun
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, NavbarComponent, RouterOutlet]
+  imports: [CommonModule, NavbarComponent, RouterOutlet, ChatbotComponent]
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'canada';

@@ -13,8 +13,12 @@ import { ServiceService } from '../../website/service.service';
 })
 export class SidebarComponent implements AfterViewInit {
   currentUser: any;
+  baseUrl: string;
 
-  constructor(private renderer: Renderer2, private router: Router,    private userService: ServiceService,  ) {}
+  constructor(private renderer: Renderer2, private router: Router,    private userService: ServiceService,  ) {
+    this.baseUrl = this.userService.apiUrlbase;
+
+  }
 
   ngAfterViewInit() {
     this.loadUserProfile();

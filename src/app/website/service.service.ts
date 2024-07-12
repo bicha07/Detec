@@ -25,8 +25,11 @@ import { Facture } from './interfaces/interface.facture';
 export class ServiceService {
   public readonly apiUrlbase: string = environment.apiUrl;
   public readonly apiUrl: string = environment.apiUrl + '/api';
+  private csrfToken: string | null = null;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) { 
+  }
 
   // Fetch CSRF token
   private getCsrfToken(): Observable<any> {
@@ -486,5 +489,15 @@ export class ServiceService {
       switchMap(() => this.http.get<Facture>(`${this.apiUrl}/factures/project/previous-year/${projectId}`, { headers: this.getAuthHeaders(), withCredentials: true }))
     );
   }
+  notifyAdmin(sessionId: string, message: string): Observable<any> {
+    const url = `http://localhost:3000/notify-admin`;
+    const payload = { sessionId, message };
+    return this.http.post<any>(url, payload);
+  }
 
-}
+  adminResponse(sessionId: string, message: string): Observable<any> {
+    const url = `http://localhost:3000/admin-response`;
+    const payload = { sessionId, message };
+    return this.http.post<any>(url, payload);
+  }
+  }

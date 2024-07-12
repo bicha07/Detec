@@ -1,0 +1,21 @@
+<div class="chat-container">
+  <div class="chat-header" id="chatHeader" (click)="toggleChat()">
+    <img *ngIf="!isChatOpen" src="./assets/images/chats.png">
+    <span *ngIf="isChatOpen">Chat with Detec-SI</span>  </div>
+  <div class="chat-content" id="chatContent">
+      <div class="chat-box" id="chatBox">
+          <div class="message bot-message">Hello! I'm Detec-Bot, your virtual assistant from Detec Industriels. How can I make your day easier?</div>
+      </div>
+      <div id="typingIndicator" class="typing-indicator" *ngIf="typing">Detek is typing...</div>
+      <div class="conversation-starters" *ngIf="!conversationStarted">
+          <p>Here are some questions you can ask:</p>
+          <button (click)="startConversation('What services do you provide?')">What services do you provide?</button>
+          <button (click)="startConversation('Tell me about your company.')">Tell me about your company.</button>
+          <button (click)="startConversation('How can I get support?')">How can I get support?</button>
+      </div>
+      <div class="input-container">
+          <input type="text" [formControl]="userInputControl" placeholder="Type your message here..." (keypress)="onKeyPress($event)">
+          <button (click)="sendMessage()">Send</button>
+      </div>
+  </div>
+</div>
