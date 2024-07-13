@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PortfolioComponent } from "../portfolio/portfolio.component";
 import { BannerComponent } from "../../Home/banner/banner.component";
 
-import { FooterComponent } from "../../Home/footer/footer.component";
+import { FooterComponent } from '../../Home/footer/footer.component';
 import { QuoteComponent } from "../quote/quote.component";
 
 @Component({

@@ -31,6 +31,8 @@ export class FooterComponent implements OnInit, AfterViewInit, AfterContentCheck
 
   ngOnInit(): void {
     this.loadAllData();
+    this.refreshFooter();
+
   }
 
   ngAfterViewInit(): void {
@@ -95,5 +97,14 @@ export class FooterComponent implements OnInit, AfterViewInit, AfterContentCheck
   updateContactEmailContent(updatedData: any): void {
     this.contactsemail = updatedData.contactsemail;
     this.cdr.detectChanges();
+  }
+
+
+
+
+  refreshFooter() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 1000);
   }
 }

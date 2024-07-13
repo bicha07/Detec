@@ -13,8 +13,42 @@
     color:white;
 
 }
+.nbg-video {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Ensures no overflow outside the div */
+}
+
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire div */
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Ensures the video is behind other content */
+}
+/* Optional: Overlay */
+.nbg-video::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adds a dark overlay */
+    z-index: 1; /* Ensures the overlay is above the video */
+}
+
 .ls .cs1{
     color: white;
+}
+
+.cs{
+    background-color: transparent!important;
+
 }
 .ds .cs{
     color:white;
@@ -27,6 +61,15 @@
     background-color: rgb(255 255 255 / 40%);
 }
     @media (max-width: 991px) {
+        .hero-typo{
+            position: relative;
+            padding-top: 15vh;
+            z-index: 5;
+        
+        }
+        .mobile{
+            height:68vh;
+        }
 
         .ls h2{
             color:black;
@@ -38,3 +81,14 @@
             bottom: 3%  !important;
         }
     }
+    /* @media (max-width: 768px) {
+        .hero-typo{
+            position: absolute;
+            padding-top: 25%;
+            z-index: 5;
+        
+        }
+        .mobile{
+            height:68vh;
+        }
+    } */
