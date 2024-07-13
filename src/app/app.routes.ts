@@ -39,6 +39,7 @@ export const routes: Routes = [
     // { path: '', component: LinkHomeComponent },
     {path:'' , redirectTo: 'home' , pathMatch: 'full'},
     { path: 'home', component: LinkHomeComponent },
+    { path: '*', component: LinkHomeComponent },
     { path: 'about', component: LinkAboutComponent },
     { path: 'contact', component: LinkContactComponent },
     { path: 'sg/:id', component: SingleSComponent },
