@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@maplibre/ngx-maplibre-gl": "^17.4.3",
+    "flexslider": "^2.7.2",
     "jquery": "^3.7.1",
     "maplibre-gl": "^4.3.2",
     "ngx-dropzone": "^3.1.0",
