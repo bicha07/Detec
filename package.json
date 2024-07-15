@@ -21,7 +21,6 @@
     "@maplibre/ngx-maplibre-gl": "^17.4.3",
     "flexslider": "^2.7.2",
     "jquery": "^3.7.1",
-    "jquery.easing": "^1.4.1",
     "maplibre-gl": "^4.3.2",
     "ngx-dropzone": "^3.1.0",
     "ngx-slick-carousel": "^17.0.0",

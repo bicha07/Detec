@@ -108,9 +108,6 @@ export class NavbarComponent implements OnInit {
     // Change the icon and images based on theme
     const icon = document.getElementById('toggle-icon') as HTMLImageElement;
     const logo = document.getElementById('detec') as HTMLImageElement;
-    const banner1 = document.getElementById('banner1') as HTMLImageElement;
-    const banner2 = document.getElementById('banner2') as HTMLImageElement;
-    const banner3 = document.getElementById('banner3') as HTMLImageElement;
     const speciality = document.getElementById('speciality') as HTMLImageElement;
     const welcome = document.getElementById('welcome') as HTMLImageElement;
     const logof = document.getElementById('logof') as HTMLImageElement;
@@ -124,9 +121,6 @@ export class NavbarComponent implements OnInit {
         icon.src = './assets/images/moon.png';
         logo.src = './assets/images/LOGOR.svg';
         logof.src = './assets/images/LOGOR.svg';
-        banner1.src = './assets/images/16.jpg';
-        banner2.src = './assets/images/6.jpg';
-        banner3.src = './assets/images/17.jpg';
         if (speciality) speciality.style.backgroundImage = 'url(./assets/images/18.png)';
         if (welcome) welcome.style.backgroundImage = 'url(./assets/images/5.webp)';
         if (lang) lang.src = './assets/images/langb.png';
@@ -138,9 +132,6 @@ export class NavbarComponent implements OnInit {
         icon.src = './assets/images/sun.png';
         logo.src = './assets/images/LOGOW.svg';
         logof.src = './assets/images/LOGOW.svg';
-        banner1.src = './assets/images/9.jpg';
-        banner2.src = './assets/images/8.jpg';
-        banner3.src = './assets/images/14.jpg';
         if (speciality) speciality.style.backgroundImage = 'url(./assets/images/6.webp)';
         if (welcome) welcome.style.backgroundImage = 'url(./assets/images/8.png)';
         if (lang) lang.src = './assets/images/langw.png';
